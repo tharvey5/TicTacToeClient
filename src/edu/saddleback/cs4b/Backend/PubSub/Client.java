@@ -12,8 +12,25 @@ public class Client {
     private Thread listeningThread;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-
     //controller?
+
+
+    public Client()
+    {
+        sender   = new PacketSender();
+        receiver = new PacketReceiver();
+
+        socket     = null;
+        portNumber = -1;
+        hostName   = "";
+        in         = null;
+        out        = null;
+
+        //Creating the listeningThread
+        listeningThread = new Thread();
+        listeningThread.start();
+    }
+
 
 
     public Client(String newHostName, int newPortNumber) {
