@@ -39,7 +39,6 @@ public class PacketReceiver implements Subject{
         observers.add(newObserver);
     }
 
-
     @Override
     public void removeObserver(Observer oldObserver)
     {
@@ -56,7 +55,11 @@ public class PacketReceiver implements Subject{
     }
 
     @Override
-    public void notifyObserver(SystemEvent e) {
-
+    public void notifyObserver(SystemEvent e)
+    {
+        for(int i = 0; i < observers.size(); i++)
+        {
+            observers.get(i).update(????????????);
+        }
     }
 }
