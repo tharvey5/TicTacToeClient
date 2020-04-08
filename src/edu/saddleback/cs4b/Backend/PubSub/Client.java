@@ -19,18 +19,7 @@ public class Client {
 
     public Client()
     {
-        sender   = new PacketSender();
-        receiver = new PacketReceiver();
-
-        socket     = null;
-        portNumber = -1;
-        hostName   = "";
-        in         = null;
-        out        = null;
-
-        //Creating the listeningThread
-        listeningThread = new Thread();
-        listeningThread.start();
+        this("", -1);
     }
 
     public Client(String newHostName, int newPortNumber)
@@ -60,6 +49,9 @@ public class Client {
         catch (IOException ex)
         {
             ex.printStackTrace();
+            socket = null;
+            out = null;
+            in = null;
         }
     }
 
@@ -68,10 +60,16 @@ public class Client {
         if(out != null && in != null)
         {
             createSocket();
-            this.sender = new PacketSender(out, controller);
-            this.receiver = new PacketReceiver(in, controller);
+            this.sender          = new PacketSender(out, controller);
+            this.receiver        = new PacketReceiver(in, controller);
             this.listeningThread = new Thread(receiver);
             listeningThread.start();
+        }
+        else
+        {
+            sender          = null;
+            receiver        = null;
+            listeningThread = null;
         }
 
     }
