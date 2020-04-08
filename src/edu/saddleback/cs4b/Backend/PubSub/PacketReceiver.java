@@ -2,8 +2,14 @@ package edu.saddleback.cs4b.Backend.PubSub;
 
 import edu.saddleback.cs4b.Backend.Messages.SignInMessage;
 
-public class PacketReceiver implements UIObserver{
-    @Override
+import java.util.List;
+
+
+public class PacketReceiver implements Subject{
+
+    private List<Observer> observers;
+
+    /*@Override
     public void update(SystemEvent event) {
         //This handles the inout and output of messages
         //SystemEvent is an interface that wraps around message event which holds a base message
@@ -25,12 +31,32 @@ public class PacketReceiver implements UIObserver{
         {
 
         }
+    }*/
+
+    @Override
+    public void addObserver(Observer newObserver)
+    {
+        observers.add(newObserver);
+    }
 
 
+    @Override
+    public void removeObserver(Observer oldObserver)
+    {
+        int deleteIndex = observers.indexOf(oldObserver);
 
+        if(deleteIndex > -1)
+        {
+            observers.remove(oldObserver);
+        }
+        else
+        {
+            System.out.println("Observer could not be found");
+        }
+    }
 
-
-
+    @Override
+    public void notifyObserver(SystemEvent e) {
 
     }
 }
