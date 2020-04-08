@@ -31,9 +31,8 @@ public class Client {
         listeningThread.start();
     }
 
-
-
-    public Client(String newHostName, int newPortNumber) {
+    public Client(String newHostName, int newPortNumber)
+    {
         sender   = new PacketSender();
         receiver = new PacketReceiver();
 
@@ -61,4 +60,6 @@ public class Client {
             ex.printStackTrace();
         }
     }
+
+
 }

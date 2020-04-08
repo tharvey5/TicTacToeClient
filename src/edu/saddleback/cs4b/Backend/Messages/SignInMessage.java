@@ -1,6 +1,6 @@
 package edu.saddleback.cs4b.Backend.Messages;
 
-import edu.saddleback.cs4b.Backend.Utilitys.User;
+import edu.saddleback.cs4b.Backend.Utilities.User;
 
 public class SignInMessage extends BaseMessage {
     private User userInfo;
