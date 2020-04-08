@@ -5,7 +5,7 @@ import edu.saddleback.cs4b.Backend.Messages.SignInMessage;
 import java.util.List;
 
 
-public class PacketReceiver implements Subject{
+public class PacketReceiver implements Subject, Runnable{
 
     private List<Observer> observers;
 
@@ -61,5 +61,10 @@ public class PacketReceiver implements Subject{
         {
             observers.get(i).update(????????????);
         }
+    }
+
+    @Override
+    public void run() {
+
     }
 }

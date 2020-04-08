@@ -1,5 +1,7 @@
 package edu.saddleback.cs4b.Backend.PubSub;
 
+import sample.Controller;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -12,7 +14,7 @@ public class Client {
     private Thread listeningThread;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-    //controller?
+    private Controller controller;
 
 
     public Client()
@@ -33,17 +35,17 @@ public class Client {
 
     public Client(String newHostName, int newPortNumber)
     {
-        sender   = new PacketSender();
-        receiver = new PacketReceiver();
-
         //Establishing socket and IOStreams
         portNumber = newPortNumber;
         hostName   = newHostName;
-        createSocket();
 
-        //Creating the listeningThread
-        listeningThread = new Thread();
-        listeningThread.start();
+        controller = new Controller();
+        // V no such method exits at the time
+        //controller.registerObserver(this);
+
+
+        //creating socket, sender, reciever
+        startUp();
     }
 
     private void createSocket()
@@ -61,5 +63,16 @@ public class Client {
         }
     }
 
+    private void startUp()
+    {
+        if(out != null && in != null)
+        {
+            createSocket();
+            this.sender = new PacketSender(out, controller);
+            this.receiver = new PacketReceiver(in, controller);
+            this.listeningThread = new Thread(receiver);
+            listeningThread.start();
+        }
 
+    }
 }
