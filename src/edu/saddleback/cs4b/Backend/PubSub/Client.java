@@ -41,17 +41,17 @@ public class Client {
     {
         try
         {
-            socket = new Socket(hostName, portNumber);
-            out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+            socket  = new Socket(hostName, portNumber);
+            out     = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             out.flush();
-            in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+            in      = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
         }
         catch (IOException ex)
         {
             ex.printStackTrace();
-            socket = null;
-            out = null;
-            in = null;
+            socket  = null;
+            out     = null;
+            in      = null;
         }
     }
 
@@ -73,4 +73,6 @@ public class Client {
         }
 
     }
+
+
 }

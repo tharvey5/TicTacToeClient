@@ -1,13 +1,23 @@
 package edu.saddleback.cs4b.Backend.PubSub;
 
+import edu.saddleback.cs4b.Backend.Messages.Packet;
 import edu.saddleback.cs4b.Backend.Messages.SignInMessage;
 
+import java.io.ObjectInputStream;
 import java.util.List;
 
 
-public class PacketReceiver implements Subject, Runnable{
-
+public class PacketReceiver implements Subject, Runnable
+{
+    private ObjectInputStream in;
     private List<Observer> observers;
+
+    public PacketReceiver(ObjectInputStream newIn, Observer controller)
+    {
+        in = newIn;
+        addObserver(controller);
+
+    }
 
     /*@Override
     public void update(SystemEvent event) {

@@ -1,13 +1,22 @@
 package edu.saddleback.cs4b.Backend.PubSub;
 
+import edu.saddleback.cs4b.Backend.Messages.Packet;
+
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
 public class PacketSender implements UIObserver{
     private ObjectOutputStream out;
     private List<UIObserver> observers;
+    private UISubject subject;
 
+    public PacketSender(ObjectOutputStream newOut, UISubject newSubject)
+    {
+        subject = newSubject;
+        out = newOut;
+    }
 
 
     @Override
