@@ -1,6 +1,9 @@
 package edu.saddleback.cs4b.Backend.ClientPackage;
 
+import edu.saddleback.cs4b.Backend.Messages.AdminMessageFactory;
+import edu.saddleback.cs4b.Backend.Messages.BaseMessage;
 import edu.saddleback.cs4b.Backend.Messages.Packet;
+import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
 import edu.saddleback.cs4b.Backend.PubSub.UISubject;
@@ -13,82 +16,52 @@ import java.util.List;
 public class PacketSender implements UIObserver {
     private ObjectOutputStream out;
     private UISubject subject;
+    private AdminMessageFactory messageFactory;
 
+
+    public PacketSender()
+    {
+        this(null, null);
+    }
 
 
     public PacketSender(ObjectOutputStream newOut, UISubject newSubject)
     {
         subject = newSubject;
         out = newOut;
+        messageFactory = new AdminMessageFactory();
     }
+
+
+
 
 
     @Override
-    public void update(SystemEvent e)
+    public void update(SystemEvent event)
     {
+        String messageType;
 
-        //massive if else that calls appropriate method to send and or create functions
+        if(event instanceof MessageEvent)
+        {
+            messageType = event.getType();
+        }
+        else
+        {
+            System.out.println("Not a valid event");
+            return;
+        }
 
+        BaseMessage nextMessage = messageFactory.createMessage(messageType);
 
-
-        /*
-        public void update(Sendable data) {
-        String type = data.getType();
-        if (type.equals(SendTypes.MESSAGE.getType()))
+        try
         {
-            UIFields messageField = (UIFields)data;
-            if (messageField.getValue() instanceof TextMessage)
-            {
-                TextMessage message = (TextMessage) messageField.getValue();
-                focusedChannel = message.getChannel();
-                sendMessage(message);
-            }
-            else if (messageField.getValue() instanceof PicMessage)
-            {
-                sendPicture((PicMessage)messageField.getValue());
-            }
+            out.writeObject(nextMessage);
+            out.flush();
         }
-        else if (type.equals(SendTypes.JOIN.getType()))
+        catch (IOException ex)
         {
-            UIFields message = (UIFields)data;
-            RegMessage reg = (RegMessage)message.getValue();
-            register(reg);
+            ex.printStackTrace();
         }
-        else if (type.equals(SendTypes.CHANNEL.getType()))
-        {
-            UIFields message = (UIFields)data;
-            UpdateMessage um = (UpdateMessage)message.getValue();
-            updateChannels(um);
-        } else if (type.equals(SendTypes.LEAVE.getType()))
-        {
-            UIFields discon = (UIFields)data;
-            DisconnectMessage disMsg = (DisconnectMessage)discon.getValue();
-            try
-            {
-                out.writeObject(new Packet(MessageType.DISCONNECT.getType(), disMsg));
-                out.flush();
-            }
-            catch(IOException ex)
-            {
-                ex.printStackTrace();
-            }
-        }
-        else if (type.equals(SendTypes.HISTORY_REQUEST.getType()))
-        {
-            UIFields req = (UIFields)data;
-            RequestMessage historyRequest = (RequestMessage)req.getValue();
-            try
-            {
-                out.writeObject(new Packet(MessageType.HISTORY_REQUEST.getType(), historyRequest));
-                out.flush();
-            }
-            catch(IOException ex)
-            {
-                ex.printStackTrace();
-            }
-        }
-    }
-         */
     }
 
 
@@ -101,63 +74,7 @@ public class ChatSender implements UIObserver {
 
 
 
-    @Override
-    public void update(Sendable data) {
-        String type = data.getType();
-        if (type.equals(SendTypes.MESSAGE.getType()))
-        {
-            UIFields messageField = (UIFields)data;
-            if (messageField.getValue() instanceof TextMessage)
-            {
-                TextMessage message = (TextMessage) messageField.getValue();
-                focusedChannel = message.getChannel();
-                sendMessage(message);
-            }
-            else if (messageField.getValue() instanceof PicMessage)
-            {
-                sendPicture((PicMessage)messageField.getValue());
-            }
-        }
-        else if (type.equals(SendTypes.JOIN.getType()))
-        {
-            UIFields message = (UIFields)data;
-            RegMessage reg = (RegMessage)message.getValue();
-            register(reg);
-        }
-        else if (type.equals(SendTypes.CHANNEL.getType()))
-        {
-            UIFields message = (UIFields)data;
-            UpdateMessage um = (UpdateMessage)message.getValue();
-            updateChannels(um);
-        } else if (type.equals(SendTypes.LEAVE.getType()))
-        {
-            UIFields discon = (UIFields)data;
-            DisconnectMessage disMsg = (DisconnectMessage)discon.getValue();
-            try
-            {
-                out.writeObject(new Packet(MessageType.DISCONNECT.getType(), disMsg));
-                out.flush();
-            }
-            catch(IOException ex)
-            {
-                ex.printStackTrace();
-            }
-        }
-        else if (type.equals(SendTypes.HISTORY_REQUEST.getType()))
-        {
-            UIFields req = (UIFields)data;
-            RequestMessage historyRequest = (RequestMessage)req.getValue();
-            try
-            {
-                out.writeObject(new Packet(MessageType.HISTORY_REQUEST.getType(), historyRequest));
-                out.flush();
-            }
-            catch(IOException ex)
-            {
-                ex.printStackTrace();
-            }
-        }
-    }
+
 
     // repeat code will be later refactored to be more concise
     private void updateChannels(UpdateMessage updateMessage)
@@ -201,92 +118,10 @@ public class ChatSender implements UIObserver {
 
 
 
-    /*
-    @Override
-    public void addObserver(UIObserver newObserver) {
-        observers.add(newObserver);
-    }
-
-    @Override
-    public void removeObserver(UIObserver oldObserver) {
-        observers.remove(oldObserver);
-    }
-
-    @Override
-    public void notifyObservers(SystemEvent e) {
-        try
-        {
-            out.writeObject();
-            out.flush();
-        }
-        catch(IOException ex)
-        {
-            ex.printStackTrace();
-        }
 
 
 
 
-
-
-
-          public void update(Sendable data) {
-        String type = data.getType();
-        if (type.equals(SendTypes.MESSAGE.getType()))
-        {
-            UIFields messageField = (UIFields)data;
-            if (messageField.getValue() instanceof TextMessage)
-            {
-                TextMessage message = (TextMessage) messageField.getValue();
-                focusedChannel = message.getChannel();
-                sendMessage(message);
-            }
-            else if (messageField.getValue() instanceof PicMessage)
-            {
-                sendPicture((PicMessage)messageField.getValue());
-            }
-        }
-        else if (type.equals(SendTypes.JOIN.getType()))
-        {
-            UIFields message = (UIFields)data;
-            RegMessage reg = (RegMessage)message.getValue();
-            register(reg);
-        }
-        else if (type.equals(SendTypes.CHANNEL.getType()))
-        {
-            UIFields message = (UIFields)data;
-            UpdateMessage um = (UpdateMessage)message.getValue();
-            updateChannels(um);
-        } else if (type.equals(SendTypes.LEAVE.getType()))
-        {
-            UIFields discon = (UIFields)data;
-            DisconnectMessage disMsg = (DisconnectMessage)discon.getValue();
-            try
-            {
-                out.writeObject(new Packet(MessageType.DISCONNECT.getType(), disMsg));
-                out.flush();
-            }
-            catch(IOException ex)
-            {
-                ex.printStackTrace();
-            }
-        }
-        else if (type.equals(SendTypes.HISTORY_REQUEST.getType()))
-        {
-            UIFields req = (UIFields)data;
-            RequestMessage historyRequest = (RequestMessage)req.getValue();
-            try
-            {
-                out.writeObject(new Packet(MessageType.HISTORY_REQUEST.getType(), historyRequest));
-                out.flush();
-            }
-            catch(IOException ex)
-            {
-                ex.printStackTrace();
-            }
-        }
-    }
-        */
 
 
 
