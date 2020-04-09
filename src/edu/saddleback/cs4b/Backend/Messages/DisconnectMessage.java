@@ -2,7 +2,12 @@ package edu.saddleback.cs4b.Backend.Messages;
 
 import java.util.List;
 
-public class DisconnectMessage extends BaseMessage {
+/**
+ * This message is received by clients to indicate that the user
+ * has been disconnected from the channel. This is NOT used for acct
+ * suspensions
+ */
+public class DisconnectMessage extends BaseMessage{
     private List<String> channels;
     private String userName;
 

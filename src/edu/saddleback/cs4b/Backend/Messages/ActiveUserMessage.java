@@ -2,6 +2,10 @@ package edu.saddleback.cs4b.Backend.Messages;
 
 import java.util.List;
 
+/**
+ * This message is sent by the user to request a list of active users
+ * and is also received by the client with that list of active users
+ */
 public class ActiveUserMessage extends BaseMessage {
     private List<String> activeUsers;
 
