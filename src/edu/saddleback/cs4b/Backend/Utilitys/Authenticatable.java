@@ -1,4 +1,4 @@
-package edu.saddleback.cs4b.Backend.Server;
+package edu.saddleback.cs4b.Backend.Utilitys;
 
 public interface Authenticatable {
     String getKey();
