@@ -16,6 +16,13 @@ public class Client {
     private ObjectOutputStream out;
     private Controller controller;
 
+    /*
+    private String userName;
+    constructor sets it to ""
+    When client is signing in, it attempts to set userName to the name given, but only once the receiver gets an authentification message saying that it's valid
+    Sign out method resets data member to ""
+    Call this method when shutting down program
+    */
 
     public Client()
     {
