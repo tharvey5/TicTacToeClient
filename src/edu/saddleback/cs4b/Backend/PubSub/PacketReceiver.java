@@ -81,11 +81,12 @@ public class PacketReceiver implements Subject, Runnable
         {
             try
             {
-
+                //get messages from "in"
+                //List of if else's determining what to do wit messages
             }
             catch()
             {
-
+                //List of catches responding to different types of errors
             }
         }//while(listening)
     }
