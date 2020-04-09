@@ -74,7 +74,19 @@ public class PacketReceiver implements Subject, Runnable
     }
 
     @Override
-    public void run() {
+    public void run()
+    {
+        boolean listening = true;
+        while(listening)
+        {
+            try
+            {
 
+            }
+            catch()
+            {
+
+            }
+        }//while(listening)
     }
 }

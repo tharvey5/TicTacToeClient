@@ -17,6 +17,7 @@ public class Client {
     private Controller controller;
 
     private String userName;
+    private String userID;
     /*
     constructor sets it to ""
     When client is signing in, it attempts to set userName to the name given, but only once the receiver gets an authentification message saying that it's valid
@@ -35,6 +36,7 @@ public class Client {
         sender.update(SIGN_OUT);
 
         userName = "";
+        userID   = null;
     }
 
     public Client()
