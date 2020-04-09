@@ -1,7 +1,10 @@
-package edu.saddleback.cs4b.Backend.PubSub;
+package edu.saddleback.cs4b.Backend.ClientPackage;
 
 import edu.saddleback.cs4b.Backend.Messages.Packet;
 import edu.saddleback.cs4b.Backend.Messages.SignInMessage;
+import edu.saddleback.cs4b.Backend.PubSub.Observer;
+import edu.saddleback.cs4b.Backend.PubSub.Subject;
+import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 
 import java.io.ObjectInputStream;
 import java.util.List;

@@ -1,4 +1,4 @@
-package edu.saddleback.cs4b.Backend.PubSub;
+package edu.saddleback.cs4b.Backend.ClientPackage;
 
 import sample.Controller;
 

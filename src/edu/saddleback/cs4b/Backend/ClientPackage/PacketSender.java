@@ -1,13 +1,16 @@
-package edu.saddleback.cs4b.Backend.PubSub;
+package edu.saddleback.cs4b.Backend.ClientPackage;
 
 import edu.saddleback.cs4b.Backend.Messages.Packet;
+import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
+import edu.saddleback.cs4b.Backend.PubSub.UISubject;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-public class PacketSender implements UIObserver{
+public class PacketSender implements UIObserver {
     private ObjectOutputStream out;
     private List<UIObserver> observers;
     private UISubject subject;
