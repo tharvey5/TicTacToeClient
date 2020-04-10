@@ -39,12 +39,12 @@
             <Image url="@Injection.png" />
          </image>
       </ImageView>
-      <TextField layoutX="489.0" layoutY="205.0" prefHeight="32.0" prefWidth="257.0" promptText="Username">
+      <TextField fx:id="userField" layoutX="489.0" layoutY="205.0" prefHeight="32.0" prefWidth="257.0" promptText="Username">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField layoutX="489.0" layoutY="273.0" prefHeight="32.0" prefWidth="257.0" promptText="Password">
+      <TextField fx:id="passwordField" layoutX="489.0" layoutY="273.0" prefHeight="32.0" prefWidth="257.0" promptText="Password">
          <font>
             <Font size="16.0" />
          </font>
