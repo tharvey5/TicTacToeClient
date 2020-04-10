@@ -3,6 +3,7 @@ package edu.saddleback.cs4b.Backend.ClientPackage;
 import edu.saddleback.cs4b.Backend.Messages.AdminMessageFactory;
 import edu.saddleback.cs4b.Backend.Messages.BaseMessage;
 import edu.saddleback.cs4b.Backend.Messages.Packet;
+import edu.saddleback.cs4b.Backend.Messages.SignOutMessage;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
@@ -19,7 +20,7 @@ public class PacketSender implements UIObserver {
     private AdminMessageFactory messageFactory;
 
     private String userName;
-    private String userID;
+    private int userID;
     /*
     constructor sets it to ""
     When client is signing in, it attempts to set userName to the name given, but only once the receiver gets an authentification message saying that it's valid
@@ -35,11 +36,10 @@ public class PacketSender implements UIObserver {
 
     public void signOut()
     {
-        update(new SystemEvent(SIGN-OUT) {
-        });
+        update((SystemEvent)new SignOutMessage());
 
         userName = "";
-        userID   = null;
+        userID   = 0;
     }
 
     public String getUserName()
@@ -47,7 +47,7 @@ public class PacketSender implements UIObserver {
         return userName;
     }
 
-    public String getUserID()
+    public int getUserID()
     {
         return userID;
     }
@@ -64,6 +64,10 @@ public class PacketSender implements UIObserver {
         subject = newSubject;
         out = newOut;
         messageFactory = new AdminMessageFactory();
+
+        userName = "";
+        userID = 0;
+
     }
 
 
