@@ -1,5 +1,10 @@
 package edu.saddleback.cs4b.UI;
 
+import edu.saddleback.cs4b.Backend.Messages.AuthenticatedMessage;
+import edu.saddleback.cs4b.Backend.Messages.BaseMessage;
+import edu.saddleback.cs4b.Backend.Messages.DeniedEntryMessage;
+import edu.saddleback.cs4b.Backend.Messages.MsgTypes;
+import edu.saddleback.cs4b.Backend.PubSub.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,15 +16,71 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
-public class ClientLoginController
+public class ClientLoginController implements UISubject, Observer
 {
+    private List<UIObserver> uiObservers;
+    boolean validLogin = false;
+
     @FXML
     Button loginButton;
 
     @FXML
     Button createAccountButton;
 
+
+    /**
+     * This method gets called by the ClientSubjects
+     */
+    @Override
+    public void update(SystemEvent e)
+    {
+        if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType())) {
+            BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
+            handleMessageEvents(message);
+        }
+    }
+
+    private void handleMessageEvents(BaseMessage message) {
+        if (message instanceof AuthenticatedMessage) {
+            validLogin = true;
+        } else if (message instanceof DeniedEntryMessage) {
+            validLogin = false;
+        }
+    }
+
+    /**
+     * These methods are used for the UISubject
+     */
+    @Override
+    public void addObserver(UIObserver o)
+    {
+        uiObservers.add(o);
+    }
+
+    /**
+     * These methods are used for the UISubject
+     */
+    @Override
+    public void removeObserver(UIObserver o)
+    {
+        uiObservers.remove(o);
+    }
+
+    /**
+     * These methods are used for the UISubject
+     */
+    @Override
+    public void notifyObservers(SystemEvent e)
+    {
+        Iterator<UIObserver> iterator = uiObservers.iterator();
+        while (iterator.hasNext())
+        {
+            iterator.next().update(e);
+        }
+    }
 
     /**
      * WHEN THIS METHOD IS CALLED THE 'LOGIN' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
