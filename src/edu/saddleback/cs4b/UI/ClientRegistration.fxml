@@ -10,10 +10,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ClientRegistrationController">
    <children>
-      <AnchorPane layoutX="100.0" layoutY="50.0" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane layoutX="100.0" layoutY="50.0" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #ffffff">
          <children>
             <ImageView fitHeight="114.0" fitWidth="129.0" layoutX="259.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -32,12 +31,12 @@
             <TextField layoutX="51.0" layoutY="300.0" prefHeight="27.0" prefWidth="211.0" promptText="Create Password" />
             <TextField layoutX="341.0" layoutY="300.0" prefHeight="27.0" prefWidth="211.0" promptText="Last Name" />
             <Line endX="9.0" endY="218.5" layoutX="292.0" layoutY="170.0" startX="9.0" startY="16.5" />
-            <Button layoutX="51.0" layoutY="431.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Return to Login" textFill="WHITE">
+            <Button fx:id="returnToLoginButton" layoutX="51.0" layoutY="431.0" mnemonicParsing="false" onAction="#handleReturnToLoginAction" onMouseEntered="#highlightReturnToLogin" onMouseExited="#resetReturnToLogin" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Return to Login" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="341.0" layoutY="431.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Register Account" textFill="WHITE">
+            <Button fx:id="registerAccountButton" layoutX="341.0" layoutY="431.0" mnemonicParsing="false" onAction="#handleRegisterAccountAction" onMouseEntered="#highlightRegisterAccount" onMouseExited="#resetRegisterAccount" prefHeight="40.0" prefWidth="211.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Register Account" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
