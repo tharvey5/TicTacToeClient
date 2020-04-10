@@ -27,7 +27,6 @@ import java.util.List;
 public class ClientLoginController implements UISubject, Observer
 {
     private List<UIObserver> uiObservers = new ArrayList<>();
-    boolean validLogin = false;
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
 
     @FXML
@@ -56,9 +55,9 @@ public class ClientLoginController implements UISubject, Observer
 
     private void handleMessageEvents(BaseMessage message) {
         if (message instanceof AuthenticatedMessage) {
-            validLogin = true;
+            swapToHome();
         } else if (message instanceof DeniedEntryMessage) {
-            validLogin = false;
+            // show some notification
         }
     }
 
@@ -136,37 +135,38 @@ public class ClientLoginController implements UISubject, Observer
     {
         String userName = userField.getText();
         String password = passwordField.getText();
-        SignInMessage signIn = (SignInMessage)factory.createMessage(MsgTypes.SIGN_IN.getType());
-        notifyObservers(new MessageEvent(signIn));
+        if (!userName.equals("") && !password.equals("")) {
+            SignInMessage signIn = (SignInMessage) factory.createMessage(MsgTypes.SIGN_IN.getType());
+            notifyObservers(new MessageEvent(signIn));
 
-        //todo gonna need to wait for a response somehow. I recommend calling
-        //  this below line 59 and creating a function for bellow called
-        //  swapToHome(ActionEvent e) and call that once the message is received
-
-        if (validLogin) {
-            Parent parent = FXMLLoader.load(getClass().getResource("/edu/saddleback/cs4b/UI/ClientHomeScreen.fxml"));
-            Scene scene = new Scene(parent);
-
-            // This line gets the Stage information
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            window.setScene(scene);
-            window.show();
+            //swapToHome();  ** uncomment to test and recomment when running with server **
         }
     }
 
-    @FXML
-    public void handleCreateAccountAction(ActionEvent event) throws IOException
+    public void swapToHome()
     {
-        Parent parent = FXMLLoader.load(getClass().getResource("/edu/saddleback/cs4b/UI/ClientRegistration.fxml"));
-        Scene scene  = new Scene(parent);
+        swapScene("/edu/saddleback/cs4b/UI/ClientHomeScreen.fxml");
+    }
 
-        // This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+    @FXML
+    public void handleCreateAccountAction(ActionEvent event)
+    {
+        swapScene("/edu/saddleback/cs4b/UI/ClientRegistration.fxml");
+    }
+
+    public void swapScene(String sceneLocation)
+    {
+        Parent parent = null;
+        try {
+            parent = FXMLLoader.load(getClass().getResource(sceneLocation));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene  = new Scene(parent);
+        // This line gets the Stage information since loginButton and Register have same scene
+        Stage window = (Stage)(loginButton).getScene().getWindow();
 
         window.setScene(scene);
         window.show();
     }
-
-
 }
