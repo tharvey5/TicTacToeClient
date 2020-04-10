@@ -39,6 +39,17 @@ public class Client {
         userID   = null;
     }
 
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    public String getUserID()
+    {
+        return userID;
+    }
+
+
     public Client()
     {
         this("", -1);
