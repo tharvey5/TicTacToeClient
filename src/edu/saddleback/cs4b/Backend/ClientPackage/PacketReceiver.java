@@ -46,11 +46,11 @@ public class PacketReceiver implements Subject, Runnable
     }
 
     @Override
-    public void notifyObserver(SystemEvent e)
+    public void notifyObserver(SystemEvent event)
     {
         for(int i = 0; i < observers.size(); i++)
         {
-            observers.get(i).update(????????????);
+            observers.get(i).update(event);
         }
     }
 

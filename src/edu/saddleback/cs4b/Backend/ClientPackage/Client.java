@@ -3,6 +3,7 @@ package edu.saddleback.cs4b.Backend.ClientPackage;
 import edu.saddleback.cs4b.Backend.Messages.SignInMessage;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
 import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import sample.Controller;
@@ -10,7 +11,7 @@ import sample.Controller;
 import java.io.*;
 import java.net.Socket;
 
-public class Client {
+public class Client implements UIObserver {
     private PacketSender sender;
     private PacketReceiver receiver;
     private Socket socket;
@@ -112,4 +113,8 @@ public class Client {
     }
 
 
+    @Override
+    public void update(SystemEvent e) {
+
+    }
 }
