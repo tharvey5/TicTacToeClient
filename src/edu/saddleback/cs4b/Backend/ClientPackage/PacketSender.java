@@ -18,6 +18,40 @@ public class PacketSender implements UIObserver {
     private UISubject subject;
     private AdminMessageFactory messageFactory;
 
+    private String userName;
+    private String userID;
+    /*
+    constructor sets it to ""
+    When client is signing in, it attempts to set userName to the name given, but only once the receiver gets an authentification message saying that it's valid
+    Sign out method resets data member to ""
+    Call this method when shutting down program
+    */
+
+
+    public void signIn()
+    {
+
+    }
+
+    public void signOut()
+    {
+        update(new SystemEvent(SIGN-OUT) {
+        });
+
+        userName = "";
+        userID   = null;
+    }
+
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    public String getUserID()
+    {
+        return userID;
+    }
+
 
     public PacketSender()
     {

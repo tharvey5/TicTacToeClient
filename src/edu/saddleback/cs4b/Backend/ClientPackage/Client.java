@@ -16,38 +16,7 @@ public class Client {
     private ObjectOutputStream out;
     private Controller controller;
 
-    private String userName;
-    private String userID;
-    /*
-    constructor sets it to ""
-    When client is signing in, it attempts to set userName to the name given, but only once the receiver gets an authentification message saying that it's valid
-    Sign out method resets data member to ""
-    Call this method when shutting down program
-    */
 
-
-    public void signIn()
-    {
-
-    }
-
-    public void signOut()
-    {
-        sender.update(SIGN_OUT);
-
-        userName = "";
-        userID   = null;
-    }
-
-    public String getUserName()
-    {
-        return userName;
-    }
-
-    public String getUserID()
-    {
-        return userID;
-    }
 
 
     public Client()
