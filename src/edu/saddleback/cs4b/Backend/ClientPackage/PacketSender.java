@@ -53,6 +53,12 @@ public class PacketSender implements UIObserver {
 
         BaseMessage nextMessage = messageFactory.createMessage(messageType);
 
+        sendMessage(nextMessage);
+    }
+
+
+    private void sendMessage(BaseMessage nextMessage)
+    {
         try
         {
             out.writeObject(nextMessage);
@@ -63,7 +69,6 @@ public class PacketSender implements UIObserver {
             ex.printStackTrace();
         }
     }
-
 
 /*
 public class ChatSender implements UIObserver {
