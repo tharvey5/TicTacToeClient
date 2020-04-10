@@ -34,7 +34,7 @@ public class Client implements UIObserver {
         //else verification false, don't set username, have UI display error message
         if()
         {
-            signIn();
+            sender.signIn((user.getUsername()), (TTTUser)user.getId());
         }
         else if()
         {
