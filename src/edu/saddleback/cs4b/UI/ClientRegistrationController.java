@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -28,6 +29,18 @@ public class ClientRegistrationController implements UISubject, Observer
     @FXML
     Button registerAccountButton;
 
+    @FXML
+    TextField usernameField;
+
+    @FXML
+    TextField passwordField;
+
+    @FXML
+    TextField firstnameField;
+
+    @FXML
+    TextField lastnameField; 
+
     /**
      * This will be called by the client backend
      */
@@ -40,10 +53,14 @@ public class ClientRegistrationController implements UISubject, Observer
         }
     }
 
-    private void handleMessageEvents(BaseMessage message) {
-        if (message instanceof SuccessfulRegistration) {
-            // call the register account scene
-        } else if (message instanceof RegistrationErrorMessage) {
+    private void handleMessageEvents(BaseMessage message)
+    {
+        if (message instanceof SuccessfulRegistration)
+        {
+            showSuccessfulRegistration();
+        }
+        else if (message instanceof RegistrationErrorMessage)
+        {
             // call the
         }
     }
@@ -120,6 +137,10 @@ public class ClientRegistrationController implements UISubject, Observer
     @FXML
     public void handleRegisterAccountAction(ActionEvent event) throws IOException
     {
+        //swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccessScreen.fxml");
+    }
+
+    public void showSuccessfulRegistration() {
         swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccessScreen.fxml");
     }
 
