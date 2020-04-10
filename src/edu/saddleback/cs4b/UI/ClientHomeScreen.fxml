@@ -40,27 +40,27 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="singlePlayerLabel" onMouseEntered="#highlightSinglePlayer" onMouseExited="#resetSinglePlayer" text="Single Player" textFill="WHITE">
+                  <Label fx:id="singlePlayerLabel" onMouseClicked="#handleSinglePlayerAction" onMouseEntered="#highlightSinglePlayer" onMouseExited="#resetSinglePlayer" text="Single Player" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="multiplayerLabel" onMouseEntered="#highlightMultiplayer" onMouseExited="#resetMultiplayer" text="Multiplayer" textFill="WHITE">
+                  <Label fx:id="multiplayerLabel" onMouseClicked="#handleMultiplayerAction" onMouseEntered="#highlightMultiplayer" onMouseExited="#resetMultiplayer" text="Multiplayer" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="viewProfileLabel" onMouseEntered="#highlightViewProfile" onMouseExited="#resetViewProfile" text="View Profile" textFill="WHITE">
+                  <Label fx:id="viewProfileLabel" onMouseClicked="#handleViewProfileAction" onMouseEntered="#highlightViewProfile" onMouseExited="#resetViewProfile" text="View Profile" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="aboutUsLabel" onMouseEntered="#highlightAboutUs" onMouseExited="#resetAboutUs" text="About Us" textFill="WHITE">
+                  <Label fx:id="aboutUsLabel" onMouseClicked="#handleAboutUsAction" onMouseEntered="#highlightAboutUs" onMouseExited="#resetAboutUs" text="About Us" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="logoutLabel" onMouseEntered="#highlightLogout" onMouseExited="#resetLogout" text="Logout" textFill="WHITE">
+                  <Label fx:id="logoutLabel" onMouseClicked="#handleLogoutAction" onMouseEntered="#highlightLogout" onMouseExited="#resetLogout" text="Logout" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>

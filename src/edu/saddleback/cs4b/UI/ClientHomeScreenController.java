@@ -150,11 +150,56 @@ public class ClientHomeScreenController implements Initializable
     }
 
     @FXML
-    public void handleMainMenuAction(MouseEvent event) throws NullPointerException
+    public void handleMainMenuAction(MouseEvent event)
     {
         System.out.println("You clicked me!");
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("Screen1");
+        Pane view = object.getPage("MainMenuScreen");
+        viewScreen.setCenter(view);
+    }
+
+    @FXML
+    public void handleSinglePlayerAction(MouseEvent event)
+    {
+        System.out.println("You clicked me!");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("SinglePlayerScreen");
+        viewScreen.setCenter(view);
+    }
+
+    @FXML
+    public void handleMultiplayerAction(MouseEvent event)
+    {
+        System.out.println("You clicked me!");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("MultiplayerScreen");
+        viewScreen.setCenter(view);
+    }
+
+    @FXML
+    public void handleViewProfileAction(MouseEvent event)
+    {
+        System.out.println("You clicked me!");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("ViewProfileScreen");
+        viewScreen.setCenter(view);
+    }
+
+    @FXML
+    public void handleAboutUsAction(MouseEvent event)
+    {
+        System.out.println("You clicked me!");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("AboutUsScreen");
+        viewScreen.setCenter(view);
+    }
+
+    @FXML
+    public void handleLogoutAction(MouseEvent event)
+    {
+        System.out.println("You clicked me!");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("LogoutScreen");
         viewScreen.setCenter(view);
     }
 
