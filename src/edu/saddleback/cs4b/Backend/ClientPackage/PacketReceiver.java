@@ -69,11 +69,11 @@ public class PacketReceiver implements Subject, Runnable
                 //List of if else's determining what to do with messages
                 if(data instanceof SuccessfulRegistration)
                 {
-
+                    //sign in
                 }
                 else if(data instanceof RegistrationErrorMessage)
                 {
-
+                    //tell user (through UI) there was an error, print error message to them ie Invalid Username, Password doesn't meet requirements
                 }
                 else if(data instanceof AuthenticatedMessage)
                 {
