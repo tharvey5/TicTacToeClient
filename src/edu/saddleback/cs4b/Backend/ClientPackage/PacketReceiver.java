@@ -77,23 +77,25 @@ public class PacketReceiver implements Subject, Runnable
                 }
                 else if(data instanceof AuthenticatedMessage)
                 {
-
+                    //sign in was successful, tell sender to set the username
+                    //UI loads next scene
                 }
                 else if(data instanceof DeniedEntryMessage)
                 {
-
+                    //Sign in failed, tell sender to NOT set username
+                    //Tell user through UI there was an error
                 }
                 else if(data instanceof DisconnectMessage)
                 {
-
+                    //UI tells user that a specified player has disconnected
                 }
                 else if(data instanceof ActiveUserMessage)
                 {
-
+                    //UI presents user with active list of users
                 }
                 else //invalid message
                 {
-                    System.out.println("Invalid message type sent");
+                    System.out.println("Invalid message type received");
                 }
 
 
