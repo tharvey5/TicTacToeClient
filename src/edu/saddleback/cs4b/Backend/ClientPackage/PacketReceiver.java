@@ -46,7 +46,7 @@ public class PacketReceiver implements Subject, Runnable
 
     @Override
     public void notifyObserver(SystemEvent event)
-        {
+    {
         for(int i = 0; i < observers.size(); i++)
         {
             observers.get(i).update(event);
@@ -98,7 +98,7 @@ public class PacketReceiver implements Subject, Runnable
                     System.out.println("Invalid message type received");
                 }
 
-
+                //NOTIFY
 
             }
             catch(IOException ex)
