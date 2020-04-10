@@ -48,7 +48,7 @@ public class TTTUser implements Serializable, Cloneable, User {
     public String getPassword() { return password; }
 
     // todo this probably would only be used by server??? ** should it be public **
-    private int getId() { return id; }
+    public int getId() { return id; }
 
     @Override
     public void setUsername(String username) { this.username = username; }
@@ -62,7 +62,7 @@ public class TTTUser implements Serializable, Cloneable, User {
     @Override
     public void setPassword(String password) { this.password = password; }
 
-    private void setId(int id) { this.id = id; }
+    public void setId(int id) { this.id = id; }
 
     @Override
     public int hashCode() {

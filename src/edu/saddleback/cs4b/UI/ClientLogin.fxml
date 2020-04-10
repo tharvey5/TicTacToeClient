@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ClientLoginController">
+   <children>
+      <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #2A363B#2A363B;">
+         <children>
+            <Circle fill="WHITE" layoutX="217.0" layoutY="300.0" radius="151.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="80.0" layoutY="256.0" text="SQL INJECTORS" textFill="#2a363b">
+               <font>
+                  <Font name="Tamil MN" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="103.0" layoutY="300.0" text="TIC-TAC-TOE" textFill="#2a363b">
+               <font>
+                  <Font name="Tamil MN" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="65.0" fitWidth="76.0" layoutX="184.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@tictacotoeicon.png" />
+               </image>
+            </ImageView>
+            <Line endX="40.0" layoutX="300.0" layoutY="250.0" startX="-200.0" />
+            <Line endX="40.0" layoutX="296.0" layoutY="356.0" startX="-200.0" />
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="103.0" fitWidth="105.0" layoutX="552.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Injection.png" />
+         </image>
+      </ImageView>
+      <TextField layoutX="489.0" layoutY="205.0" prefHeight="32.0" prefWidth="257.0" promptText="Username">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="489.0" layoutY="273.0" prefHeight="32.0" prefWidth="257.0" promptText="Password">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Line endX="150.0" layoutX="600.0" layoutY="180.0" startX="-150.0" />
+      <Line endX="150.0" layoutX="600.0" layoutY="480.0" startX="-150.0" />
+      <ImageView fitHeight="32.0" fitWidth="38.0" layoutX="445.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@personicon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="38.0" layoutX="445.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@passwordicon.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="450.0" layoutY="495.0" text="Forgot Password?" textFill="#0099ff" />
+      <Button fx:id="loginButton" layoutX="489.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleLoginAction" onMouseEntered="#highlightLogin" onMouseExited="#resetLogin" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: #2A363B#2A363B;" text="Login" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="createAccountButton" layoutX="489.0" layoutY="404.0" mnemonicParsing="false" onAction="#handleCreateAccountAction" onMouseEntered="#highlightCreateAccount" onMouseExited="#resetCreateAccount" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: #2A363B#2A363B;" text="Create Account" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="526.0" layoutY="130.0" text="Client Login">
+         <font>
+            <Font name="Tamil MN" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
