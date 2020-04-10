@@ -26,15 +26,26 @@ public class TTTProfile implements Serializable, Profile {
     /**
      * @throws NullPointerException if a null user is added
      */
-    private void setUser(TTTUser user) throws NullPointerException {
+    @Override
+    public void setUser(User user) throws NullPointerException {
         if (user == null) {
             throw new NullPointerException();
         }
-        this.user = user;
+        this.user = (TTTUser)user;
+    }
+
+    @Override
+    public void setId(String id) {
+        user.setId(Integer.parseInt(id));
     }
 
     @Override
     public User getUser() { return (TTTUser)user.clone(); }
+
+    @Override
+    public String getId() {
+        return Integer.toString(user.getId());
+    }
 
     @Override
     protected Object clone()  {
