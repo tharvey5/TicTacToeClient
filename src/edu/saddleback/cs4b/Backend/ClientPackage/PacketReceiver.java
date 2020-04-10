@@ -1,8 +1,6 @@
 package edu.saddleback.cs4b.Backend.ClientPackage;
 
-import edu.saddleback.cs4b.Backend.Messages.BaseMessage;
-import edu.saddleback.cs4b.Backend.Messages.Packet;
-import edu.saddleback.cs4b.Backend.Messages.SignInMessage;
+import edu.saddleback.cs4b.Backend.Messages.*;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.Subject;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
@@ -21,7 +19,6 @@ public class PacketReceiver implements Subject, Runnable
     {
         in = newIn;
         addObserver(controller);
-
     }
 
 
@@ -69,7 +66,38 @@ public class PacketReceiver implements Subject, Runnable
                 BaseMessage data = message.getData();
 
 
-                //List of if else's determining what to do wit messages
+                //List of if else's determining what to do with messages
+                if(data instanceof SuccessfulRegistration)
+                {
+
+                }
+                else if(data instanceof RegistrationErrorMessage)
+                {
+
+                }
+                else if(data instanceof AuthenticatedMessage)
+                {
+
+                }
+                else if(data instanceof DeniedEntryMessage)
+                {
+
+                }
+                else if(data instanceof DisconnectMessage)
+                {
+
+                }
+                else if(data instanceof ActiveUserMessage)
+                {
+
+                }
+                else //invalid message
+                {
+                    System.out.println("Invalid message type sent");
+                }
+
+
+
             }
             catch(IOException ex)
             {
