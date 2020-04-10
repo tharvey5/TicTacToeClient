@@ -29,9 +29,10 @@ public class PacketSender implements UIObserver {
     */
 
 
-    public void signIn()
+    public void signIn(String newUserName, int newUserID)
     {
-
+        userName = newUserName;
+        userID   = newUserID;
 
 
         //in client, call sender.update(signInMessage)

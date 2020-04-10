@@ -3,6 +3,7 @@ package edu.saddleback.cs4b.Backend.ClientPackage;
 import edu.saddleback.cs4b.Backend.Messages.SignInMessage;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import sample.Controller;
 
@@ -20,14 +21,36 @@ public class Client {
     private ObjectOutputStream out;
     private Controller controller;
 
-    public void signIn(User userInfo)
+    public void signIn()
     {
-        sender.update((SystemEvent) new SignInMessage(userInfo));
+        //Get username and password from UI
+        User user; //= FROM UI
+
+        //Send it to server for verification
+        sender.update((SystemEvent) new SignInMessage((User)user));
+
+        //if verification true, set username Authenticated Message, Denial message
+        //else verification false, don't set username, have UI display error message
+        if()
+        {
+            signIn();
+        }
+        else if()
+        {
+
+        }
+
+
+
+
 
 
         //in client, call sender.update(signInMessage)
         //if PacketReceiver receves an authenification message, call the sign in method for sender and set the name and ID
 
+        TTTUser user = //FROM UI
+
+        sender.signIn(user);
     }
 
 
