@@ -2,6 +2,8 @@ package edu.saddleback.cs4b.UI;
 
 import edu.saddleback.cs4b.Backend.Messages.*;
 import edu.saddleback.cs4b.Backend.PubSub.*;
+import edu.saddleback.cs4b.Backend.Utilitys.Profile;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +41,7 @@ public class ClientRegistrationController implements UISubject, Observer
     TextField firstnameField;
 
     @FXML
-    TextField lastnameField; 
+    TextField lastnameField;
 
     /**
      * This will be called by the client backend
@@ -61,7 +63,7 @@ public class ClientRegistrationController implements UISubject, Observer
         }
         else if (message instanceof RegistrationErrorMessage)
         {
-            // call the
+            // popup the scene showing unsuccessful message
         }
     }
 
@@ -137,6 +139,20 @@ public class ClientRegistrationController implements UISubject, Observer
     @FXML
     public void handleRegisterAccountAction(ActionEvent event) throws IOException
     {
+        String firstname = firstnameField.getText();
+        String lastname = lastnameField.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+
+        if (!firstname.equals("") && !lastname.equals("") && !username.equals("") && !password.equals("")) {
+            ProfileMessage profileMessage = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
+            Profile prof = new TTTProfile(username, firstname, lastname, password);
+            profileMessage.setProfile(prof);
+            notifyObservers(new MessageEvent(profileMessage));
+        } else {
+            // generate an error message to the screen
+        }
+
         //swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccessScreen.fxml");
     }
 
