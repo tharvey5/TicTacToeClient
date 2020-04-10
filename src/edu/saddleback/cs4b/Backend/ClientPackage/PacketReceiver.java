@@ -72,3 +72,124 @@ public class PacketReceiver implements Subject, Runnable
         }//while(listening)
     }
 }
+
+
+
+
+
+
+
+
+
+
+/*
+public class ChatListener implements ClientSubject, Runnable {
+
+    private Receivable receivable;
+    private ArrayList<ClientObserver> observers;
+    private ObjectInputStream in;
+
+
+
+
+    public ChatListener(ObjectInputStream newIn, ClientObserver controller) {
+        observers = new ArrayList<>();
+        registerObserver(controller);
+        receivable = null;
+        in = newIn;
+        try
+        {
+            receivable = new UIDisplayData(ReceiveTypes.HOST, InetAddress.getLocalHost().getHostAddress(), "");
+            notifyObservers();
+        } catch (UnknownHostException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void run() {
+        boolean listening = true;
+        while (listening)
+        {
+            try
+            {
+                Packet message = (Packet) in.readObject();
+                Serializable data = message.getData();
+                if (data instanceof TextMessage)
+                {
+                    receivable = new UIDisplayData(ReceiveTypes.TEXT_AREA,
+                            (TextMessage)data,
+                            ((TextMessage) data).getChannel());
+                    notifyObservers();
+                }
+                else if (data instanceof PicMessage)
+                {
+                    receivable = new UIDisplayData(ReceiveTypes.TEXT_AREA, data, (
+                            (PicMessage) data).getChannel());
+                    notifyObservers();
+                } else if (data instanceof DisconnectMessage) {
+                    listening = false;
+                } else if (data instanceof RequestMessage) {
+                    receivable = new UIDisplayData(ReceiveTypes.TEXT_AREA, data,
+                            ((RequestMessage) data).getChannel());
+                    notifyObservers();
+                }
+            }
+            catch (SocketException socketEx)
+            {
+                listening = false;
+            }
+            catch (EOFException eof)
+            {
+                listening = false;
+                String error = "Server has been unexpectedly shutoff, please restart";
+                TextMessage offlineServerMsg = new TextMessage("SERVER", "", error);
+                receivable = new UIDisplayData(ReceiveTypes.TEXT_AREA,
+                        offlineServerMsg,
+                        "");
+                notifyObservers();
+            }
+            catch (IOException ioEx)
+            {
+                ioEx.printStackTrace();
+            }
+            catch (ClassNotFoundException notFoundEx)
+            {
+                notFoundEx.printStackTrace();
+            }
+        }//END while (listening)
+    }//end public void run()
+
+    @Override
+    public void notifyObservers()
+    {
+        for(int i = 0; i < observers.size(); i++)
+        {
+            observers.get(i).update(receivable);
+        }
+    }
+
+    @Override
+    public void registerObserver(ClientObserver newObserver)
+    {
+        observers.add(newObserver);
+    }
+
+    @Override
+    public void removeObserver(ClientObserver oldObserver)
+    {
+        int deleteIndex = observers.indexOf(oldObserver);
+
+        if(deleteIndex > -1)
+        {
+            observers.remove(oldObserver);
+        }
+        else
+        {
+            System.out.println("Observer could not be found");
+        }
+    }
+}
+ */
