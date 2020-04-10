@@ -32,28 +32,14 @@ public class PacketSender implements UIObserver {
     public void signIn()
     {
 
+
+
         //in client, call sender.update(signInMessage)
         //if PacketReceiver receves an authenification message, call the sign in method for sender and set the name and ID
 
     }
 
-    public void signOut()
-    {
-        update((SystemEvent)new SignOutMessage());
 
-        userName = "";
-        userID   = 0;
-    }
-
-    public String getUserName()
-    {
-        return userName;
-    }
-
-    public int getUserID()
-    {
-        return userID;
-    }
 
 
     public PacketSender()
@@ -74,7 +60,23 @@ public class PacketSender implements UIObserver {
     }
 
 
+    public void signOut()
+    {
+        update((SystemEvent)new SignOutMessage());
 
+        userName = "";
+        userID   = 0;
+    }
+
+    //Getters
+    public String getUserName()
+    {
+        return userName;
+    }
+    public int getUserID()
+    {
+        return userID;
+    }
 
 
     @Override
@@ -97,7 +99,6 @@ public class PacketSender implements UIObserver {
         sendMessage(nextMessage);
     }
 
-
     private void sendMessage(BaseMessage nextMessage)
     {
         try
@@ -110,5 +111,4 @@ public class PacketSender implements UIObserver {
             ex.printStackTrace();
         }
     }
-
 }

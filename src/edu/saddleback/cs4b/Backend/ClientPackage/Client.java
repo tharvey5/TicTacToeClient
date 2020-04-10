@@ -1,5 +1,9 @@
 package edu.saddleback.cs4b.Backend.ClientPackage;
 
+import edu.saddleback.cs4b.Backend.Messages.SignInMessage;
+import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
+import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.Utilitys.User;
 import sample.Controller;
 
 import java.io.*;
@@ -16,7 +20,15 @@ public class Client {
     private ObjectOutputStream out;
     private Controller controller;
 
+    public void signIn(User userInfo)
+    {
+        sender.update((SystemEvent) new SignInMessage(userInfo));
 
+
+        //in client, call sender.update(signInMessage)
+        //if PacketReceiver receves an authenification message, call the sign in method for sender and set the name and ID
+
+    }
 
 
     public Client()
