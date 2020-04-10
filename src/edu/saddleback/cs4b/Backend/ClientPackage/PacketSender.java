@@ -32,6 +32,9 @@ public class PacketSender implements UIObserver {
     public void signIn()
     {
 
+        //in client, call sender.update(signInMessage)
+        //if PacketReceiver receves an authenification message, call the sign in method for sender and set the name and ID
+
     }
 
     public void signOut()
