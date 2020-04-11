@@ -22,37 +22,7 @@ public class Client implements UIObserver {
     private ObjectOutputStream out;
     private Controller controller;
 
-    public void signIn()
-    {
-        //Get username and password from UI
-        User user; //= FROM UI
 
-        //Send it to server for verification
-        sender.update((SystemEvent) new SignInMessage((User)user));
-
-        //if verification true, set username Authenticated Message, Denial message
-        //else verification false, don't set username, have UI display error message
-        if()
-        {
-            sender.signIn((user.getUsername()), (TTTUser)user.getId());
-        }
-        else if()
-        {
-
-        }
-
-
-
-
-
-
-        //in client, call sender.update(signInMessage)
-        //if PacketReceiver receves an authenification message, call the sign in method for sender and set the name and ID
-
-        TTTUser user = //FROM UI
-
-        sender.signIn(user);
-    }
 
 
     public Client()
