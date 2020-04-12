@@ -1,12 +1,14 @@
 package edu.saddleback.cs4b.Backend.ClientPackage;
 
 import edu.saddleback.cs4b.Backend.Messages.*;
+import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.Subject;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,6 +20,7 @@ public class PacketReceiver implements Subject, Runnable
     public PacketReceiver(ObjectInputStream newIn, Observer controller)
     {
         in = newIn;
+        observers = new ArrayList<>();
         addObserver(controller);
     }
 
@@ -65,41 +68,16 @@ public class PacketReceiver implements Subject, Runnable
                 Packet message = (Packet) in.readObject();
                 BaseMessage data = message.getData();
 
+                SystemEvent messageEvent = new MessageEvent(data);
+                notifyObserver(messageEvent);
 
-                //List of if else's determining what to do with messages
-                if(data instanceof SuccessfulRegistration)
+                //Might need to look for message to stop listening
+                /*
+                if(data instanceOf ShutdownMessage)
                 {
-                    //Tells UI that Registration was successful  (Does not immediately sign them in) and prompts them to return to the login screen
+                    listening = false;
                 }
-                else if(data instanceof RegistrationErrorMessage)
-                {
-                    //tell user (through UI) there was an error, print error message to them ie Invalid Username, Password doesn't meet requirements
-                }
-                else if(data instanceof AuthenticatedMessage)
-                {
-                    //sign in was successful, tell sender to set the username
-                    //UI loads next scene
-                }
-                else if(data instanceof DeniedEntryMessage)
-                {
-                    //Sign in failed, tell sender to NOT set username
-                    //Tell user through UI there was an error
-                }
-                else if(data instanceof DisconnectMessage)
-                {
-                    //UI tells user that a specified player has disconnected
-                }
-                else if(data instanceof ActiveUserMessage)
-                {
-                    //UI presents user with active list of users
-                }
-                else //invalid message
-                {
-                    System.out.println("Invalid message type received");
-                }
-
-                //NOTIFY
-
+                 */
             }
             catch(IOException ex)
             {
@@ -109,6 +87,8 @@ public class PacketReceiver implements Subject, Runnable
             {
                 ex.printStackTrace();
             }
+
+
         }//while(listening)
     }
 }
