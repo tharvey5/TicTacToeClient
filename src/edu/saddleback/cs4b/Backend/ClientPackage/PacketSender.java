@@ -47,7 +47,7 @@ public class PacketSender implements UIObserver {
 
         if(event instanceof MessageEvent)
         {
-            messageType = event.getType();
+            messageType = ((MessageEvent) event).getMessage().getMessageType();
         }
         else
         {

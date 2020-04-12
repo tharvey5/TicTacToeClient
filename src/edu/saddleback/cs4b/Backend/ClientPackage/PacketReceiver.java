@@ -35,16 +35,7 @@ public class PacketReceiver implements Subject, Runnable
     @Override
     public void removeObserver(Observer oldObserver)
     {
-        int deleteIndex = observers.indexOf(oldObserver);
-
-        if(deleteIndex > -1)
-        {
-            observers.remove(oldObserver);
-        }
-        else
-        {
-            System.out.println("Observer could not be found");
-        }
+        observers.remove(oldObserver);
     }
 
     @Override
