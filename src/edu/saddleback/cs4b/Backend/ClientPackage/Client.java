@@ -15,7 +15,7 @@ public class Client implements UIObserver {
     private PacketSender sender;
     private PacketReceiver receiver;
     private Socket socket;
-    private int portNumber;
+    private int portNumber = 8080;
     private String hostName;
     private Thread listeningThread;
     private ObjectInputStream in;
