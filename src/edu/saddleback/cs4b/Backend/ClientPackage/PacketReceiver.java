@@ -15,13 +15,13 @@ import java.util.List;
 public class PacketReceiver implements Runnable
 {
     private ObjectInputStream in;
-    private List<Observer> observers;
+    //private List<Observer> observers;
     private ClientEventLog clientLog = ClientEventLog.getInstance();
 
     public PacketReceiver(ObjectInputStream newIn)
     {
         in = newIn;
-        observers = new ArrayList<>();
+        //observers = new ArrayList<>();
     }
 
 
@@ -58,6 +58,7 @@ public class PacketReceiver implements Runnable
                 //get messages from "in"
                 Packet message = (Packet) in.readObject();
                 BaseMessage data = message.getData();
+                System.out.println("incoming...");
 
                 SystemEvent messageEvent = new MessageEvent(data);
                 clientLog.notifyObserver(messageEvent);

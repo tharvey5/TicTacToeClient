@@ -1,9 +1,11 @@
 package edu.saddleback.cs4b.UI;
 
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.Messages.*;
 import edu.saddleback.cs4b.Backend.PubSub.*;
 import edu.saddleback.cs4b.Backend.Utilitys.Profile;
 import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,9 +22,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ClientRegistrationController implements UISubject, Observer
+public class ClientRegistrationController implements Observer
 {
-    private List<UIObserver> uiObservers = new ArrayList<>();
+//    private List<UIObserver> uiObservers = new ArrayList<>();
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
 
     @FXML
@@ -43,6 +45,10 @@ public class ClientRegistrationController implements UISubject, Observer
     @FXML
     TextField lastnameField;
 
+    public ClientRegistrationController() {
+        ClientEventLog.getInstance().addObserver(this);
+    }
+
     /**
      * This will be called by the client backend
      */
@@ -57,6 +63,7 @@ public class ClientRegistrationController implements UISubject, Observer
 
     private void handleMessageEvents(BaseMessage message)
     {
+        System.out.println("got message...");
         if (message instanceof SuccessfulRegistration)
         {
             showSuccessfulRegistration();
@@ -70,27 +77,27 @@ public class ClientRegistrationController implements UISubject, Observer
     /**
      * The following will be called by this UI
      */
-    @Override
-    public void addObserver(UIObserver o)
-    {
-        uiObservers.add(o);
-    }
-
-    @Override
-    public void removeObserver(UIObserver o)
-    {
-        uiObservers.remove(o);
-    }
-
-    @Override
-    public void notifyObservers(SystemEvent e)
-    {
-        Iterator<UIObserver> iterator = uiObservers.iterator();
-        while (iterator.hasNext())
-        {
-            iterator.next().update(e);
-        }
-    }
+//    @Override
+//    public void addObserver(UIObserver o)
+//    {
+//        uiObservers.add(o);
+//    }
+//
+//    @Override
+//    public void removeObserver(UIObserver o)
+//    {
+//        uiObservers.remove(o);
+//    }
+//
+//    @Override
+//    public void notifyObservers(SystemEvent e)
+//    {
+//        Iterator<UIObserver> iterator = uiObservers.iterator();
+//        while (iterator.hasNext())
+//        {
+//            iterator.next().update(e);
+//        }
+//    }
 
     /**
      * WHEN THIS METHOD IS CALLED THE 'RETURN TO LOGIN' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
@@ -148,7 +155,8 @@ public class ClientRegistrationController implements UISubject, Observer
             ProfileMessage profileMessage = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
             Profile prof = new TTTProfile(username, firstname, lastname, password);
             profileMessage.setProfile(prof);
-            notifyObservers(new MessageEvent(profileMessage));
+            UIEventLog.getInstance().notifyObservers(new MessageEvent(profileMessage));
+            System.out.println("got credentials");
         } else {
             // generate an error message to the screen
         }
@@ -162,6 +170,7 @@ public class ClientRegistrationController implements UISubject, Observer
 
     public void swapScene(String sceneLocation)
     {
+        ClientEventLog.getInstance().removeObserver(this);
         Parent parent = null;
         try {
             parent = FXMLLoader.load(getClass().getResource(sceneLocation));
@@ -170,7 +179,9 @@ public class ClientRegistrationController implements UISubject, Observer
         }
         Scene scene  = new Scene(parent);
         Stage window = (Stage)(returnToLoginButton).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
+        Platform.runLater(()->{
+            window.setScene(scene);
+            window.show();
+        });
     }
 }

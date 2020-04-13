@@ -35,19 +35,19 @@ public class PacketSender implements UIObserver {
     @Override
     public void update(SystemEvent event)
     {
-        String messageType;
+//        String messageType;
+//
+//        if(event instanceof MessageEvent)
+//        {
+//            messageType = ((MessageEvent) event).getMessage().getMessageType();
+//        }
+//        else
+//        {
+//            System.out.println("Not a valid event");
+//            return;
+//        }
 
-        if(event instanceof MessageEvent)
-        {
-            messageType = ((MessageEvent) event).getMessage().getMessageType();
-        }
-        else
-        {
-            System.out.println("Not a valid event");
-            return;
-        }
-
-        BaseMessage nextMessage = messageFactory.createMessage(messageType);
+        BaseMessage nextMessage = ((MessageEvent) event).getMessage();
 
         sendMessage(nextMessage);
     }
@@ -56,8 +56,9 @@ public class PacketSender implements UIObserver {
     {
         try
         {
-            out.writeObject(nextMessage);
+            out.writeObject(new Packet(nextMessage));
             out.flush();
+            System.out.println("sending...");
         }
         catch (IOException ex)
         {

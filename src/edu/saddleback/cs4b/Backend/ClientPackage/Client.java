@@ -1,12 +1,7 @@
 package edu.saddleback.cs4b.Backend.ClientPackage;
 
-import edu.saddleback.cs4b.Backend.Messages.SignInMessage;
-import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
-import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
-import edu.saddleback.cs4b.Backend.Utilitys.User;
-import sample.Controller;
 
 import java.io.*;
 import java.net.Socket;
@@ -20,8 +15,6 @@ public class Client implements UIObserver {
     private Thread listeningThread;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-
-
 
 
     public Client()
@@ -63,20 +56,25 @@ public class Client implements UIObserver {
 
     private void startUp()
     {
-        if(out != null && in != null)
-        {
-            createSocket();
-            this.sender          = new PacketSender(out);
-            this.receiver        = new PacketReceiver(in, controller);
-            this.listeningThread = new Thread(receiver);
-            listeningThread.start();
-        }
-        else
-        {
-            sender          = null;
-            receiver        = null;
-            listeningThread = null;
-        }
+        createSocket();
+        this.sender          = new PacketSender(out);
+        this.receiver        = new PacketReceiver(in);
+        this.listeningThread = new Thread(receiver);
+        listeningThread.start();
+//        if(out != null && in != null)
+//        {
+//            createSocket();
+//            this.sender          = new PacketSender(out);
+//            this.receiver        = new PacketReceiver(in);
+//            this.listeningThread = new Thread(receiver);
+//            listeningThread.start();
+//        }
+//        else
+//        {
+//            sender          = null;
+//            receiver        = null;
+//            listeningThread = null;
+//        }
 
     }
 

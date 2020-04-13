@@ -1,5 +1,6 @@
 package edu.saddleback.cs4b.UI;
 
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.Messages.*;
 import edu.saddleback.cs4b.Backend.PubSub.*;
 import javafx.event.ActionEvent;
@@ -15,18 +16,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * We will need to have andrew call the instance of this class via the
  * FXML loader so that he can log this instance of an observer AND
  * so we can log his classes as our observer
  */
-public class ClientLoginController implements UISubject, Observer
+public class ClientLoginController implements Observer
 {
-    private List<UIObserver> uiObservers = new ArrayList<>();
+    private UIEventLog uilog = UIEventLog.getInstance();
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
 
     @FXML
@@ -40,6 +38,10 @@ public class ClientLoginController implements UISubject, Observer
 
     @FXML
     TextField passwordField;
+
+    public ClientLoginController() {
+        ClientEventLog.getInstance().addObserver(this);
+    }
 
     /**
      * This method gets called by the ClientSubjects
@@ -64,33 +66,33 @@ public class ClientLoginController implements UISubject, Observer
     /**
      * These methods are used for the UISubject
      */
-    @Override
-    public void addObserver(UIObserver o)
-    {
-        uiObservers.add(o);
-    }
-
-    /**
-     * These methods are used for the UISubject
-     */
-    @Override
-    public void removeObserver(UIObserver o)
-    {
-        uiObservers.remove(o);
-    }
-
-    /**
-     * These methods are used for the UISubject
-     */
-    @Override
-    public void notifyObservers(SystemEvent e)
-    {
-        Iterator<UIObserver> iterator = uiObservers.iterator();
-        while (iterator.hasNext())
-        {
-            iterator.next().update(e);
-        }
-    }
+//    @Override
+//    public void addObserver(UIObserver o)
+//    {
+//        uiObservers.add(o);
+//    }
+//
+//    /**
+//     * These methods are used for the UISubject
+//     */
+//    @Override
+//    public void removeObserver(UIObserver o)
+//    {
+//        uiObservers.remove(o);
+//    }
+//
+//    /**
+//     * These methods are used for the UISubject
+//     */
+//    @Override
+//    public void notifyObservers(SystemEvent e)
+//    {
+//        Iterator<UIObserver> iterator = uiObservers.iterator();
+//        while (iterator.hasNext())
+//        {
+//            iterator.next().update(e);
+//        }
+//    }
 
     /**
      * WHEN THIS METHOD IS CALLED THE 'LOGIN' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
@@ -137,7 +139,7 @@ public class ClientLoginController implements UISubject, Observer
         String password = passwordField.getText();
         if (!userName.equals("") && !password.equals("")) {
             SignInMessage signIn = (SignInMessage) factory.createMessage(MsgTypes.SIGN_IN.getType());
-            notifyObservers(new MessageEvent(signIn));
+            uilog.notifyObservers(new MessageEvent(signIn));
 
             //swapToHome();  ** uncomment to test and recomment when running with server **
         }
@@ -157,6 +159,7 @@ public class ClientLoginController implements UISubject, Observer
     public void swapScene(String sceneLocation)
     {
         Parent parent = null;
+        ClientEventLog.getInstance().removeObserver(this);
         try {
             parent = FXMLLoader.load(getClass().getResource(sceneLocation));
         } catch (IOException e) {
