@@ -3,8 +3,8 @@ package edu.saddleback.cs4b.Backend.ClientPackage;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.Subject;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
-import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,7 +12,9 @@ public class ClientEventLog implements Subject {
     private static ClientEventLog log = new ClientEventLog();
     private List<Observer> observers;
 
-    private ClientEventLog() {}
+    private ClientEventLog() {
+        observers = new ArrayList<>();
+    }
 
     public static ClientEventLog getInstance() { return log; }
 
