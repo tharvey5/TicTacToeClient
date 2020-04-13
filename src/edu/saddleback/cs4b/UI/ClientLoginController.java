@@ -3,12 +3,15 @@ package edu.saddleback.cs4b.UI;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.Messages.*;
 import edu.saddleback.cs4b.Backend.PubSub.*;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -60,6 +63,10 @@ public class ClientLoginController implements Observer
             swapToHome();
         } else if (message instanceof DeniedEntryMessage) {
             // show some notification
+            Platform.runLater(()-> {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong Username/password");
+                alert.show();
+            });
         }
     }
 
@@ -139,6 +146,7 @@ public class ClientLoginController implements Observer
         String password = passwordField.getText();
         if (!userName.equals("") && !password.equals("")) {
             SignInMessage signIn = (SignInMessage) factory.createMessage(MsgTypes.SIGN_IN.getType());
+            signIn.setUserInfo(new TTTUser(userName, password));
             uilog.notifyObservers(new MessageEvent(signIn));
 
             //swapToHome();  ** uncomment to test and recomment when running with server **
@@ -169,7 +177,10 @@ public class ClientLoginController implements Observer
         // This line gets the Stage information since loginButton and Register have same scene
         Stage window = (Stage)(loginButton).getScene().getWindow();
 
-        window.setScene(scene);
-        window.show();
+        Platform.runLater(()->{
+            window.setScene(scene);
+            window.show();
+        });
+
     }
 }

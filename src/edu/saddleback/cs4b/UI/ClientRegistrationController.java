@@ -63,7 +63,6 @@ public class ClientRegistrationController implements Observer
 
     private void handleMessageEvents(BaseMessage message)
     {
-        System.out.println("got message...");
         if (message instanceof SuccessfulRegistration)
         {
             showSuccessfulRegistration();
@@ -156,7 +155,6 @@ public class ClientRegistrationController implements Observer
             Profile prof = new TTTProfile(username, firstname, lastname, password);
             profileMessage.setProfile(prof);
             UIEventLog.getInstance().notifyObservers(new MessageEvent(profileMessage));
-            System.out.println("got credentials");
         } else {
             // generate an error message to the screen
         }

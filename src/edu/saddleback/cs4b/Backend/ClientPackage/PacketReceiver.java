@@ -58,7 +58,6 @@ public class PacketReceiver implements Runnable
                 //get messages from "in"
                 Packet message = (Packet) in.readObject();
                 BaseMessage data = message.getData();
-                System.out.println("incoming...");
 
                 SystemEvent messageEvent = new MessageEvent(data);
                 clientLog.notifyObserver(messageEvent);
