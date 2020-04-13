@@ -70,36 +70,6 @@ public class ClientLoginController implements Observer
         }
     }
 
-    /**
-     * These methods are used for the UISubject
-     */
-//    @Override
-//    public void addObserver(UIObserver o)
-//    {
-//        uiObservers.add(o);
-//    }
-//
-//    /**
-//     * These methods are used for the UISubject
-//     */
-//    @Override
-//    public void removeObserver(UIObserver o)
-//    {
-//        uiObservers.remove(o);
-//    }
-//
-//    /**
-//     * These methods are used for the UISubject
-//     */
-//    @Override
-//    public void notifyObservers(SystemEvent e)
-//    {
-//        Iterator<UIObserver> iterator = uiObservers.iterator();
-//        while (iterator.hasNext())
-//        {
-//            iterator.next().update(e);
-//        }
-//    }
 
     /**
      * WHEN THIS METHOD IS CALLED THE 'LOGIN' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT

@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -70,33 +71,13 @@ public class ClientRegistrationController implements Observer
         else if (message instanceof RegistrationErrorMessage)
         {
             // popup the scene showing unsuccessful message
+            Platform.runLater(()-> {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Username Exists");
+                alert.show();
+            });
         }
     }
 
-    /**
-     * The following will be called by this UI
-     */
-//    @Override
-//    public void addObserver(UIObserver o)
-//    {
-//        uiObservers.add(o);
-//    }
-//
-//    @Override
-//    public void removeObserver(UIObserver o)
-//    {
-//        uiObservers.remove(o);
-//    }
-//
-//    @Override
-//    public void notifyObservers(SystemEvent e)
-//    {
-//        Iterator<UIObserver> iterator = uiObservers.iterator();
-//        while (iterator.hasNext())
-//        {
-//            iterator.next().update(e);
-//        }
-//    }
 
     /**
      * WHEN THIS METHOD IS CALLED THE 'RETURN TO LOGIN' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
