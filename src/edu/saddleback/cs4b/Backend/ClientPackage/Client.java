@@ -20,7 +20,6 @@ public class Client implements UIObserver {
     private Thread listeningThread;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-    private Controller controller;
 
 
 
@@ -36,7 +35,6 @@ public class Client implements UIObserver {
         portNumber = newPortNumber;
         hostName   = newHostName;
 
-        controller = new Controller();
         // V no such method exits at the time
         //controller.registerObserver(this);
 
@@ -68,7 +66,7 @@ public class Client implements UIObserver {
         if(out != null && in != null)
         {
             createSocket();
-            this.sender          = new PacketSender(out, controller);
+            this.sender          = new PacketSender(out);
             this.receiver        = new PacketReceiver(in, controller);
             this.listeningThread = new Thread(receiver);
             listeningThread.start();

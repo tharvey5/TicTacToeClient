@@ -8,6 +8,7 @@ import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
 import edu.saddleback.cs4b.Backend.PubSub.UISubject;
+import edu.saddleback.cs4b.UI.UIEventLog;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,29 +17,20 @@ import java.util.List;
 
 public class PacketSender implements UIObserver {
     private ObjectOutputStream out;
-    private UISubject subject;
     private AdminMessageFactory messageFactory;
-
-
-
-
-
 
     public PacketSender()
     {
-        this(null, null);
+        this(null);
     }
 
 
-    public PacketSender(ObjectOutputStream newOut, UISubject newSubject)
+    public PacketSender(ObjectOutputStream newOut)
     {
-        subject = newSubject;
         out = newOut;
         messageFactory = new AdminMessageFactory();
+        UIEventLog.getInstance().addObserver(this);
     }
-
-
-
 
     @Override
     public void update(SystemEvent event)
