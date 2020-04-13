@@ -9,7 +9,12 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ClientEventLog implements Subject {
+    private static ClientEventLog log = new ClientEventLog();
     private List<Observer> observers;
+
+    private ClientEventLog() {}
+
+    public static ClientEventLog getInstance() { return log; }
 
     @Override
     public void addObserver(Observer o) {
