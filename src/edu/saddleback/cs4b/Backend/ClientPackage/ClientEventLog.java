@@ -7,13 +7,14 @@ import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ClientEventLog implements Subject {
     private static ClientEventLog log = new ClientEventLog();
     private List<Observer> observers;
 
     private ClientEventLog() {
-        observers = new ArrayList<>();
+        observers = new CopyOnWriteArrayList<>(); // todo costly, find alternative later
     }
 
     public static ClientEventLog getInstance() { return log; }
@@ -25,7 +26,7 @@ public class ClientEventLog implements Subject {
 
     @Override
     public void removeObserver(Observer o) {
-        observers.remove(o);
+        observers.removeIf(i-> i == o);
     }
 
     @Override
