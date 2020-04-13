@@ -1,24 +1,82 @@
 package edu.saddleback.cs4b.UI;
 
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
+import edu.saddleback.cs4b.Backend.Messages.*;
+import edu.saddleback.cs4b.Backend.PubSub.*;
+import edu.saddleback.cs4b.Backend.Utilitys.Profile;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-public class ClientRegistrationController
+public class ClientRegistrationController implements Observer
 {
+//    private List<UIObserver> uiObservers = new ArrayList<>();
+    private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
+
     @FXML
     Button returnToLoginButton;
 
     @FXML
     Button registerAccountButton;
+
+    @FXML
+    TextField usernameField;
+
+    @FXML
+    TextField passwordField;
+
+    @FXML
+    TextField firstnameField;
+
+    @FXML
+    TextField lastnameField;
+
+    public ClientRegistrationController() {
+        ClientEventLog.getInstance().addObserver(this);
+    }
+
+    /**
+     * This will be called by the client backend
+     */
+    @Override
+    public void update(SystemEvent e)
+    {
+        if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType())) {
+            BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
+            handleMessageEvents(message);
+        }
+    }
+
+    private void handleMessageEvents(BaseMessage message)
+    {
+        if (message instanceof SuccessfulRegistration)
+        {
+            showSuccessfulRegistration();
+        }
+        else if (message instanceof RegistrationErrorMessage)
+        {
+            // popup the scene showing unsuccessful message
+            Platform.runLater(()-> {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Username Exists");
+                alert.show();
+            });
+        }
+    }
 
 
     /**
@@ -62,27 +120,47 @@ public class ClientRegistrationController
     @FXML
     public void handleReturnToLoginAction(ActionEvent event) throws IOException
     {
-        Parent parent = FXMLLoader.load(getClass().getResource("/edu/saddleback/cs4b/UI/ClientLogin.fxml"));
-        Scene scene  = new Scene(parent);
-
-        // This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(scene);
-        window.show();
+        swapScene("/edu/saddleback/cs4b/UI/ClientLogin.fxml");
     }
 
     @FXML
     public void handleRegisterAccountAction(ActionEvent event) throws IOException
     {
-        Parent parent = FXMLLoader.load(getClass().getResource("/edu/saddleback/cs4b/UI/AccountCreationSuccessScreen.fxml"));
-        Scene scene  = new Scene(parent);
+        String firstname = firstnameField.getText();
+        String lastname = lastnameField.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
 
-        // This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        if (!firstname.equals("") && !lastname.equals("") && !username.equals("") && !password.equals("")) {
+            ProfileMessage profileMessage = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
+            Profile prof = new TTTProfile(username, firstname, lastname, password);
+            profileMessage.setProfile(prof);
+            UIEventLog.getInstance().notifyObservers(new MessageEvent(profileMessage));
+        } else {
+            // generate an error message to the screen
+        }
 
-        window.setScene(scene);
-        window.show();
+        //swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccessScreen.fxml");
     }
 
+    public void showSuccessfulRegistration() {
+        swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccessScreen.fxml");
+    }
+
+    public void swapScene(String sceneLocation)
+    {
+        ClientEventLog.getInstance().removeObserver(this);
+        Parent parent = null;
+        try {
+            parent = FXMLLoader.load(getClass().getResource(sceneLocation));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene  = new Scene(parent);
+        Stage window = (Stage)(returnToLoginButton).getScene().getWindow();
+        Platform.runLater(()->{
+            window.setScene(scene);
+            window.show();
+        });
+    }
 }
