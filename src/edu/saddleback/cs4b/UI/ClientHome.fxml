@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -40,31 +41,49 @@
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="singlePlayerButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#handleSinglePlayerAction" onMouseEntered="#highlightSinglePlayer" onMouseExited="#resetSinglePlayer" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Single Player" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="multiplayerButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#handleMultiplayerAction" onMouseEntered="#highlightMultiplayer" onMouseExited="#resetMultiplayer" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Multiplayer" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="viewProfileButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="102.0" mnemonicParsing="false" onMouseClicked="#handleViewProfileAction" onMouseEntered="#highlightViewProfile" onMouseExited="#resetViewProfile" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Profile" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="aboutUsButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#handleAboutUsAction" onMouseEntered="#highlightAboutUs" onMouseExited="#resetAboutUs" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="About Us" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="logoutButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#handleLogoutAction" onMouseEntered="#highlightLogout" onMouseExited="#resetLogout" prefHeight="45.0" prefWidth="161.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Logout" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </VBox>

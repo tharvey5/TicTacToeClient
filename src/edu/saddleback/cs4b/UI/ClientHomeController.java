@@ -152,7 +152,7 @@ public class ClientHomeController implements Initializable
     public void handleMainMenuAction(MouseEvent event)
     {
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("MainMenuScreen");
+        Pane view = object.getPage("MainMenu");
         viewScreen.setCenter(view);
     }
 
@@ -160,7 +160,7 @@ public class ClientHomeController implements Initializable
     public void handleSinglePlayerAction(MouseEvent event)
     {
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("SinglePlayerScreen");
+        Pane view = object.getPage("SinglePlayer");
         viewScreen.setCenter(view);
     }
 
@@ -168,7 +168,7 @@ public class ClientHomeController implements Initializable
     public void handleMultiplayerAction(MouseEvent event)
     {
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("MultiplayerScreen");
+        Pane view = object.getPage("Multiplayer");
         viewScreen.setCenter(view);
     }
 
@@ -176,7 +176,7 @@ public class ClientHomeController implements Initializable
     public void handleViewProfileAction(MouseEvent event)
     {
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("ViewProfileScreen");
+        Pane view = object.getPage("ViewProfile");
         viewScreen.setCenter(view);
     }
 
@@ -184,7 +184,7 @@ public class ClientHomeController implements Initializable
     public void handleAboutUsAction(MouseEvent event)
     {
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("AboutUsScreen");
+        Pane view = object.getPage("AboutUs");
         viewScreen.setCenter(view);
     }
 
@@ -192,7 +192,7 @@ public class ClientHomeController implements Initializable
     public void handleLogoutAction(MouseEvent event)
     {
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("LogoutScreen");
+        Pane view = object.getPage("Logout");
         viewScreen.setCenter(view);
     }
 
