@@ -9,7 +9,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -19,9 +18,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class ClientRegistrationController implements Observer
 {
@@ -140,11 +136,11 @@ public class ClientRegistrationController implements Observer
             // generate an error message to the screen
         }
 
-        //swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccessScreen.fxml");
+        //swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccess.fxml");
     }
 
     public void showSuccessfulRegistration() {
-        swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccessScreen.fxml");
+        swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccess.fxml");
     }
 
     public void swapScene(String sceneLocation)

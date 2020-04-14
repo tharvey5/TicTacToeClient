@@ -61,7 +61,7 @@
             <Image url="@passwordicon.png" />
          </image>
       </ImageView>
-      <Label layoutX="450.0" layoutY="495.0" text="Forgot Password?" textFill="#0099ff" />
+      <Label fx:id="forgotPasswordLabel" layoutX="450.0" layoutY="495.0" onMouseEntered="#highlightForgotPassword" onMouseExited="#resetForgotPassword" text="Forgot Password?" textFill="#0099ff" />
       <Button fx:id="loginButton" layoutX="489.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleLoginAction" onMouseEntered="#highlightLogin" onMouseExited="#resetLogin" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: #2A363B#2A363B;" text="Login" textFill="WHITE">
          <font>
             <Font size="18.0" />

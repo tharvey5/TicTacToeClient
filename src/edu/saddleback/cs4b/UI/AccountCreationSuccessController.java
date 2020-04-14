@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AccountCreationSuccessScreenController
+public class AccountCreationSuccessController
 {
     @FXML
     Button returnToLoginButton;

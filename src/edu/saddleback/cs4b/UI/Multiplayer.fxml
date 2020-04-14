@@ -5,9 +5,9 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.SinglePlayerScreenController">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.MultiplayerController">
    <children>
-      <Label layoutX="211.0" layoutY="270.0" text="Screen 2">
+      <Label layoutX="210.0" layoutY="270.0" text="Screen 3">
          <font>
             <Font size="48.0" />
          </font>

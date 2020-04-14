@@ -8,7 +8,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -37,12 +36,16 @@ public class ClientLoginController implements Observer
     Button createAccountButton;
 
     @FXML
+    Label forgotPasswordLabel;
+
+    @FXML
     TextField userField;
 
     @FXML
     TextField passwordField;
 
-    public ClientLoginController() {
+    public ClientLoginController()
+    {
         ClientEventLog.getInstance().addObserver(this);
     }
 
@@ -52,24 +55,29 @@ public class ClientLoginController implements Observer
     @Override
     public void update(SystemEvent e)
     {
-        if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType())) {
+        if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType()))
+        {
             BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
             handleMessageEvents(message);
         }
     }
 
-    private void handleMessageEvents(BaseMessage message) {
-        if (message instanceof AuthenticatedMessage) {
+    private void handleMessageEvents(BaseMessage message)
+    {
+        if(message instanceof AuthenticatedMessage)
+        {
             swapToHome();
-        } else if (message instanceof DeniedEntryMessage) {
+        }
+        else if(message instanceof DeniedEntryMessage)
+        {
             // show some notification
-            Platform.runLater(()-> {
+            Platform.runLater(()->
+            {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong Username/password");
                 alert.show();
             });
         }
     }
-
 
     /**
      * WHEN THIS METHOD IS CALLED THE 'LOGIN' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
@@ -109,12 +117,32 @@ public class ClientLoginController implements Observer
         createAccountButton.setOnMouseExited(mouseEvent -> createAccountButton.setTextFill(Color.WHITE));
     }
 
+    /**
+     * WHEN THIS METHOD IS CALLED THE 'FORGOT PASSWORD?' LABEL WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
+     */
+    @FXML
+    public void highlightForgotPassword()
+    {
+        forgotPasswordLabel.setOnMouseEntered(mouseEvent -> forgotPasswordLabel.setTextFill(Color.YELLOW));
+    }
+
+    /**
+     * WHEN THIS METHOD IS CALLED THE 'FORGOT PASSWORD?' LABEL WILL CHANGE BACK TO THE DEFAULT TEXT COLOR WHEN THE MOUSE IS
+     * NO LONGER HOVERING OVER IT
+     */
+    @FXML
+    public void resetForgotPassword()
+    {
+        forgotPasswordLabel.setOnMouseExited(mouseEvent -> forgotPasswordLabel.setTextFill(Color.WHITE));
+    }
+
     @FXML
     public void handleLoginAction(ActionEvent event) throws IOException
     {
         String userName = userField.getText();
         String password = passwordField.getText();
-        if (!userName.equals("") && !password.equals("")) {
+        if(!userName.equals("") && !password.equals(""))
+        {
             SignInMessage signIn = (SignInMessage) factory.createMessage(MsgTypes.SIGN_IN.getType());
             signIn.setUserInfo(new TTTUser(userName, password));
             uilog.notifyObservers(new MessageEvent(signIn));
@@ -125,7 +153,7 @@ public class ClientLoginController implements Observer
 
     public void swapToHome()
     {
-        swapScene("/edu/saddleback/cs4b/UI/ClientHomeScreen.fxml");
+        swapScene("/edu/saddleback/cs4b/UI/ClientHome.fxml");
     }
 
     @FXML
@@ -138,19 +166,22 @@ public class ClientLoginController implements Observer
     {
         Parent parent = null;
         ClientEventLog.getInstance().removeObserver(this);
-        try {
+        try
+        {
             parent = FXMLLoader.load(getClass().getResource(sceneLocation));
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
         Scene scene  = new Scene(parent);
         // This line gets the Stage information since loginButton and Register have same scene
         Stage window = (Stage)(loginButton).getScene().getWindow();
 
-        Platform.runLater(()->{
+        Platform.runLater(()->
+        {
             window.setScene(scene);
             window.show();
         });
-
     }
 }

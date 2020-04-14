@@ -3,7 +3,6 @@ package edu.saddleback.cs4b.UI;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
 import edu.saddleback.cs4b.Backend.PubSub.UISubject;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
