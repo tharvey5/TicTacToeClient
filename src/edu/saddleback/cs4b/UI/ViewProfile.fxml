@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ViewProfileController">
    <children>
-      <Pane layoutY="-2.0" prefHeight="201.0" prefWidth="600.0" style="-fx-background-color: #4682B4;">
+      <Pane layoutY="-2.0" prefHeight="201.0" prefWidth="600.0" style="-fx-background-color: #E84A5F;">
          <children>
             <Label layoutX="198.0" layoutY="88.0" text="First Name: ">
                <font>
@@ -26,7 +26,7 @@
                   <Image url="@editicon.png" />
                </image>
             </ImageView>
-            <Button fx:id="editProfileButton" layoutX="481.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#handleEditProfileAction" onMouseEntered="#highlightEditProfile" onMouseExited="#resetEditProfile" style="-fx-background-color: #4682B4;" text="Edit Profile">
+            <Button fx:id="editProfileButton" layoutX="481.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#handleEditProfileAction" onMouseEntered="#highlightEditProfile" onMouseExited="#resetEditProfile" style="-fx-background-color: #E84A5F #E84A5F;" text="Edit Profile">
                <font>
                   <Font size="18.0" />
                </font>
@@ -60,7 +60,7 @@
          </font>
       </Label>
       <PasswordField layoutX="300.0" layoutY="281.0" />
-      <Button fx:id="saveChangesButton" layoutX="311.0" layoutY="365.0" mnemonicParsing="false" onMouseClicked="#handleSaveChangesAction" onMouseEntered="#highlightSaveChanges" onMouseExited="#resetSaveChanges" style="-fx-background-color: #4682B4;" text="Save Changes" textFill="WHITE">
+      <Button fx:id="saveChangesButton" layoutX="311.0" layoutY="365.0" mnemonicParsing="false" onMouseClicked="#handleSaveChangesAction" onMouseEntered="#highlightSaveChanges" onMouseExited="#resetSaveChanges" style="-fx-background-color: #E84A5F #E84A5F;" text="Save Changes" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
@@ -80,7 +80,7 @@
             <Image url="@editicon.png" />
          </image>
       </ImageView>
-      <Button fx:id="changeProfilePictureButton" layoutX="53.0" layoutY="283.0" mnemonicParsing="false" onMouseClicked="#handleChangeProfilePictureAction" onMouseEntered="#highlightChangeProfilePicture" onMouseExited="#resetChangeProfilePicture" style="-fx-background-color: #4682B4;" text="Change Profile Picture" textFill="WHITE">
+      <Button fx:id="changeProfilePictureButton" layoutX="53.0" layoutY="283.0" mnemonicParsing="false" onMouseClicked="#handleChangeProfilePictureAction" onMouseEntered="#highlightChangeProfilePicture" onMouseExited="#resetChangeProfilePicture" style="-fx-background-color: #E84A5F #E84A5F;" text="Change Profile Picture" textFill="WHITE">
          <font>
             <Font size="12.0" />
          </font>

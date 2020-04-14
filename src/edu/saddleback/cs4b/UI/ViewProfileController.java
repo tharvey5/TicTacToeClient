@@ -32,7 +32,7 @@ public class ViewProfileController
     @FXML
     public void resetEditProfile()
     {
-        editProfileButton.setOnMouseExited(mouseEvent -> editProfileButton.setTextFill(Color.WHITE));
+        editProfileButton.setOnMouseExited(mouseEvent -> editProfileButton.setTextFill(Color.BLACK));
     }
 
     /**
