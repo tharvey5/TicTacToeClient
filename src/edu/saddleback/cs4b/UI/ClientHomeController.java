@@ -196,7 +196,6 @@ public class ClientHomeController implements Initializable
         viewScreen.setCenter(view);
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {

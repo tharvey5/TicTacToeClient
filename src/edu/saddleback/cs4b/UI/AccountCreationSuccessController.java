@@ -3,14 +3,10 @@ package edu.saddleback.cs4b.UI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -27,9 +23,7 @@ public class AccountCreationSuccessController
     @FXML
     public void highlightReturnToLogin()
     {
-        BackgroundFill fill = new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY);
-        Background background = new Background(fill);
-        returnToLoginButton.setOnMouseEntered(mouseEvent -> returnToLoginButton.setBackground(background));
+        returnToLoginButton.setOnMouseEntered(mouseEvent -> returnToLoginButton.setTextFill(Color.RED));
     }
 
     /**
@@ -39,9 +33,8 @@ public class AccountCreationSuccessController
     @FXML
     public void resetReturnToLogin()
     {
-        BackgroundFill fill = new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY);
-        Background background = new Background(fill);
-        returnToLoginButton.setOnMouseExited(mouseEvent -> returnToLoginButton.setBackground(background));
+
+        returnToLoginButton.setOnMouseExited(mouseEvent -> returnToLoginButton.setTextFill(Color.BLACK));
     }
 
     @FXML
@@ -56,4 +49,6 @@ public class AccountCreationSuccessController
         window.setScene(scene);
         window.show();
     }
+
+
 }
