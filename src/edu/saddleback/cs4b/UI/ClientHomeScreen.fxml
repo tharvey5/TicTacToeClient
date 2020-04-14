@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ClientHomeScreenController">
+   <children>
+      <AnchorPane prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;">
+         <children>
+            <Line endX="80.0" layoutX="99.0" layoutY="149.0" startX="-80.0" stroke="WHITE" />
+            <Circle fill="WHITE" layoutX="99.0" layoutY="70.0" radius="56.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="54.0" layoutY="54.0" text="SQL INJECTORS">
+               <font>
+                  <Font name="Tamil MN" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="61.0" layoutY="70.0" text="TIC-TAC-TOE">
+               <font>
+                  <Font name="Tamil MN" size="12.0" />
+               </font>
+            </Label>
+            <Line endX="45.5" layoutX="100.0" layoutY="54.0" startX="-46.0" strokeWidth="0.5" />
+            <Line endX="45.5" layoutX="100.0" layoutY="86.0" startX="-46.0" strokeWidth="0.5" />
+            <ImageView fitHeight="29.0" fitWidth="25.0" layoutX="86.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@tictacotoeicon.png" />
+               </image>
+            </ImageView>
+            <VBox layoutX="20.0" layoutY="161.0" prefHeight="279.0" prefWidth="161.0" spacing="1.0">
+               <children>
+                  <Button fx:id="mainMenuButton" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#handleMainMenuAction" onMouseEntered="#highlightMainMenu" onMouseExited="#resetMainMenu" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Main Menu" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="singlePlayerButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#handleSinglePlayerAction" onMouseEntered="#highlightSinglePlayer" onMouseExited="#resetSinglePlayer" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Single Player" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="multiplayerButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#handleMultiplayerAction" onMouseEntered="#highlightMultiplayer" onMouseExited="#resetMultiplayer" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Multiplayer" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="viewProfileButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="102.0" mnemonicParsing="false" onMouseClicked="#handleViewProfileAction" onMouseEntered="#highlightViewProfile" onMouseExited="#resetViewProfile" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Profile" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="aboutUsButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#handleAboutUsAction" onMouseEntered="#highlightAboutUs" onMouseExited="#resetAboutUs" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="About Us" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="logoutButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#handleLogoutAction" onMouseEntered="#highlightLogout" onMouseExited="#resetLogout" prefHeight="45.0" prefWidth="161.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Logout" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <BorderPane fx:id="viewScreen" layoutX="200.0" prefHeight="600.0" prefWidth="600.0" />
+   </children>
+</AnchorPane>

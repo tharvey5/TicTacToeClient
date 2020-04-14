@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -151,13 +152,18 @@ public class ClientLoginController implements Observer
         }
     }
 
+    public void handleForgotPasswordAction(MouseEvent event)
+    {
+        swapScene("/edu/saddleback/cs4b/UI/ForgotPassword.fxml");
+    }
+
     public void swapToHome()
     {
         swapScene("/edu/saddleback/cs4b/UI/ClientHome.fxml");
     }
 
     @FXML
-    public void handleCreateAccountAction(ActionEvent event)
+    public void handleCreateAccountAction(MouseEvent event)
     {
         swapScene("/edu/saddleback/cs4b/UI/ClientRegistration.fxml");
     }

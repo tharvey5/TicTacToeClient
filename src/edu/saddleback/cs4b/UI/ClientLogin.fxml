@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -43,11 +44,17 @@
          <font>
             <Font size="16.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
       </TextField>
       <TextField fx:id="passwordField" layoutX="489.0" layoutY="273.0" prefHeight="32.0" prefWidth="257.0" promptText="Password">
          <font>
             <Font size="16.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
       </TextField>
       <Line endX="150.0" layoutX="600.0" layoutY="180.0" startX="-150.0" />
       <Line endX="150.0" layoutX="600.0" layoutY="480.0" startX="-150.0" />
@@ -61,16 +68,25 @@
             <Image url="@passwordicon.png" />
          </image>
       </ImageView>
-      <Label fx:id="forgotPasswordLabel" layoutX="450.0" layoutY="495.0" onMouseEntered="#highlightForgotPassword" onMouseExited="#resetForgotPassword" text="Forgot Password?" textFill="#0099ff" />
+      <Label fx:id="forgotPasswordLabel" layoutX="450.0" layoutY="495.0" onMouseClicked="#handleForgotPasswordAction" onMouseEntered="#highlightForgotPassword" onMouseExited="#resetForgotPassword" text="Forgot Password?" textFill="#0099ff">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Label>
       <Button fx:id="loginButton" layoutX="489.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleLoginAction" onMouseEntered="#highlightLogin" onMouseExited="#resetLogin" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: #2A363B#2A363B;" text="Login" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Button fx:id="createAccountButton" layoutX="489.0" layoutY="404.0" mnemonicParsing="false" onAction="#handleCreateAccountAction" onMouseEntered="#highlightCreateAccount" onMouseExited="#resetCreateAccount" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: #2A363B#2A363B;" text="Create Account" textFill="WHITE">
+      <Button fx:id="createAccountButton" layoutX="489.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#handleCreateAccountAction" onMouseEntered="#highlightCreateAccount" onMouseExited="#resetCreateAccount" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: #2A363B#2A363B;" text="Create Account" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Label layoutX="526.0" layoutY="130.0" text="Client Login">
          <font>
