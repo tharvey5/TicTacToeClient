@@ -7,7 +7,7 @@ public class JoinGameRequestMessage extends BaseMessage
     private String gameID;
 
 
-    JoinGameRequestMessage(String newGameID)
+    public JoinGameRequestMessage(String newGameID)
     {
         super(MsgTypes.JOIN_GAME_REQUEST);
 
