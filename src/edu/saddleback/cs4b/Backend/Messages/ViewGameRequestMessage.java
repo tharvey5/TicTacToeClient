@@ -20,4 +20,9 @@ public class ViewGameRequestMessage extends BaseMessage
     {
         return gameID;
     }
+
+    public void setGameID(String newGameId)
+    {
+        gameID = newGameId;
+    }
 }

@@ -20,4 +20,9 @@ public class MoveMessage extends BaseMessage
     {
         return coordinate;
     }
+
+    public void setCoordinate(TTTPosition newCoord)
+    {
+        coordinate = newCoord;
+    }
 }

@@ -34,4 +34,9 @@ public class TTTPosition implements Coordinate
     {
         this.yCoord = yCoord;
     }
+
+    public String toString()
+    {
+        return "(" + xCoord + ", " + yCoord + ")";
+    }
 }

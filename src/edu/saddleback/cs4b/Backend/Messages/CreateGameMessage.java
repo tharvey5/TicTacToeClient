@@ -18,8 +18,13 @@ public class CreateGameMessage extends BaseMessage
         isSinglePlayer = newIsSinglePlayer;
     }
 
-    public boolean checkIfSinglePlayer()
+    public boolean getIfSinglePlayer()
     {
         return isSinglePlayer;
+    }
+
+    public void getIfSinglePlayer(boolean newISinglePlayer)
+    {
+         isSinglePlayer = newISinglePlayer;
     }
 }

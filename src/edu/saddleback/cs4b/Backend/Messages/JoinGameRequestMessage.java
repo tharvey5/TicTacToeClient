@@ -22,4 +22,9 @@ public class JoinGameRequestMessage extends BaseMessage
     {
         return gameID;
     }
+
+    public void setGameID(String newGameID)
+    {
+        gameID = newGameID;
+    }
 }

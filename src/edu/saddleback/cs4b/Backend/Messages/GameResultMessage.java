@@ -53,4 +53,20 @@ public class GameResultMessage extends BaseMessage{
     {
         return isTieGame;
     }
+
+    public void setWinType(WinType winType) {
+        this.winType = winType;
+    }
+
+    public void setWinner(String newWinner) {
+        winner = newWinner;
+    }
+
+    public void setLoser(String newLoser) {
+        loser = newLoser;
+    }
+
+    public void setTieGame(boolean newTieGame) {
+        isTieGame = newTieGame;
+    }
 }
