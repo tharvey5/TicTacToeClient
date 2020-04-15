@@ -14,9 +14,10 @@ public enum MsgTypes {
     // we will need to add our Reg/Profile
 
     //Game Messages
-    GAME_RESULT_MESSAGE("Game Result"),
+    INVALID_MOVE("Invalid Move"),
+    GAME_RESULT("Game Result"),
     REQUEST_JOIN_GAME("Request to Join Game"),
-    CREATE_GAME_MESSAGE("Create Game"),
+    CREATE_GAME("Create Game"),
     REQUEST_GAME_HISTORY("Request Game History");
 
 

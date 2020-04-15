@@ -11,7 +11,7 @@ public class GameResultMessage extends BaseMessage{
 
     public GameResultMessage(WinType newWinType, String newWinner, String newLoser, boolean newIsTieGame)
     {
-        super(MsgTypes.GAME_RESULT_MESSAGE);
+        super(MsgTypes.GAME_RESULT);
 
         winType = newWinType;
         winner = newWinner;

@@ -9,7 +9,7 @@ public class CreateGameMessage extends BaseMessage
 
     public CreateGameMessage(boolean newIsSinglePlayer)
     {
-        super(MsgTypes.CREATE_GAME_MESSAGE);
+        super(MsgTypes.CREATE_GAME);
 
         isSinglePlayer = newIsSinglePlayer;
     }
