@@ -9,6 +9,11 @@ public class GameResultMessage extends BaseMessage{
     private String loser;
     private boolean isTieGame;
 
+    public GameResultMessage()
+    {
+        this(null, null, null, false);
+    }
+
     public GameResultMessage(WinType newWinType, String newWinner, String newLoser, boolean newIsTieGame)
     {
         super(MsgTypes.GAME_RESULT);

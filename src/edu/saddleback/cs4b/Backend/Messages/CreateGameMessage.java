@@ -6,6 +6,10 @@ public class CreateGameMessage extends BaseMessage
 {
     private boolean isSinglePlayer;
 
+    public CreateGameMessage()
+    {
+        this(false);
+    }
 
     public CreateGameMessage(boolean newIsSinglePlayer)
     {

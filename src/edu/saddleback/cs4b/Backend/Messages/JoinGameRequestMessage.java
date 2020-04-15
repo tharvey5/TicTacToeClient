@@ -6,6 +6,10 @@ public class JoinGameRequestMessage extends BaseMessage
 {
     private String gameID;
 
+    public JoinGameRequestMessage()
+    {
+        this(null);
+    }
 
     public JoinGameRequestMessage(String newGameID)
     {

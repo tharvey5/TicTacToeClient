@@ -4,6 +4,11 @@ public class MoveMessage extends BaseMessage
 {
     TTTPosition coordinate;
 
+    public MoveMessage()
+    {
+        this(null);
+    }
+
     public MoveMessage(TTTPosition newCoordinate)
     {
         super(MsgTypes.MOVE);

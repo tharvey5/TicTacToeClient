@@ -4,6 +4,11 @@ public class ViewGameRequestMessage extends BaseMessage
 {
     private String gameID;
 
+    public ViewGameRequestMessage()
+    {
+        this(null);
+    }
+
     public ViewGameRequestMessage(String newGameID)
     {
         super(MsgTypes.VIEW_GAME_REQUEST);
