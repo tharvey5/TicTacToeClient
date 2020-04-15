@@ -176,7 +176,7 @@ public class ClientHomeController implements Initializable
     public void handleViewProfileAction(MouseEvent event)
     {
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("ViewProfile");
+        Pane view = object.getPage("Profile");
         viewScreen.setCenter(view);
     }
 

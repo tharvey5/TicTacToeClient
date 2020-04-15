@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-public class ViewProfileController
+public class ProfileController
 {
     @FXML
     Button editProfileButton;
