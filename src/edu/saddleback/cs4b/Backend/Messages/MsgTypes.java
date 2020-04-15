@@ -10,8 +10,17 @@ public enum MsgTypes {
     SIGN_OUT("Sign-out"),
     DISCONNECTION("Disconnection"),
     ACTIVE_USER_REQ("Active User Request"),
-    DEACTIVATION("Deactivation");
+    DEACTIVATION("Deactivation"),
     // we will need to add our Reg/Profile
+
+    //Game Messages
+    CREATE_GAME_MESSAGE("Create Game"),
+    REQUEST_GAME_HISTORY("Request Game History");
+
+
+
+
+
 
     private String type;
     private MsgTypes(String type) {
