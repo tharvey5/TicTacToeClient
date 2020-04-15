@@ -15,7 +15,7 @@ public enum MsgTypes {
 
     //Game Messages
     VIEW_GAME_REQUEST("View Game Request"),
-
+    MOVE("Move"),
     INVALID_MOVE("Invalid Move"),
     GAME_RESULT("Game Result"),
     JOIN_GAME_REQUEST("Request to Join Game"),
