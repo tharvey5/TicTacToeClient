@@ -6,8 +6,7 @@ import java.util.List;
 public class GameResultMessage extends BaseMessage{
     private WinType winType;
     private String winner;
-    private String loser;
-    private boolean isTieGame;
+
 
     public GameResultMessage()
     {
@@ -20,8 +19,6 @@ public class GameResultMessage extends BaseMessage{
 
         winType = newWinType;
         winner = newWinner;
-        loser = newLoser;
-        isTieGame = newIsTieGame;
     }
 
     public WinType getWinType()
@@ -34,39 +31,13 @@ public class GameResultMessage extends BaseMessage{
         return winner;
     }
 
-    public String getLoser()
-    {
-        return loser;
-    }
-
-    public List getPlayers()
-    {
-        ArrayList<String> players = new ArrayList<String>();
-
-        players.add(winner);
-        players.add(loser);
-
-        return players;
-    }
-
-    public boolean isTieGame()
-    {
-        return isTieGame;
-    }
-
-    public void setWinType(WinType winType) {
-        this.winType = winType;
-    }
-
     public void setWinner(String newWinner) {
         winner = newWinner;
     }
 
-    public void setLoser(String newLoser) {
-        loser = newLoser;
+    public void setWinType(WinType newWinType)
+    {
+        winType = newWinType;
     }
 
-    public void setTieGame(boolean newTieGame) {
-        isTieGame = newTieGame;
-    }
 }
