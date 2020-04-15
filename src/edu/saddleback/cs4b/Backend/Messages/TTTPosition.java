@@ -1,15 +1,15 @@
 package edu.saddleback.cs4b.Backend.Messages;
 
-public class TTTTPosition implements Coordinate
+public class TTTPosition implements Coordinate
 {
     private int xCoord;
     private int yCoord;
 
-    public TTTTPosition()
+    public TTTPosition()
     {
         this(0,0);
     }
-    public TTTTPosition(int newX, int newY)
+    public TTTPosition(int newX, int newY)
     {
         xCoord = newX;
         yCoord = newY;

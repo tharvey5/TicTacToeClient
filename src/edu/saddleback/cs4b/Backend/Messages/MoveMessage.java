@@ -2,16 +2,16 @@ package edu.saddleback.cs4b.Backend.Messages;
 
 public class MoveMessage extends BaseMessage
 {
-    TTTTPosition coordinate;
+    TTTPosition coordinate;
 
-    public MoveMessage(TTTTPosition newCoordinate)
+    public MoveMessage(TTTPosition newCoordinate)
     {
         super(MsgTypes.MOVE);
 
         coordinate = newCoordinate;
     }
 
-    public TTTTPosition getCoordinate()
+    public TTTPosition getCoordinate()
     {
         return coordinate;
     }
