@@ -4,7 +4,7 @@ package edu.saddleback.cs4b.Backend.Messages;
 
 public class CreateGameMessage extends BaseMessage
 {
-    boolean isSinglePlayer;
+    private boolean isSinglePlayer;
 
 
     public CreateGameMessage(boolean newIsSinglePlayer)
