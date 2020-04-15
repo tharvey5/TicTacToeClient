@@ -18,7 +18,7 @@ public enum MsgTypes {
 
     INVALID_MOVE("Invalid Move"),
     GAME_RESULT("Game Result"),
-    REQUEST_JOIN_GAME("Request to Join Game"),
+    JOIN_GAME_REQUEST("Request to Join Game"),
     CREATE_GAME("Create Game"),
     GAME_HISTORY_REQUEST("Request Game History");
 
