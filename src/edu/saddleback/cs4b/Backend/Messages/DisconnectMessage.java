@@ -11,7 +11,6 @@ public class DisconnectMessage extends BaseMessage{
     private List<String> channels;
     private String userName;
 
-
     /**
      * used for the message factory
      */
@@ -26,8 +25,6 @@ public class DisconnectMessage extends BaseMessage{
         setChannels(newChannels);
         setUserName(newUserName);
     }
-
-
 
     public List<String> getChannels()
     {
