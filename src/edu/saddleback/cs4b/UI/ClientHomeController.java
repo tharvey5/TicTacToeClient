@@ -23,7 +23,7 @@ public class ClientHomeController implements Initializable
     private Button multiplayerButton;
 
     @FXML
-    private Button viewProfileButton;
+    private Button profileButton;
 
     @FXML
     private Button aboutUsButton;
@@ -40,7 +40,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void highlightMainMenu()
     {
-        mainMenuButton.setOnMouseEntered(mouseEvent -> mainMenuButton.setTextFill(Color.YELLOW));
+        mainMenuButton.setOnMouseEntered(mouseEvent -> mainMenuButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -59,7 +59,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void highlightSinglePlayer()
     {
-        singlePlayerButton.setOnMouseEntered(mouseEvent -> singlePlayerButton.setTextFill(Color.YELLOW));
+        singlePlayerButton.setOnMouseEntered(mouseEvent -> singlePlayerButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -78,7 +78,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void highlightMultiplayer()
     {
-        multiplayerButton.setOnMouseEntered(mouseEvent -> multiplayerButton.setTextFill(Color.YELLOW));
+        multiplayerButton.setOnMouseEntered(mouseEvent -> multiplayerButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -95,9 +95,9 @@ public class ClientHomeController implements Initializable
      * WHEN THIS METHOD IS CALLED THE 'VIEW PROFILE' LABEL WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
      */
     @FXML
-    public void highlightViewProfile()
+    public void highlightProfile()
     {
-        viewProfileButton.setOnMouseEntered(mouseEvent -> viewProfileButton.setTextFill(Color.YELLOW));
+        profileButton.setOnMouseEntered(mouseEvent -> profileButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -105,9 +105,9 @@ public class ClientHomeController implements Initializable
      * NO LONGER HOVERING OVER IT
      */
     @FXML
-    public void resetViewProfile()
+    public void resetProfile()
     {
-        viewProfileButton.setOnMouseExited(mouseEvent -> viewProfileButton.setTextFill(Color.WHITE));
+        profileButton.setOnMouseExited(mouseEvent -> profileButton.setTextFill(Color.WHITE));
     }
 
     /**
@@ -116,7 +116,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void highlightAboutUs()
     {
-        aboutUsButton.setOnMouseEntered(mouseEvent -> aboutUsButton.setTextFill(Color.YELLOW));
+        aboutUsButton.setOnMouseEntered(mouseEvent -> aboutUsButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -135,7 +135,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void highlightLogout()
     {
-        logoutButton.setOnMouseEntered(mouseEvent -> logoutButton.setTextFill(Color.YELLOW));
+        logoutButton.setOnMouseEntered(mouseEvent -> logoutButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -173,10 +173,17 @@ public class ClientHomeController implements Initializable
     }
 
     @FXML
-    public void handleViewProfileAction(MouseEvent event)
+    public void handleProfileAction(MouseEvent event)
     {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("Profile");
+        viewScreen.setCenter(view);
+    }
+
+    public void handleEditProfileAction(MouseEvent event)
+    {
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("ProfileEdit");
         viewScreen.setCenter(view);
     }
 

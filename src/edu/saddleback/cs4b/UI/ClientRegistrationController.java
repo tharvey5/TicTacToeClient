@@ -81,7 +81,7 @@ public class ClientRegistrationController implements Observer
     @FXML
     public void highlightReturnToLogin()
     {
-        returnToLoginButton.setOnMouseEntered(mouseEvent -> returnToLoginButton.setTextFill(Color.YELLOW));
+        returnToLoginButton.setOnMouseEntered(mouseEvent -> returnToLoginButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -100,7 +100,7 @@ public class ClientRegistrationController implements Observer
     @FXML
     public void highlightRegisterAccount()
     {
-        registerAccountButton.setOnMouseEntered(mouseEvent -> registerAccountButton.setTextFill(Color.YELLOW));
+        registerAccountButton.setOnMouseEntered(mouseEvent -> registerAccountButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**

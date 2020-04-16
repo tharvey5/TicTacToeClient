@@ -63,7 +63,7 @@ public class LogoutController implements Observer
     @FXML
     public void highlightYes()
     {
-        yesButton.setOnMouseEntered(mouseEvent -> yesButton.setTextFill(Color.RED));
+        yesButton.setOnMouseEntered(mouseEvent -> yesButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -82,7 +82,7 @@ public class LogoutController implements Observer
     @FXML
     public void highlightNo()
     {
-        noButton.setOnMouseEntered(mouseEvent -> noButton.setTextFill(Color.RED));
+        noButton.setOnMouseEntered(mouseEvent -> noButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**

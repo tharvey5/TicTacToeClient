@@ -84,7 +84,7 @@ public class SinglePlayerController implements Initializable
     @FXML
     public void highlightPlayGame()
     {
-        playGameButton.setOnMouseEntered(mouseEvent -> playGameButton.setTextFill(Color.YELLOW));
+        playGameButton.setOnMouseEntered(mouseEvent -> playGameButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**

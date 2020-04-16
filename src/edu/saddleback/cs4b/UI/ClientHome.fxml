@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ClientHomeController">
    <children>
-      <AnchorPane prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;">
          <children>
             <Line endX="80.0" layoutX="99.0" layoutY="149.0" startX="-80.0" stroke="WHITE" />
             <Circle fill="WHITE" layoutX="99.0" layoutY="70.0" radius="56.0" stroke="BLACK" strokeType="INSIDE" />
@@ -61,7 +61,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="viewProfileButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="102.0" mnemonicParsing="false" onMouseClicked="#handleViewProfileAction" onMouseEntered="#highlightViewProfile" onMouseExited="#resetViewProfile" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Profile" textFill="WHITE">
+                  <Button fx:id="profileButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="102.0" mnemonicParsing="false" onMouseClicked="#handleProfileAction" onMouseEntered="#highlightProfile" onMouseExited="#resetProfile" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Profile" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -87,6 +87,7 @@
                   </Button>
                </children>
             </VBox>
+            <Line endX="20.0" endY="-80.0" layoutX="180.0" layoutY="80.0" startX="20.0" startY="520.0" stroke="WHITE" strokeWidth="2.0" />
          </children>
       </AnchorPane>
       <BorderPane fx:id="viewScreen" layoutX="200.0" prefHeight="600.0" prefWidth="600.0" />

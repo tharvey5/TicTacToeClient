@@ -23,7 +23,7 @@ public class AccountCreationSuccessController
     @FXML
     public void highlightReturnToLogin()
     {
-        returnToLoginButton.setOnMouseEntered(mouseEvent -> returnToLoginButton.setTextFill(Color.RED));
+        returnToLoginButton.setOnMouseEntered(mouseEvent -> returnToLoginButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**

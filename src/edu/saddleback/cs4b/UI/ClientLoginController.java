@@ -86,7 +86,7 @@ public class ClientLoginController implements Observer
     @FXML
     public void highlightLogin()
     {
-        loginButton.setOnMouseEntered(mouseEvent -> loginButton.setTextFill(Color.YELLOW));
+        loginButton.setOnMouseEntered(mouseEvent -> loginButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -105,7 +105,7 @@ public class ClientLoginController implements Observer
     @FXML
     public void highlightCreateAccount()
     {
-        createAccountButton.setOnMouseEntered(mouseEvent -> createAccountButton.setTextFill(Color.YELLOW));
+        createAccountButton.setOnMouseEntered(mouseEvent -> createAccountButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -124,7 +124,7 @@ public class ClientLoginController implements Observer
     @FXML
     public void highlightForgotPassword()
     {
-        forgotPasswordLabel.setOnMouseEntered(mouseEvent -> forgotPasswordLabel.setTextFill(Color.YELLOW));
+        forgotPasswordLabel.setOnMouseEntered(mouseEvent -> forgotPasswordLabel.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -134,7 +134,7 @@ public class ClientLoginController implements Observer
     @FXML
     public void resetForgotPassword()
     {
-        forgotPasswordLabel.setOnMouseExited(mouseEvent -> forgotPasswordLabel.setTextFill(Color.WHITE));
+        forgotPasswordLabel.setOnMouseExited(mouseEvent -> forgotPasswordLabel.setTextFill(Color.valueOf("#0099FF")));
     }
 
     @FXML
