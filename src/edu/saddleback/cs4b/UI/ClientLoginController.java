@@ -4,8 +4,8 @@ import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.Messages.*;
 import edu.saddleback.cs4b.Backend.PubSub.*;
 import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
+import edu.saddleback.cs4b.Backend.Utilitys.User;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,15 +20,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * We will need to have andrew call the instance of this class via the
- * FXML loader so that he can log this instance of an observer AND
- * so we can log his classes as our observer
- */
 public class ClientLoginController implements Observer
 {
     private UIEventLog uilog = UIEventLog.getInstance();
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
+    private User user;
 
     @FXML
     Button loginButton;
@@ -59,15 +55,35 @@ public class ClientLoginController implements Observer
         if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType()))
         {
             BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
-            handleMessageEvents(message);
+            try
+            {
+                handleMessageEvents(message);
+            }
+            catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
         }
     }
 
-    private void handleMessageEvents(BaseMessage message)
+    private void handleMessageEvents(BaseMessage message) throws IOException
     {
         if(message instanceof AuthenticatedMessage)
         {
-            swapToHome();
+            AuthenticatedMessage msg = (AuthenticatedMessage) message;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/saddleback/cs4b/UI/ClientHome.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            // This line gets the Stage information since loginButton and Register have same scene
+            Stage window = (Stage) (loginButton).getScene().getWindow();
+            ClientHomeController crtl = loader.getController();
+            crtl.handleMainMenuAction();
+
+            Platform.runLater(() ->
+            {
+                window.setScene(scene);
+                window.show();
+            });
         }
         else if(message instanceof DeniedEntryMessage)
         {
@@ -138,7 +154,7 @@ public class ClientLoginController implements Observer
     }
 
     @FXML
-    public void handleLoginAction(ActionEvent event) throws IOException
+    public void handleLoginAction(MouseEvent event) throws IOException
     {
         String userName = userField.getText();
         String password = passwordField.getText();
@@ -147,19 +163,12 @@ public class ClientLoginController implements Observer
             SignInMessage signIn = (SignInMessage) factory.createMessage(MsgTypes.SIGN_IN.getType());
             signIn.setUserInfo(new TTTUser(userName, password));
             uilog.notifyObservers(new MessageEvent(signIn));
-
-            //swapToHome();  ** uncomment to test and recomment when running with server **
         }
     }
 
     public void handleForgotPasswordAction(MouseEvent event)
     {
         swapScene("/edu/saddleback/cs4b/UI/ForgotPassword.fxml");
-    }
-
-    public void swapToHome()
-    {
-        swapScene("/edu/saddleback/cs4b/UI/ClientHome.fxml");
     }
 
     @FXML

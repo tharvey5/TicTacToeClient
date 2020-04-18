@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,9 +12,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #2A363B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ProfileEditController">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #1B262B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ProfileEditController">
    <children>
-      <Pane layoutY="-2.0" prefHeight="201.0" prefWidth="600.0" style="-fx-background-color: #2A363B;">
+      <Pane layoutY="-2.0" prefHeight="201.0" prefWidth="600.0" style="-fx-background-color: #102840;">
          <children>
             <Label layoutX="219.0" layoutY="125.0" text="First Name: " textFill="WHITE">
                <font>
@@ -30,9 +29,6 @@
             </Label>
             <TextField layoutX="337.0" layoutY="125.0" />
          </children>
-         <effect>
-            <ColorAdjust contrast="0.1" />
-         </effect>
       </Pane>
       <Label layoutX="217.0" layoutY="347.0" text="Username: " textFill="WHITE">
          <font>
@@ -87,7 +83,4 @@
       </Label>
       <PasswordField layoutX="329.0" layoutY="434.0" />
    </children>
-   <effect>
-      <ColorAdjust contrast="0.1" />
-   </effect>
 </AnchorPane>

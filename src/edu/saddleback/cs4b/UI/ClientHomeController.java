@@ -149,7 +149,7 @@ public class ClientHomeController implements Initializable
     }
 
     @FXML
-    public void handleMainMenuAction(MouseEvent event)
+    public void handleMainMenuAction()
     {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("MainMenu");

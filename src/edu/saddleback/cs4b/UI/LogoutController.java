@@ -13,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -105,9 +104,21 @@ public class LogoutController implements Observer
     }
 
     @FXML
-    public void handleNoAction(MouseEvent event)
+    public void handleNoAction(MouseEvent event) throws IOException
     {
-        swapSceneNo("/edu/saddleback/cs4b/UI/ClientHome.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/saddleback/cs4b/UI/ClientHome.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        // This line gets the Stage information since loginButton and Register have same scene
+        Stage window = (Stage) (noButton).getScene().getWindow();
+        ClientHomeController crtl = loader.getController();
+        crtl.handleMainMenuAction();
+
+        Platform.runLater(() ->
+        {
+            window.setScene(scene);
+            window.show();
+        });
     }
 
     public void swapSceneYes(String sceneLocation)
@@ -132,22 +143,7 @@ public class LogoutController implements Observer
 
     public void swapSceneNo(String sceneLocation)
     {
-        Parent parent = null;
-        ClientEventLog.getInstance().removeObserver(this);
-        try {
-            parent = FXMLLoader.load(getClass().getResource(sceneLocation));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Scene scene = new Scene(parent);
-        // This line gets the Stage information since loginButton and Register have same scene
-        Stage window = (Stage) (yesButton).getScene().getWindow();
 
-        Platform.runLater(() ->
-        {
-            window.setScene(scene);
-            window.show();
-        });
     }
 
 }

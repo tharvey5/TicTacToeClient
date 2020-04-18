@@ -1,8 +1,10 @@
 package edu.saddleback.cs4b.UI;
 
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.Utilitys.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,8 @@ import java.util.ResourceBundle;
 
 public class ProfileController implements Observer, Initializable
 {
+    private User user = ClientUser.getInstanceOf();
+
     @FXML
     Label firstNameLabel;
 
@@ -43,10 +47,21 @@ public class ProfileController implements Observer, Initializable
     @FXML
     ImageView profilePicture;
 
+    @Override
+    public void update(SystemEvent e)
+    {
+
+    }
+
 
     public ProfileController()
     {
         ClientEventLog.getInstance().addObserver(this);
+
+        this.firstNameLabel.setText(user.getFirstName());
+        this.lastNameLabel.setText(user.getLastName());
+        this.usernameLabel.setText(user.getUsername());
+        this.passwordLabel.setText(user.getPassword());
     }
 
     /**
@@ -87,11 +102,7 @@ public class ProfileController implements Observer, Initializable
 
     }
 
-    @Override
-    public void update(SystemEvent e)
-    {
 
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)

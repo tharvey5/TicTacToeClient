@@ -43,8 +43,6 @@ public class SinglePlayerController implements Initializable
     @FXML
     private RadioButton selectModeHard;
     @FXML
-    private RadioButton selectModeImpossible;
-    @FXML
     private ToggleGroup difficultyGroup;
 
     @FXML
@@ -74,7 +72,6 @@ public class SinglePlayerController implements Initializable
         this.selectModeEasy.setToggleGroup(difficultyGroup);
         this.selectModeNormal.setToggleGroup(difficultyGroup);
         this.selectModeHard.setToggleGroup(difficultyGroup);
-        this.selectModeImpossible.setToggleGroup(difficultyGroup);
         noDifficultySelection.setText("");
     }
 

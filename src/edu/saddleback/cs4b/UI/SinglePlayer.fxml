@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #2A363B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.SinglePlayerController">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #1B262B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.SinglePlayerController">
    <children>
       <Label layoutX="108.0" layoutY="33.0" text="Single Player Menu" textFill="WHITE">
          <font>
@@ -21,7 +21,7 @@
          </font>
       </Label>
       <Line endX="410.0" layoutX="141.0" layoutY="92.0" startX="-100.0" stroke="WHITE" />
-      <VBox layoutX="350.0" layoutY="179.0" prefHeight="131.0" prefWidth="165.0" spacing="10.0">
+      <VBox layoutX="347.0" layoutY="194.0" prefHeight="108.0" prefWidth="165.0" spacing="10.0">
          <children>
             <RadioButton fx:id="selectModeEasy" mnemonicParsing="false" text="Easy" textFill="WHITE">
                <font>
@@ -37,11 +37,6 @@
                </font>
             </RadioButton>
             <RadioButton fx:id="selectModeHard" layoutX="10.0" layoutY="37.0" mnemonicParsing="false" text="Hard" textFill="WHITE" toggleGroup="$difficultyGroup">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </RadioButton>
-            <RadioButton fx:id="selectModeImpossible" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" text="Impossible" textFill="WHITE" toggleGroup="$difficultyGroup">
                <font>
                   <Font size="20.0" />
                </font>
@@ -124,8 +119,8 @@
       </VBox>
       <Label fx:id="noTurnSelection" layoutX="41.0" layoutY="454.0" text="Error Message" textFill="RED" />
       <Label fx:id="noTokenSelection" layoutX="41.0" layoutY="312.0" text="Error Message" textFill="RED" />
-      <Label fx:id="noDifficultySelection" layoutX="350.0" layoutY="334.0" text="Error Message" textFill="RED" />
-      <Button fx:id="playGameButton" layoutX="228.0" layoutY="491.0" mnemonicParsing="false" onMouseClicked="#handlePlayGameAction" onMouseEntered="#highlightPlayGame" onMouseExited="#resetPlayGame" prefHeight="27.0" prefWidth="204.0" style="-fx-background-color: #008000; -fx-background-radius: 40;" text="Play Game" textFill="WHITE">
+      <Label fx:id="noDifficultySelection" layoutX="350.0" layoutY="312.0" text="Error Message" textFill="RED" />
+      <Button fx:id="playGameButton" layoutX="213.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#handlePlayGameAction" onMouseEntered="#highlightPlayGame" onMouseExited="#resetPlayGame" prefHeight="27.0" prefWidth="204.0" style="-fx-background-color: #008000; -fx-background-radius: 40;" text="Play Game" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
