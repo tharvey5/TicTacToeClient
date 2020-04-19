@@ -11,17 +11,18 @@ import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ClientLoginController implements Observer
+public class ClientLoginController implements Observer, Initializable
 {
     private UIEventLog uilog = UIEventLog.getInstance();
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
@@ -36,10 +37,19 @@ public class ClientLoginController implements Observer
     Button forgotPasswordButton;
 
     @FXML
-    TextField userField;
+    TextField usernameField;
 
     @FXML
-    TextField passwordField;
+    PasswordField passwordField;
+
+    @FXML
+    Label passwordError;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        passwordError.setText("");
+    }
 
     public ClientLoginController()
     {
@@ -76,8 +86,7 @@ public class ClientLoginController implements Observer
         {
             Platform.runLater(()->
             {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong Username/password");
-                alert.show();
+                invalidUsernameOrPassword();
             });
         }
     }
@@ -85,7 +94,7 @@ public class ClientLoginController implements Observer
     @FXML
     public void handleLoginAction()
     {
-        String userName = userField.getText();
+        String userName = usernameField.getText();
         String password = passwordField.getText();
         if(!userName.equals("") && !password.equals(""))
         {
@@ -104,6 +113,14 @@ public class ClientLoginController implements Observer
     public void handleCreateAccountAction()
     {
         swapScene("/edu/saddleback/cs4b/UI/ClientRegistration.fxml", createAccountButton);
+    }
+
+    @FXML
+    public void invalidUsernameOrPassword()
+    {
+        passwordField.setText("");
+        passwordError.setText("* Invalid Username or Password");
+
     }
 
     /**
