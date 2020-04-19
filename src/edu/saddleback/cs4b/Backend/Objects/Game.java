@@ -10,14 +10,14 @@ public interface Game
     String getStartTime();
     void setStartTime(LocalDateTime newTime);
 
-    String getStartPlayer();
-    void setStartPlayer(String username);
+    PublicUser getStartPlayer();
+    void setStartPlayer(PublicUser user);
 
-    void setCreator(String username);
+    void setCreator(PublicUser user);
     PublicUser getCreator();
 
     PublicUser getOtherPlayer();
-    void setOtherPlayer (String username);
+    void setOtherPlayer (PublicUser user);
 
     Moves getMoves();
     void setMoves(Moves newMoves);
