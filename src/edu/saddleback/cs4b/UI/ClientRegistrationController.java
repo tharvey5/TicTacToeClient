@@ -42,7 +42,8 @@ public class ClientRegistrationController implements Observer
     @FXML
     TextField lastnameField;
 
-    public ClientRegistrationController() {
+    public ClientRegistrationController()
+    {
         ClientEventLog.getInstance().addObserver(this);
     }
 
@@ -120,26 +121,29 @@ public class ClientRegistrationController implements Observer
     }
 
     @FXML
-    public void handleRegisterAccountAction(ActionEvent event) throws IOException
+    public void handleRegisterAccountAction()
     {
         String firstname = firstnameField.getText();
-        String lastname = lastnameField.getText();
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+        String lastname  = lastnameField.getText();
+        String username  = usernameField.getText();
+        String password  = passwordField.getText();
 
-        if (!firstname.equals("") && !lastname.equals("") && !username.equals("") && !password.equals("")) {
+        if (!firstname.equals("") && !lastname.equals("") && !username.equals("") && !password.equals(""))
+        {
             ProfileMessage profileMessage = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
             Profile prof = new TTTProfile(username, firstname, lastname, password);
             profileMessage.setProfile(prof);
             UIEventLog.getInstance().notifyObservers(new MessageEvent(profileMessage));
-        } else {
+        }
+        else
+        {
             // generate an error message to the screen
         }
 
-        //swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccess.fxml");
     }
 
-    public void showSuccessfulRegistration() {
+    public void showSuccessfulRegistration()
+    {
         swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccess.fxml");
     }
 

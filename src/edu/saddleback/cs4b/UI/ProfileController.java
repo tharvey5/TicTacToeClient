@@ -57,11 +57,6 @@ public class ProfileController implements Observer, Initializable
     public ProfileController()
     {
         ClientEventLog.getInstance().addObserver(this);
-
-        this.firstNameLabel.setText(user.getFirstName());
-        this.lastNameLabel.setText(user.getLastName());
-        this.usernameLabel.setText(user.getUsername());
-        this.passwordLabel.setText(user.getPassword());
     }
 
     /**
@@ -107,6 +102,8 @@ public class ProfileController implements Observer, Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-
+        this.firstNameLabel.setText(user.getFirstName());
+        this.lastNameLabel.setText(user.getLastName());
+        this.usernameLabel.setText(user.getUsername());
     }
 }

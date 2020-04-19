@@ -1,6 +1,7 @@
 package edu.saddleback.cs4b.UI;
 
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
 import edu.saddleback.cs4b.Backend.Messages.*;
 import edu.saddleback.cs4b.Backend.PubSub.*;
 import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
@@ -24,7 +25,6 @@ public class ClientLoginController implements Observer
 {
     private UIEventLog uilog = UIEventLog.getInstance();
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
-    private User user;
 
     @FXML
     Button loginButton;
@@ -33,7 +33,7 @@ public class ClientLoginController implements Observer
     Button createAccountButton;
 
     @FXML
-    Label forgotPasswordLabel;
+    Button forgotPasswordButton;
 
     @FXML
     TextField userField;
@@ -55,35 +55,22 @@ public class ClientLoginController implements Observer
         if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType()))
         {
             BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
-            try
-            {
-                handleMessageEvents(message);
-            }
-            catch (IOException ex)
-            {
-                ex.printStackTrace();
-            }
+            handleMessageEvents(message);
         }
     }
 
-    private void handleMessageEvents(BaseMessage message) throws IOException
+    private void handleMessageEvents(BaseMessage message)
     {
         if(message instanceof AuthenticatedMessage)
         {
             AuthenticatedMessage msg = (AuthenticatedMessage) message;
+            ClientUser.setInstance(msg.getAuthUser());
+
+            swapScene("/edu/saddleback/cs4b/UI/ClientHome.fxml", loginButton);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/saddleback/cs4b/UI/ClientHome.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            // This line gets the Stage information since loginButton and Register have same scene
-            Stage window = (Stage) (loginButton).getScene().getWindow();
+
             ClientHomeController crtl = loader.getController();
             crtl.handleMainMenuAction();
-
-            Platform.runLater(() ->
-            {
-                window.setScene(scene);
-                window.show();
-            });
         }
         else if(message instanceof DeniedEntryMessage)
         {
@@ -135,26 +122,26 @@ public class ClientLoginController implements Observer
     }
 
     /**
-     * WHEN THIS METHOD IS CALLED THE 'FORGOT PASSWORD?' LABEL WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
+     * WHEN THIS METHOD IS CALLED THE 'FORGOT PASSWORD?' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
      */
     @FXML
     public void highlightForgotPassword()
     {
-        forgotPasswordLabel.setOnMouseEntered(mouseEvent -> forgotPasswordLabel.setTextFill(Color.valueOf("#FFD700")));
+        forgotPasswordButton.setOnMouseEntered(mouseEvent -> forgotPasswordButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
-     * WHEN THIS METHOD IS CALLED THE 'FORGOT PASSWORD?' LABEL WILL CHANGE BACK TO THE DEFAULT TEXT COLOR WHEN THE MOUSE IS
+     * WHEN THIS METHOD IS CALLED THE 'FORGOT PASSWORD?' BUTTON WILL CHANGE BACK TO THE DEFAULT TEXT COLOR WHEN THE MOUSE IS
      * NO LONGER HOVERING OVER IT
      */
     @FXML
     public void resetForgotPassword()
     {
-        forgotPasswordLabel.setOnMouseExited(mouseEvent -> forgotPasswordLabel.setTextFill(Color.valueOf("#0099FF")));
+        forgotPasswordButton.setOnMouseExited(mouseEvent -> forgotPasswordButton.setTextFill(Color.valueOf("#0099FF")));
     }
 
     @FXML
-    public void handleLoginAction(MouseEvent event) throws IOException
+    public void handleLoginAction()
     {
         String userName = userField.getText();
         String password = passwordField.getText();
@@ -166,18 +153,18 @@ public class ClientLoginController implements Observer
         }
     }
 
-    public void handleForgotPasswordAction(MouseEvent event)
+    public void handleForgotPasswordAction()
     {
-        swapScene("/edu/saddleback/cs4b/UI/ForgotPassword.fxml");
+        swapScene("/edu/saddleback/cs4b/UI/ForgotPassword.fxml", forgotPasswordButton);
     }
 
     @FXML
-    public void handleCreateAccountAction(MouseEvent event)
+    public void handleCreateAccountAction()
     {
-        swapScene("/edu/saddleback/cs4b/UI/ClientRegistration.fxml");
+        swapScene("/edu/saddleback/cs4b/UI/ClientRegistration.fxml", createAccountButton);
     }
 
-    public void swapScene(String sceneLocation)
+    public void swapScene(String sceneLocation, Button button)
     {
         Parent parent = null;
         ClientEventLog.getInstance().removeObserver(this);
@@ -191,7 +178,7 @@ public class ClientLoginController implements Observer
         }
         Scene scene  = new Scene(parent);
         // This line gets the Stage information since loginButton and Register have same scene
-        Stage window = (Stage)(loginButton).getScene().getWindow();
+        Stage window = (Stage)(button).getScene().getWindow();
 
         Platform.runLater(()->
         {

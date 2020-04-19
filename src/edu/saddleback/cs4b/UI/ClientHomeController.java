@@ -157,7 +157,7 @@ public class ClientHomeController implements Initializable
     }
 
     @FXML
-    public void handleSinglePlayerAction(MouseEvent event)
+    public void handleSinglePlayerAction()
     {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("SinglePlayer");
@@ -165,7 +165,7 @@ public class ClientHomeController implements Initializable
     }
 
     @FXML
-    public void handleMultiplayerAction(MouseEvent event)
+    public void handleMultiplayerAction()
     {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("Multiplayer");
@@ -173,14 +173,14 @@ public class ClientHomeController implements Initializable
     }
 
     @FXML
-    public void handleProfileAction(MouseEvent event)
+    public void handleProfileAction()
     {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("Profile");
         viewScreen.setCenter(view);
     }
 
-    public void handleEditProfileAction(MouseEvent event)
+    public void handleEditProfileAction()
     {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("ProfileEdit");
@@ -188,7 +188,7 @@ public class ClientHomeController implements Initializable
     }
 
     @FXML
-    public void handleAboutUsAction(MouseEvent event)
+    public void handleAboutUsAction()
     {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("AboutUs");
@@ -196,7 +196,7 @@ public class ClientHomeController implements Initializable
     }
 
     @FXML
-    public void handleLogoutAction(MouseEvent event)
+    public void handleLogoutAction()
     {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("Logout");
