@@ -1,20 +1,24 @@
 package edu.saddleback.cs4b.UI;
 
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
 import edu.saddleback.cs4b.Backend.Messages.*;
 import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
-import edu.saddleback.cs4b.Backend.Utilitys.Profile;
-import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ProfileChangePasswordController implements Observer
 {
@@ -34,29 +38,33 @@ public class ProfileChangePasswordController implements Observer
     @FXML
     PasswordField confirmPasswordField;
 
+    public ProfileChangePasswordController()
+    {
+        ClientEventLog.getInstance().addObserver(this);
+    }
+
     @Override
     public void update(SystemEvent e)
     {
         if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType()))
         {
             BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
-            handleMessageEvents(message);
+            try
+            {
+                handleMessageEvents(message);
+            }
+            catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
         }
     }
 
-    private void handleMessageEvents(BaseMessage message)
+    private void handleMessageEvents(BaseMessage message) throws IOException
     {
-        if (message instanceof SuccessfulRegistration)
+        if (message instanceof ProfileMessage)
         {
-
-        }
-        else if (message instanceof RegistrationErrorMessage)
-        {
-            Platform.runLater(()->
-            {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Username Exists");
-                alert.show();
-            });
+            swapHomeProfile("/edu/saddleback/cs4b/UI/ClientHome.fxml", saveChangesButton);
         }
     }
 
@@ -95,7 +103,22 @@ public class ProfileChangePasswordController implements Observer
         saveChangesButton.setOnMouseExited(mouseEvent -> saveChangesButton.setTextFill(Color.BLACK));
     }
 
+    public void swapHomeProfile(String sceneLocation, Button button) throws IOException
+    {
+        ClientEventLog.getInstance().removeObserver(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneLocation));
+        Parent root = loader.load();
+        Scene scene  = new Scene(root);
+        Stage window = (Stage)(button).getScene().getWindow();
 
+        ClientHomeController crtl = loader.getController();
+        crtl.handleProfileAction();
 
+        Platform.runLater(()->
+        {
+            window.setScene(scene);
+            window.show();
+        });
+    }
 
 }

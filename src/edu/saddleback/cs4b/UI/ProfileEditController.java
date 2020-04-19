@@ -57,28 +57,74 @@ public class ProfileEditController implements Observer, Initializable
     Label winLossTieLabel;
 
     @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        this.firstNameField.setText(user.getFirstName());
+        this.lastNameField.setText(user.getLastName());
+        this.usernameLabel.setText(user.getUsername());
+    }
+
+    public ProfileEditController()
+    {
+        ClientEventLog.getInstance().addObserver(this);
+    }
+
+    @Override
     public void update(SystemEvent e)
     {
         if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType()))
         {
             BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
-            handleMessageEvents(message);
+            try
+            {
+                handleMessageEvents(message);
+            }
+            catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
         }
     }
 
-    private void handleMessageEvents(BaseMessage message)
+    private void handleMessageEvents(BaseMessage message) throws IOException
     {
         if(message instanceof ProfileMessage)
         {
-            ProfileMessage msg = (ProfileMessage) message;
-
-            swapScene("/edu/saddleback/cs4b/UI/ClientHome.fxml", saveChangesButton);
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/saddleback/cs4b/UI/ClientHome.fxml"));
-
-            ClientHomeController crtl = loader.getController();
-            crtl.handleProfileAction();
+            swapHomeProfile("/edu/saddleback/cs4b/UI/ClientHome.fxml", saveChangesButton);
         }
+    }
+
+    @FXML
+    public void handleSaveChangesAction()
+    {
+        String firstName = firstNameField.getText();
+        String lastName  = lastNameField.getText();
+
+        if(!firstName.equals("") && !lastName.equals(""))
+        {
+            ProfileMessage profileUpdate = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
+            Profile prof = new TTTProfile(user.getUsername(), firstName, lastName, user.getPassword());
+            profileUpdate.setProfile(prof);
+            uilog.notifyObservers(new MessageEvent(profileUpdate));
+        }
+    }
+
+    @FXML
+    public void handleChangeProfilePictureAction()
+    {
+
+    }
+
+    @FXML
+    public void handleChangeUsernameAction() throws IOException
+    {
+        swapProfileChangeUsername("/edu/saddleback/cs4b/UI/ClientHome.fxml", changeUsernameButton);
+    }
+
+    @FXML
+    public void handleChangePasswordAction() throws IOException
+    {
+        swapProfileChangePassword("/edu/saddleback/cs4b/UI/ClientHome.fxml", changePasswordButton);
     }
 
     /**
@@ -157,55 +203,16 @@ public class ProfileEditController implements Observer, Initializable
         changeUsernameButton.setOnMouseExited(mouseEvent -> changeUsernameButton.setTextFill(Color.BLACK));
     }
 
-
-    @FXML
-    public void handleChangeProfilePictureAction()
+    public void swapHomeProfile(String sceneLocation, Button button) throws IOException
     {
-
-    }
-
-    @FXML
-    public void handleChangeUsernameAction()
-    {
-
-    }
-
-    @FXML
-    public void handleChangePasswordAction()
-    {
-
-    }
-
-    @FXML
-    public void handleSaveChangesAction()
-    {
-        String firstName = firstNameField.getText();
-        String lastName  = lastNameField.getText();
-
-        if(!firstName.equals("") && !lastName.equals(""))
-        {
-            ProfileMessage profileUpdate = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
-            Profile prof = new TTTProfile(user.getUsername(), firstName, lastName, user.getPassword());
-            profileUpdate.setProfile(prof);
-            uilog.notifyObservers(new MessageEvent(profileUpdate));
-        }
-    }
-
-    public void swapScene(String sceneLocation, Button button)
-    {
-        Parent parent = null;
         ClientEventLog.getInstance().removeObserver(this);
-        try
-        {
-            parent = FXMLLoader.load(getClass().getResource(sceneLocation));
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        Scene scene  = new Scene(parent);
-        // This line gets the Stage information since loginButton and Register have same scene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneLocation));
+        Parent root = loader.load();
+        Scene scene  = new Scene(root);
         Stage window = (Stage)(button).getScene().getWindow();
+
+        ClientHomeController crtl = loader.getController();
+        crtl.handleProfileAction();
 
         Platform.runLater(()->
         {
@@ -214,11 +221,40 @@ public class ProfileEditController implements Observer, Initializable
         });
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
+    public void swapProfileChangeUsername(String sceneLocation, Button button) throws IOException
     {
-        this.firstNameField.setText(user.getFirstName());
-        this.lastNameField.setText(user.getLastName());
-        this.usernameLabel.setText(user.getUsername());
+        ClientEventLog.getInstance().removeObserver(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneLocation));
+        Parent root = loader.load();
+        Scene scene  = new Scene(root);
+        Stage window = (Stage)(button).getScene().getWindow();
+
+        ClientHomeController crtl = loader.getController();
+        crtl.handleEditProfileUsernameAction();
+
+        Platform.runLater(()->
+        {
+            window.setScene(scene);
+            window.show();
+        });
+    }
+
+    public void swapProfileChangePassword(String sceneLocation, Button button) throws IOException
+    {
+        ClientEventLog.getInstance().removeObserver(this);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneLocation));
+        Parent root = loader.load();
+        Scene scene  = new Scene(root);
+        Stage window = (Stage)(button).getScene().getWindow();
+
+        ClientHomeController crtl = loader.getController();
+        crtl.handleEditProfilePasswordAction();
+
+        Platform.runLater(()->
+        {
+            window.setScene(scene);
+            window.show();
+        });
     }
 }

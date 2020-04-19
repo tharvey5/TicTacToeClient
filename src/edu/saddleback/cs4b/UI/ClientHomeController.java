@@ -180,10 +180,27 @@ public class ClientHomeController implements Initializable
         viewScreen.setCenter(view);
     }
 
+    @FXML
     public void handleEditProfileAction()
     {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("ProfileEdit");
+        viewScreen.setCenter(view);
+    }
+
+    @FXML
+    public void handleEditProfileUsernameAction()
+    {
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("ProfileChangeUsername");
+        viewScreen.setCenter(view);
+    }
+
+    @FXML
+    public void handleEditProfilePasswordAction()
+    {
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("ProfileChangePassword");
         viewScreen.setCenter(view);
     }
 

@@ -3,9 +3,11 @@ package edu.saddleback.cs4b.UI;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
 import edu.saddleback.cs4b.Backend.Messages.*;
-import edu.saddleback.cs4b.Backend.PubSub.*;
+import edu.saddleback.cs4b.Backend.PubSub.EventType;
+import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
+import edu.saddleback.cs4b.Backend.PubSub.Observer;
+import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
-import edu.saddleback.cs4b.Backend.Utilitys.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -46,41 +46,64 @@ public class ClientLoginController implements Observer
         ClientEventLog.getInstance().addObserver(this);
     }
 
-    /**
-     * This method gets called by the ClientSubjects
-     */
     @Override
     public void update(SystemEvent e)
     {
         if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType()))
         {
             BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
-            handleMessageEvents(message);
+            try
+            {
+                handleMessageEvents(message);
+            }
+            catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
         }
     }
 
-    private void handleMessageEvents(BaseMessage message)
+    private void handleMessageEvents(BaseMessage message) throws IOException
     {
         if(message instanceof AuthenticatedMessage)
         {
             AuthenticatedMessage msg = (AuthenticatedMessage) message;
             ClientUser.setInstance(msg.getAuthUser());
 
-            swapScene("/edu/saddleback/cs4b/UI/ClientHome.fxml", loginButton);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/saddleback/cs4b/UI/ClientHome.fxml"));
-
-            ClientHomeController crtl = loader.getController();
-            crtl.handleMainMenuAction();
+            swapHome("/edu/saddleback/cs4b/UI/ClientHome.fxml", loginButton);
         }
         else if(message instanceof DeniedEntryMessage)
         {
-            // show some notification
             Platform.runLater(()->
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong Username/password");
                 alert.show();
             });
         }
+    }
+
+    @FXML
+    public void handleLoginAction()
+    {
+        String userName = userField.getText();
+        String password = passwordField.getText();
+        if(!userName.equals("") && !password.equals(""))
+        {
+            SignInMessage signIn = (SignInMessage) factory.createMessage(MsgTypes.SIGN_IN.getType());
+            signIn.setUserInfo(new TTTUser(userName, password));
+            uilog.notifyObservers(new MessageEvent(signIn));
+        }
+    }
+
+    public void handleForgotPasswordAction()
+    {
+        swapScene("/edu/saddleback/cs4b/UI/ForgotPassword.fxml", forgotPasswordButton);
+    }
+
+    @FXML
+    public void handleCreateAccountAction()
+    {
+        swapScene("/edu/saddleback/cs4b/UI/ClientRegistration.fxml", createAccountButton);
     }
 
     /**
@@ -140,28 +163,24 @@ public class ClientLoginController implements Observer
         forgotPasswordButton.setOnMouseExited(mouseEvent -> forgotPasswordButton.setTextFill(Color.valueOf("#0099FF")));
     }
 
-    @FXML
-    public void handleLoginAction()
+    public void swapHome(String sceneLocation, Button button) throws IOException
     {
-        String userName = userField.getText();
-        String password = passwordField.getText();
-        if(!userName.equals("") && !password.equals(""))
+        ClientEventLog.getInstance().removeObserver(this);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneLocation));
+
+        Parent root = loader.load();
+        Scene scene  = new Scene(root);
+        Stage window = (Stage)(button).getScene().getWindow();
+
+        ClientHomeController crtl = loader.getController();
+        crtl.handleMainMenuAction();
+
+        Platform.runLater(()->
         {
-            SignInMessage signIn = (SignInMessage) factory.createMessage(MsgTypes.SIGN_IN.getType());
-            signIn.setUserInfo(new TTTUser(userName, password));
-            uilog.notifyObservers(new MessageEvent(signIn));
-        }
-    }
-
-    public void handleForgotPasswordAction()
-    {
-        swapScene("/edu/saddleback/cs4b/UI/ForgotPassword.fxml", forgotPasswordButton);
-    }
-
-    @FXML
-    public void handleCreateAccountAction()
-    {
-        swapScene("/edu/saddleback/cs4b/UI/ClientRegistration.fxml", createAccountButton);
+            window.setScene(scene);
+            window.show();
+        });
     }
 
     public void swapScene(String sceneLocation, Button button)

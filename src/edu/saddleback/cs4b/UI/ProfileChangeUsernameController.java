@@ -1,5 +1,6 @@
 package edu.saddleback.cs4b.UI;
 
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
 import edu.saddleback.cs4b.Backend.Messages.*;
 import edu.saddleback.cs4b.Backend.PubSub.EventType;
@@ -11,13 +12,19 @@ import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
-public class ProfileChangeUsernameController implements Observer
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ProfileChangeUsernameController implements Observer, Initializable
 {
     private UIEventLog uilog = UIEventLog.getInstance();
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
@@ -27,10 +34,24 @@ public class ProfileChangeUsernameController implements Observer
     Button saveChangesButton;
 
     @FXML
+    Label usernameLabel;
+
+    @FXML
     TextField usernameField;
 
     @FXML
     PasswordField passwordField;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        this.usernameLabel.setText(user.getUsername());
+    }
+
+    public ProfileChangeUsernameController()
+    {
+        ClientEventLog.getInstance().addObserver(this);
+    }
 
     @Override
     public void update(SystemEvent e)
@@ -38,14 +59,22 @@ public class ProfileChangeUsernameController implements Observer
         if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType()))
         {
             BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
-            handleMessageEvents(message);
+            try
+            {
+                handleMessageEvents(message);
+            }
+            catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
         }
     }
 
-    private void handleMessageEvents(BaseMessage message)
+    private void handleMessageEvents(BaseMessage message) throws IOException
     {
-        if (message instanceof SuccessfulRegistration)
+        if(message instanceof ProfileMessage)
         {
+            swapHomeProfile("/edu/saddleback/cs4b/UI/ClientHome.fxml", saveChangesButton);
 
         }
         else if (message instanceof RegistrationErrorMessage)
@@ -63,11 +92,13 @@ public class ProfileChangeUsernameController implements Observer
     {
         String username = usernameField.getText();
         String password = passwordField.getText();
+        String id       = user.getIdentifier();
 
         if(!username.equals("") && !password.equals(""))
         {
             ProfileMessage profileUpdate = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
             Profile prof = new TTTProfile(username, user.getFirstName(), user.getLastName(), password);
+            prof.setId(id);
             profileUpdate.setProfile(prof);
             uilog.notifyObservers(new MessageEvent(profileUpdate));
         }
@@ -90,5 +121,23 @@ public class ProfileChangeUsernameController implements Observer
     public void resetSaveChanges()
     {
         saveChangesButton.setOnMouseExited(mouseEvent -> saveChangesButton.setTextFill(Color.BLACK));
+    }
+
+    public void swapHomeProfile(String sceneLocation, Button button) throws IOException
+    {
+        ClientEventLog.getInstance().removeObserver(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneLocation));
+        Parent root = loader.load();
+        Scene scene  = new Scene(root);
+        Stage window = (Stage)(button).getScene().getWindow();
+
+        ClientHomeController crtl = loader.getController();
+        crtl.handleProfileAction();
+
+        Platform.runLater(()->
+        {
+            window.setScene(scene);
+            window.show();
+        });
     }
 }

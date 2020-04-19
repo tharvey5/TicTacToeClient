@@ -21,7 +21,7 @@ import java.io.IOException;
 
 public class ClientRegistrationController implements Observer
 {
-//    private List<UIObserver> uiObservers = new ArrayList<>();
+    private UIEventLog uilog = UIEventLog.getInstance();
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
 
     @FXML
@@ -37,23 +37,21 @@ public class ClientRegistrationController implements Observer
     TextField passwordField;
 
     @FXML
-    TextField firstnameField;
+    TextField firstNameField;
 
     @FXML
-    TextField lastnameField;
+    TextField lastNameField;
 
     public ClientRegistrationController()
     {
         ClientEventLog.getInstance().addObserver(this);
     }
 
-    /**
-     * This will be called by the client backend
-     */
     @Override
     public void update(SystemEvent e)
     {
-        if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType())) {
+        if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType()))
+        {
             BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
             handleMessageEvents(message);
         }
@@ -63,18 +61,44 @@ public class ClientRegistrationController implements Observer
     {
         if (message instanceof SuccessfulRegistration)
         {
-            showSuccessfulRegistration();
+            swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccess.fxml");
         }
         else if (message instanceof RegistrationErrorMessage)
         {
-            // popup the scene showing unsuccessful message
-            Platform.runLater(()-> {
+            Platform.runLater(()->
+            {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Username Exists");
                 alert.show();
             });
         }
     }
 
+    @FXML
+    public void handleRegisterAccountAction()
+    {
+        String firstname = firstNameField.getText();
+        String lastname  = lastNameField.getText();
+        String username  = usernameField.getText();
+        String password  = passwordField.getText();
+
+        if (!firstname.equals("") && !lastname.equals("") && !username.equals("") && !password.equals(""))
+        {
+            ProfileMessage profileMessage = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
+            Profile prof = new TTTProfile(username, firstname, lastname, password);
+            profileMessage.setProfile(prof);
+            uilog.notifyObservers(new MessageEvent(profileMessage));
+        }
+        else
+        {
+            // generate an error message to the screen
+        }
+    }
+
+    @FXML
+    public void handleReturnToLoginAction(ActionEvent event) throws IOException
+    {
+        swapScene("/edu/saddleback/cs4b/UI/ClientLogin.fxml");
+    }
 
     /**
      * WHEN THIS METHOD IS CALLED THE 'RETURN TO LOGIN' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
@@ -114,51 +138,23 @@ public class ClientRegistrationController implements Observer
         registerAccountButton.setOnMouseExited(mouseEvent -> registerAccountButton.setTextFill(Color.WHITE));
     }
 
-    @FXML
-    public void handleReturnToLoginAction(ActionEvent event) throws IOException
-    {
-        swapScene("/edu/saddleback/cs4b/UI/ClientLogin.fxml");
-    }
-
-    @FXML
-    public void handleRegisterAccountAction()
-    {
-        String firstname = firstnameField.getText();
-        String lastname  = lastnameField.getText();
-        String username  = usernameField.getText();
-        String password  = passwordField.getText();
-
-        if (!firstname.equals("") && !lastname.equals("") && !username.equals("") && !password.equals(""))
-        {
-            ProfileMessage profileMessage = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
-            Profile prof = new TTTProfile(username, firstname, lastname, password);
-            profileMessage.setProfile(prof);
-            UIEventLog.getInstance().notifyObservers(new MessageEvent(profileMessage));
-        }
-        else
-        {
-            // generate an error message to the screen
-        }
-
-    }
-
-    public void showSuccessfulRegistration()
-    {
-        swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccess.fxml");
-    }
-
     public void swapScene(String sceneLocation)
     {
         ClientEventLog.getInstance().removeObserver(this);
         Parent parent = null;
-        try {
+        try
+        {
             parent = FXMLLoader.load(getClass().getResource(sceneLocation));
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
         Scene scene  = new Scene(parent);
         Stage window = (Stage)(returnToLoginButton).getScene().getWindow();
-        Platform.runLater(()->{
+
+        Platform.runLater(()->
+        {
             window.setScene(scene);
             window.show();
         });

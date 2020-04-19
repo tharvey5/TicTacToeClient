@@ -1,9 +1,6 @@
 package edu.saddleback.cs4b.UI;
 
-import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
-import edu.saddleback.cs4b.Backend.PubSub.Observer;
-import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -14,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -22,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProfileController implements Observer, Initializable
+public class ProfileController implements Initializable
 {
     private User user = ClientUser.getInstanceOf();
 
@@ -48,15 +44,29 @@ public class ProfileController implements Observer, Initializable
     ImageView profilePicture;
 
     @Override
-    public void update(SystemEvent e)
+    public void initialize(URL url, ResourceBundle resourceBundle)
     {
-
+        this.firstNameLabel.setText(user.getFirstName());
+        this.lastNameLabel.setText(user.getLastName());
+        this.usernameLabel.setText(user.getUsername());
     }
 
-
-    public ProfileController()
+    @FXML
+    public void handleEditProfileAction() throws IOException
     {
-        ClientEventLog.getInstance().addObserver(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/saddleback/cs4b/UI/ClientHome.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage window = (Stage) (editProfileButton).getScene().getWindow();
+
+        ClientHomeController crtl = loader.getController();
+        crtl.handleEditProfileAction();
+
+        Platform.runLater(() ->
+        {
+            window.setScene(scene);
+            window.show();
+        });
     }
 
     /**
@@ -76,34 +86,5 @@ public class ProfileController implements Observer, Initializable
     public void resetEditProfile()
     {
         editProfileButton.setOnMouseExited(mouseEvent -> editProfileButton.setTextFill(Color.BLACK));
-    }
-
-    @FXML
-    public void handleEditProfileAction(MouseEvent event) throws IOException
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/saddleback/cs4b/UI/ClientHome.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        // This line gets the Stage information since loginButton and Register have same scene
-        Stage window = (Stage) (editProfileButton).getScene().getWindow();
-        ClientHomeController crtl = loader.getController();
-        crtl.handleEditProfileAction(event);
-
-        Platform.runLater(() ->
-        {
-            window.setScene(scene);
-            window.show();
-        });
-
-    }
-
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
-        this.firstNameLabel.setText(user.getFirstName());
-        this.lastNameLabel.setText(user.getLastName());
-        this.usernameLabel.setText(user.getUsername());
     }
 }
