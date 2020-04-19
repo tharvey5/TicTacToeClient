@@ -6,14 +6,12 @@ import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
-import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -120,7 +118,6 @@ public class LogoutController implements Observer
         FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneLocation));
         Parent root = loader.load();
         Scene scene = new Scene(root);
-        // This line gets the Stage information since loginButton and Register have same scene
         Stage window = (Stage) (button).getScene().getWindow();
 
         Platform.runLater(() ->
