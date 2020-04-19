@@ -7,6 +7,8 @@ import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.Utilitys.Profile;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -62,8 +64,10 @@ public class ProfileChangePasswordController implements Observer
 
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
-        if (message instanceof ProfileMessage)
+        if (message instanceof SuccessfulRegistration)
         {
+            SuccessfulRegistration msg = (SuccessfulRegistration) message;
+            ClientUser.setInstance(msg.getUser());
             swapHomeProfile("/edu/saddleback/cs4b/UI/ClientHome.fxml", saveChangesButton);
         }
     }
@@ -77,10 +81,14 @@ public class ProfileChangePasswordController implements Observer
 
         if(!oldPassword.equals("") && !newPassword.equals("") && !confirmPassword.equals(""))
         {
-            ProfileMessage profileUpdate = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
-//            Profile prof = new TTTProfile(user.getUsername(), firstName, lastName, user.getPassword());
-//            profileUpdate.setProfile(prof);
-            uilog.notifyObservers(new MessageEvent(profileUpdate));
+            if(oldPassword.equals(user.getPassword()) && !oldPassword.equals(newPassword) && newPassword.equals(confirmPassword))
+            {
+                ProfileMessage profileUpdate = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
+                Profile prof = new TTTProfile(user.getUsername(), user.getFirstName(), user.getLastName(), newPassword);
+                profileUpdate.setProfile(prof);
+                uilog.notifyObservers(new MessageEvent(profileUpdate));
+            }
+
         }
     }
 

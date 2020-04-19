@@ -92,9 +92,10 @@ public class ProfileEditController implements Observer, Initializable
         if(message instanceof SuccessfulRegistration)
         {
             System.out.println("Changes Updated");
+            SuccessfulRegistration msg = (SuccessfulRegistration) message;
+            ClientUser.setInstance(msg.getUser());
             swapHomeProfile("/edu/saddleback/cs4b/UI/ClientHome.fxml", saveChangesButton);
-//            SuccessfulRegistration msg = (SuccessfulRegistration) message;
-//            ClientUser.setInstance(msg.getAuthUser());
+
         }
         else if(message instanceof RegistrationErrorMessage)
         {

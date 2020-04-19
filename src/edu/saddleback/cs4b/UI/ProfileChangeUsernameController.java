@@ -72,8 +72,10 @@ public class ProfileChangeUsernameController implements Observer, Initializable
 
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
-        if(message instanceof ProfileMessage)
+        if(message instanceof SuccessfulRegistration)
         {
+            SuccessfulRegistration msg = (SuccessfulRegistration) message;
+            ClientUser.setInstance(msg.getUser());
             swapHomeProfile("/edu/saddleback/cs4b/UI/ClientHome.fxml", saveChangesButton);
 
         }
@@ -92,15 +94,16 @@ public class ProfileChangeUsernameController implements Observer, Initializable
     {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        String id       = user.getIdentifier();
 
         if(!username.equals("") && !password.equals(""))
         {
-            ProfileMessage profileUpdate = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
-            Profile prof = new TTTProfile(username, user.getFirstName(), user.getLastName(), password);
-            prof.setId(id);
-            profileUpdate.setProfile(prof);
-            uilog.notifyObservers(new MessageEvent(profileUpdate));
+            if(!username.equals(user.getUsername()) && password.equals(user.getPassword()))
+            {
+                ProfileMessage profileUpdate = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
+                Profile prof = new TTTProfile(username, user.getFirstName(), user.getLastName(), password);
+                profileUpdate.setProfile(prof);
+                uilog.notifyObservers(new MessageEvent(profileUpdate));
+            }
         }
     }
 
