@@ -1,29 +1,36 @@
 package edu.saddleback.cs4b.Backend.Objects;
 
+import edu.saddleback.cs4b.Backend.Utilitys.PublicUser;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface Game
 {
-    public LocalDateTime getStartTime();
-    public void setStartTime(LocalDateTime newTime);
+    String getStartTime();
+    void setStartTime(LocalDateTime newTime);
 
-    public String getStartPlayer();
-    public void setStartPlayer(String newStartPlayer);
+    String getStartPlayer();
+    void setStartPlayer(String username);
 
-    public String getOtherPlayer();
-    public void setOtherPlayer(String newOtherPlayer);
+    void setCreator(String username);
+    PublicUser getCreator();
 
-    public List<Move> getMoves();
-    public void setMoves(List<Move> newMoves);
-    public void addMove(Move newMove);
+    PublicUser getOtherPlayer();
+    void setOtherPlayer (String username);
 
-    public String getWinner();
+    Moves getMoves();
+    void setMoves(Moves newMoves);
+    void addMove(Move newMove);
 
-    public String getGameID();
-    public void setGameID(String newGameID);
+    String getWinner();
 
-    public Board getGameBoard();
-    public void setGameBoard(Board newBoard);
+    String getGameID();
+    void setGameID(String newGameID);
 
+    Board getGameBoard();
+    void setGameBoard(Board newBoard);
+
+    List<PublicUser> viewers();
+    void addViewer(PublicUser user);
 }
