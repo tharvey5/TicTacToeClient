@@ -185,7 +185,6 @@ public class ClientLoginController implements Observer, Initializable
         ClientEventLog.getInstance().removeObserver(this);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneLocation));
-
         Parent root = loader.load();
         Scene scene  = new Scene(root);
         Stage window = (Stage)(button).getScene().getWindow();

@@ -6,6 +6,7 @@ import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,26 +35,42 @@ public class LogoutController implements Observer
         ClientEventLog.getInstance().addObserver(this);
     }
 
-    private void handleMessageEvents(BaseMessage message)
-    {
-        if(message instanceof AuthenticatedMessage)
-        {
-
-        }
-        else if(message instanceof DeniedEntryMessage)
-        {
-
-        }
-    }
-
     @Override
     public void update(SystemEvent e)
     {
         if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType()))
         {
             BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
-            handleMessageEvents(message);
+            try
+            {
+                handleMessageEvents(message);
+            }
+            catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
         }
+    }
+
+    private void handleMessageEvents(BaseMessage message) throws IOException
+    {
+        if(message instanceof SignOutMessage)
+        {
+            swapSceneYes("/edu/saddleback/cs4b/UI/ClientLogin.fxml", yesButton);
+        }
+    }
+
+    @FXML
+    public void handleYesAction()
+    {
+        SignOutMessage signOut = (SignOutMessage) factory.createMessage(MsgTypes.SIGN_OUT.getType());
+        uilog.notifyObservers(new MessageEvent(signOut));
+    }
+
+    @FXML
+    public void handleNoAction() throws IOException
+    {
+        swapSceneNo("/edu/saddleback/cs4b/UI/ClientHome.fxml", noButton);
     }
 
     /**
@@ -91,26 +108,37 @@ public class LogoutController implements Observer
     @FXML
     public void resetNo()
     {
-
         noButton.setOnMouseExited(mouseEvent -> noButton.setTextFill(Color.BLACK));
     }
 
-    @FXML
-    public void handleYesAction(MouseEvent event)
-    {
-        swapSceneYes("/edu/saddleback/cs4b/UI/ClientLogin.fxml");
 
-        //Need to implement a way that logs the user out and send that message to the server and the DB
-    }
 
-    @FXML
-    public void handleNoAction(MouseEvent event) throws IOException
+    public void swapSceneYes(String sceneLocation, Button button) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/saddleback/cs4b/UI/ClientHome.fxml"));
+        ClientEventLog.getInstance().removeObserver(this);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneLocation));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         // This line gets the Stage information since loginButton and Register have same scene
-        Stage window = (Stage) (noButton).getScene().getWindow();
+        Stage window = (Stage) (button).getScene().getWindow();
+
+        Platform.runLater(() ->
+        {
+            window.setScene(scene);
+            window.show();
+        });
+    }
+
+    public void swapSceneNo(String sceneLocation, Button button) throws IOException
+    {
+        ClientEventLog.getInstance().removeObserver(this);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneLocation));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage window = (Stage) (button).getScene().getWindow();
+
         ClientHomeController crtl = loader.getController();
         crtl.handleMainMenuAction();
 
@@ -119,31 +147,6 @@ public class LogoutController implements Observer
             window.setScene(scene);
             window.show();
         });
-    }
-
-    public void swapSceneYes(String sceneLocation)
-    {
-        Parent parent = null;
-        ClientEventLog.getInstance().removeObserver(this);
-        try {
-            parent = FXMLLoader.load(getClass().getResource(sceneLocation));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Scene scene = new Scene(parent);
-        // This line gets the Stage information since loginButton and Register have same scene
-        Stage window = (Stage) (yesButton).getScene().getWindow();
-
-        Platform.runLater(() ->
-        {
-            window.setScene(scene);
-            window.show();
-        });
-    }
-
-    public void swapSceneNo(String sceneLocation)
-    {
-
     }
 
 }
