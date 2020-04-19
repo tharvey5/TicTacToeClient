@@ -112,7 +112,6 @@ public class ProfileEditController implements Observer, Initializable
         {
             ProfileMessage profileUpdate = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
             Profile prof = new TTTProfile(user.getUsername(), firstName, lastName, user.getPassword());
-            prof.setId("4");
             profileUpdate.setProfile(prof);
             uilog.notifyObservers(new MessageEvent(profileUpdate));
         }
