@@ -101,8 +101,6 @@ public class SinglePlayerController implements Initializable
         {
             Parent parent = FXMLLoader.load(getClass().getResource("/edu/saddleback/cs4b/UI/GameBoard.fxml"));
             Scene scene  = new Scene(parent);
-
-            // This line gets the Stage information
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
             window.setScene(scene);

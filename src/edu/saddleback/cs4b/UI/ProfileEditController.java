@@ -88,9 +88,17 @@ public class ProfileEditController implements Observer, Initializable
 
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
-        if(message instanceof ProfileMessage)
+        System.out.println("Message Received");
+        if(message instanceof SuccessfulRegistration)
         {
+            System.out.println("Changes Updated");
             swapHomeProfile("/edu/saddleback/cs4b/UI/ClientHome.fxml", saveChangesButton);
+//            SuccessfulRegistration msg = (SuccessfulRegistration) message;
+//            ClientUser.setInstance(msg.getAuthUser());
+        }
+        else if(message instanceof RegistrationErrorMessage)
+        {
+            System.out.println("Denied Change");
         }
     }
 
@@ -104,6 +112,7 @@ public class ProfileEditController implements Observer, Initializable
         {
             ProfileMessage profileUpdate = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
             Profile prof = new TTTProfile(user.getUsername(), firstName, lastName, user.getPassword());
+            prof.setId("4");
             profileUpdate.setProfile(prof);
             uilog.notifyObservers(new MessageEvent(profileUpdate));
         }
@@ -190,7 +199,7 @@ public class ProfileEditController implements Observer, Initializable
     @FXML
     public void highlightChangePassword()
     {
-        changeUsernameButton.setOnMouseEntered(mouseEvent -> changeUsernameButton.setTextFill(Color.valueOf("#FFD700")));
+        changePasswordButton.setOnMouseEntered(mouseEvent -> changePasswordButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -200,7 +209,7 @@ public class ProfileEditController implements Observer, Initializable
     @FXML
     public void resetChangePassword()
     {
-        changeUsernameButton.setOnMouseExited(mouseEvent -> changeUsernameButton.setTextFill(Color.BLACK));
+        changePasswordButton.setOnMouseExited(mouseEvent -> changePasswordButton.setTextFill(Color.BLACK));
     }
 
     public void swapHomeProfile(String sceneLocation, Button button) throws IOException
