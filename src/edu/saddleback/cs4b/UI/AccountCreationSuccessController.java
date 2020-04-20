@@ -1,9 +1,8 @@
 package edu.saddleback.cs4b.UI;
 
-import javafx.event.ActionEvent;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,6 +15,12 @@ public class AccountCreationSuccessController
 {
     @FXML
     Button returnToLoginButton;
+
+    @FXML
+    public void handleReturnToLoginAction()
+    {
+        swapScene("/edu/saddleback/cs4b/UI/ClientLogin.fxml", returnToLoginButton);
+    }
 
     /**
      * WHEN THIS METHOD IS CALLED THE 'RETURN TO LOGIN' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
@@ -37,17 +42,25 @@ public class AccountCreationSuccessController
         returnToLoginButton.setOnMouseExited(mouseEvent -> returnToLoginButton.setTextFill(Color.BLACK));
     }
 
-    @FXML
-    public void handleReturnToLoginAction(ActionEvent event) throws IOException
+    public void swapScene(String sceneLocation, Button button)
     {
-        Parent parent = FXMLLoader.load(getClass().getResource("/edu/saddleback/cs4b/UI/ClientLogin.fxml"));
+        Parent parent = null;
+        try
+        {
+            parent = FXMLLoader.load(getClass().getResource(sceneLocation));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
         Scene scene  = new Scene(parent);
+        Stage window = (Stage)(button).getScene().getWindow();
 
-        // This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(scene);
-        window.show();
+        Platform.runLater(()->
+        {
+            window.setScene(scene);
+            window.show();
+        });
     }
 
 

@@ -9,17 +9,21 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ClientRegistrationController implements Observer
+public class ClientRegistrationController implements Observer, Initializable
 {
     private UIEventLog uilog = UIEventLog.getInstance();
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
@@ -42,6 +46,15 @@ public class ClientRegistrationController implements Observer
     @FXML
     TextField lastNameField;
 
+    @FXML
+    Label usernameError;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        usernameError.setText("");
+    }
+
     public ClientRegistrationController()
     {
         ClientEventLog.getInstance().addObserver(this);
@@ -61,14 +74,13 @@ public class ClientRegistrationController implements Observer
     {
         if (message instanceof SuccessfulRegistration)
         {
-            swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccess.fxml");
+            swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccess.fxml", registerAccountButton);
         }
         else if (message instanceof RegistrationErrorMessage)
         {
             Platform.runLater(()->
             {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Username Exists");
-                alert.show();
+                invalidUsername();
             });
         }
     }
@@ -76,15 +88,15 @@ public class ClientRegistrationController implements Observer
     @FXML
     public void handleRegisterAccountAction()
     {
-        String firstname = firstNameField.getText();
-        String lastname  = lastNameField.getText();
+        String firstName = firstNameField.getText();
+        String lastName  = lastNameField.getText();
         String username  = usernameField.getText();
         String password  = passwordField.getText();
 
-        if (!firstname.equals("") && !lastname.equals("") && !username.equals("") && !password.equals(""))
+        if (!firstName.equals("") && !lastName.equals("") && !username.equals("") && !password.equals(""))
         {
             ProfileMessage profileMessage = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
-            Profile prof = new TTTProfile(username, firstname, lastname, password);
+            Profile prof = new TTTProfile(username, firstName, lastName, password);
             profileMessage.setProfile(prof);
             uilog.notifyObservers(new MessageEvent(profileMessage));
         }
@@ -95,9 +107,17 @@ public class ClientRegistrationController implements Observer
     }
 
     @FXML
-    public void handleReturnToLoginAction(ActionEvent event) throws IOException
+    public void handleReturnToLoginAction()
     {
-        swapScene("/edu/saddleback/cs4b/UI/ClientLogin.fxml");
+        swapScene("/edu/saddleback/cs4b/UI/ClientLogin.fxml", returnToLoginButton);
+    }
+
+    @FXML
+    public void invalidUsername()
+    {
+        usernameField.setText("");
+        usernameError.setText("* Username Already Exists!");
+
     }
 
     /**
@@ -138,7 +158,7 @@ public class ClientRegistrationController implements Observer
         registerAccountButton.setOnMouseExited(mouseEvent -> registerAccountButton.setTextFill(Color.WHITE));
     }
 
-    public void swapScene(String sceneLocation)
+    public void swapScene(String sceneLocation, Button button)
     {
         ClientEventLog.getInstance().removeObserver(this);
         Parent parent = null;
@@ -151,7 +171,7 @@ public class ClientRegistrationController implements Observer
             e.printStackTrace();
         }
         Scene scene  = new Scene(parent);
-        Stage window = (Stage)(returnToLoginButton).getScene().getWindow();
+        Stage window = (Stage)(button).getScene().getWindow();
 
         Platform.runLater(()->
         {
