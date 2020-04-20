@@ -84,10 +84,7 @@ public class ClientLoginController implements Observer, Initializable
         }
         else if(message instanceof DeniedEntryMessage)
         {
-            Platform.runLater(()->
-            {
-                invalidUsernameOrPassword();
-            });
+            Platform.runLater(()-> invalidUsernameOrPassword());
         }
     }
 

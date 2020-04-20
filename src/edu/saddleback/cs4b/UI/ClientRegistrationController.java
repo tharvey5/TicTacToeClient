@@ -78,10 +78,7 @@ public class ClientRegistrationController implements Observer, Initializable
         }
         else if (message instanceof RegistrationErrorMessage)
         {
-            Platform.runLater(()->
-            {
-                invalidUsername();
-            });
+            Platform.runLater(()-> invalidUsername());
         }
     }
 
