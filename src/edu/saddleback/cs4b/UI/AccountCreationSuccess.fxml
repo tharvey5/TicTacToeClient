@@ -27,7 +27,7 @@
          </font>
       </Label>
       <Line endX="600.0" layoutX="150.0" layoutY="100.0" startX="-100.0" stroke="WHITE" />
-      <Button fx:id="returnToLoginButton" layoutX="50.0" layoutY="197.0" mnemonicParsing="false" onMouseClicked="#handleReturnToLoginAction" onMouseEntered="#highlightReturnToLogin" onMouseExited="#resetReturnToLogin" style="-fx-background-color: #FFFFFF;" text="Return to Login" textFill="#2a363b">
+      <Button fx:id="returnToLoginButton" layoutX="50.0" layoutY="197.0" mnemonicParsing="false" onMouseClicked="#handleReturnToLoginAction" onMouseEntered="#highlightReturnToLogin" onMouseExited="#resetReturnToLogin" style="-fx-background-color: #FFFFFF;" text="Return to Login">
          <font>
             <Font size="24.0" />
          </font>

@@ -117,7 +117,6 @@ public class ClientLoginController implements Observer, Initializable
     {
         passwordField.setText("");
         passwordError.setText("* Invalid Username or Password");
-
     }
 
     /**
@@ -209,7 +208,6 @@ public class ClientLoginController implements Observer, Initializable
             e.printStackTrace();
         }
         Scene scene  = new Scene(parent);
-        // This line gets the Stage information since loginButton and Register have same scene
         Stage window = (Stage)(button).getScene().getWindow();
 
         Platform.runLater(()->
