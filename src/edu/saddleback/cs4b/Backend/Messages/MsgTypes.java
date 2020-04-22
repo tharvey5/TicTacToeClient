@@ -19,8 +19,8 @@ public enum MsgTypes {
     GAME_CREATED("Game Successfully Created"),
     INVALID_MOVE("Invalid Move"),
     INVALID_PROFILE_UPDATE("Invalid Profile Update"),
-
-
+    JOIN_GAME_REQUEST("Request to Join Game"),
+    MOVE("Move"),
 
 
 
@@ -32,8 +32,8 @@ public enum MsgTypes {
 
 
 
-    JOIN_GAME_REQUEST("Request to Join Game"),
-    MOVE("Move"),
+
+
     PROFILE("Profile"),
     REG_ERROR("Registration Error"),
     SIGN_IN("Sign-in"),
