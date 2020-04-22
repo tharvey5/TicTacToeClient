@@ -21,7 +21,7 @@ public enum MsgTypes {
     INVALID_PROFILE_UPDATE("Invalid Profile Update"),
     JOIN_GAME_REQUEST("Request to Join Game"),
     MOVE("Move"),
-
+    NO_GAME_TO_VIEW("No Game to View"),
 
 
 
