@@ -6,14 +6,18 @@ public enum MsgTypes {
     DEACTIVATION("Deactivation"),
     ACTIVE_USER("Active User"),
     ACTIVE_USER_RESPONSE("Active User Response"),
+    AUTHENTICATION("Authentication"),
+    AVAILABLE_GAME("Available Game"),
+    CREATE_GAME("Create Game"),
+    DEACTIVATION_CONFIRM("Deactivation Confirmation"),
 
 
 
 
     ACTIVE_GAMES("Active_Game"),
 
-    AUTHENTICATION("Authentication"),
-    CREATE_GAME("Create Game"),
+
+
 
     DENIED("Denied"),
     DISCONNECTION("Disconnection"),
