@@ -9,23 +9,23 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ClientRegistrationController implements Observer
+public class ClientRegistrationController implements Observer, Initializable
 {
-//    private List<UIObserver> uiObservers = new ArrayList<>();
+    private UIEventLog uilog = UIEventLog.getInstance();
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
 
     @FXML
@@ -41,22 +41,30 @@ public class ClientRegistrationController implements Observer
     TextField passwordField;
 
     @FXML
-    TextField firstnameField;
+    TextField firstNameField;
 
     @FXML
-    TextField lastnameField;
+    TextField lastNameField;
 
-    public ClientRegistrationController() {
+    @FXML
+    Label usernameError;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        usernameError.setText("");
+    }
+
+    public ClientRegistrationController()
+    {
         ClientEventLog.getInstance().addObserver(this);
     }
 
-    /**
-     * This will be called by the client backend
-     */
     @Override
     public void update(SystemEvent e)
     {
-        if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType())) {
+        if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType()))
+        {
             BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
             handleMessageEvents(message);
         }
@@ -66,18 +74,51 @@ public class ClientRegistrationController implements Observer
     {
         if (message instanceof SuccessfulRegistration)
         {
-            showSuccessfulRegistration();
+            swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccess.fxml", registerAccountButton);
         }
         else if (message instanceof RegistrationErrorMessage)
         {
-            // popup the scene showing unsuccessful message
-            Platform.runLater(()-> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Username Exists");
-                alert.show();
+            Platform.runLater(()->
+            {
+                invalidUsername();
             });
         }
     }
 
+    @FXML
+    public void handleRegisterAccountAction()
+    {
+        String firstName = firstNameField.getText();
+        String lastName  = lastNameField.getText();
+        String username  = usernameField.getText();
+        String password  = passwordField.getText();
+
+        if (!firstName.equals("") && !lastName.equals("") && !username.equals("") && !password.equals(""))
+        {
+            ProfileMessage profileMessage = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
+            Profile prof = new TTTProfile(username, firstName, lastName, password);
+            profileMessage.setProfile(prof);
+            uilog.notifyObservers(new MessageEvent(profileMessage));
+        }
+        else
+        {
+            // generate an error message to the screen
+        }
+    }
+
+    @FXML
+    public void handleReturnToLoginAction()
+    {
+        swapScene("/edu/saddleback/cs4b/UI/ClientLogin.fxml", returnToLoginButton);
+    }
+
+    @FXML
+    public void invalidUsername()
+    {
+        usernameField.setText("");
+        usernameError.setText("* Username Already Exists!");
+
+    }
 
     /**
      * WHEN THIS METHOD IS CALLED THE 'RETURN TO LOGIN' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
@@ -85,7 +126,7 @@ public class ClientRegistrationController implements Observer
     @FXML
     public void highlightReturnToLogin()
     {
-        returnToLoginButton.setOnMouseEntered(mouseEvent -> returnToLoginButton.setTextFill(Color.YELLOW));
+        returnToLoginButton.setOnMouseEntered(mouseEvent -> returnToLoginButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -104,7 +145,7 @@ public class ClientRegistrationController implements Observer
     @FXML
     public void highlightRegisterAccount()
     {
-        registerAccountButton.setOnMouseEntered(mouseEvent -> registerAccountButton.setTextFill(Color.YELLOW));
+        registerAccountButton.setOnMouseEntered(mouseEvent -> registerAccountButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -117,48 +158,23 @@ public class ClientRegistrationController implements Observer
         registerAccountButton.setOnMouseExited(mouseEvent -> registerAccountButton.setTextFill(Color.WHITE));
     }
 
-    @FXML
-    public void handleReturnToLoginAction(ActionEvent event) throws IOException
-    {
-        swapScene("/edu/saddleback/cs4b/UI/ClientLogin.fxml");
-    }
-
-    @FXML
-    public void handleRegisterAccountAction(ActionEvent event) throws IOException
-    {
-        String firstname = firstnameField.getText();
-        String lastname = lastnameField.getText();
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-
-        if (!firstname.equals("") && !lastname.equals("") && !username.equals("") && !password.equals("")) {
-            ProfileMessage profileMessage = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
-            Profile prof = new TTTProfile(username, firstname, lastname, password);
-            profileMessage.setProfile(prof);
-            UIEventLog.getInstance().notifyObservers(new MessageEvent(profileMessage));
-        } else {
-            // generate an error message to the screen
-        }
-
-        //swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccessScreen.fxml");
-    }
-
-    public void showSuccessfulRegistration() {
-        swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccessScreen.fxml");
-    }
-
-    public void swapScene(String sceneLocation)
+    public void swapScene(String sceneLocation, Button button)
     {
         ClientEventLog.getInstance().removeObserver(this);
         Parent parent = null;
-        try {
+        try
+        {
             parent = FXMLLoader.load(getClass().getResource(sceneLocation));
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
         Scene scene  = new Scene(parent);
-        Stage window = (Stage)(returnToLoginButton).getScene().getWindow();
-        Platform.runLater(()->{
+        Stage window = (Stage)(button).getScene().getWindow();
+
+        Platform.runLater(()->
+        {
             window.setScene(scene);
             window.show();
         });

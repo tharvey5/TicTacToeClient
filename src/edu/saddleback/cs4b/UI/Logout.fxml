@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #1B262B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.LogoutController">
+   <children>
+      <Pane layoutX="34.0" layoutY="73.0" prefHeight="200.0" prefWidth="533.0" style="-fx-background-color: #2A363B;">
+         <children>
+            <Label layoutX="101.0" layoutY="34.0" text="Are you sure you wish to Logout?" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="78.0" layoutY="63.0" text="Any unsaved changes will be deleted." textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="yesButton" layoutX="101.0" layoutY="115.0" mnemonicParsing="false" onMouseClicked="#handleYesAction" onMouseEntered="#highlightYes" onMouseExited="#resetYes" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF;" text="Yes">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button fx:id="noButton" layoutX="322.0" layoutY="115.0" mnemonicParsing="false" onMouseClicked="#handleNoAction" onMouseEntered="#highlightNo" onMouseExited="#resetNo" prefHeight="27.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF;" text="No">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+   </children>
+</AnchorPane>
