@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface Game
 {
+    void setToken(Token token, PublicUser user);
+    Token getToken(PublicUser user);
+
     String getStartTime();
     void setStartTime(LocalDateTime newTime);
 
