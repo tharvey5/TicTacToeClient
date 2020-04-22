@@ -1,32 +1,34 @@
 package edu.saddleback.cs4b.Backend.Messages;
 
 public enum MsgTypes {
+
+
+    DEACTIVATION("Deactivation"),
+    ACTIVE_USER("Active User"),
+    ACTIVE_USER_RESPONSE("Active User Response"),
+
+
+
+
+    ACTIVE_GAMES("Active_Game"),
+
+    AUTHENTICATION("Authentication"),
+    CREATE_GAME("Create Game"),
+
+    DENIED("Denied"),
+    DISCONNECTION("Disconnection"),
+    GAME_HISTORY_REQUEST("Request Game History"),
+    GAME_HISTORY_RESPONSE("Game History Response"),
+    GAME_RESULT("Game Result"),
+    INVALID_MOVE("Invalid Move"),
+    JOIN_GAME_REQUEST("Request to Join Game"),
+    MOVE("Move"),
     PROFILE("Profile"),
     REG_ERROR("Registration Error"),
-    SUCCESS_REG("Successful Registration"),
     SIGN_IN("Sign-in"),
-    AUTHENTICATION("Authentication"),
-    DENIED("Denied"),
     SIGN_OUT("Sign-out"),
-    DISCONNECTION("Disconnection"),
-    ACTIVE_USER_REQ("Active User Request"),
-    DEACTIVATION("Deactivation"),
-    // we will need to add our Reg/Profile
-
-    //Game Messages
-    VIEW_GAME_REQUEST("View Game Request"),
-    GAME_HISTORY_RESPONSE("Game History Response"),
-    ACTIVE_GAMES("Active_Game"),
-    MOVE("Move"),
-    INVALID_MOVE("Invalid Move"),
-    GAME_RESULT("Game Result"),
-    JOIN_GAME_REQUEST("Request to Join Game"),
-    CREATE_GAME("Create Game"),
-    GAME_HISTORY_REQUEST("Request Game History");
-
-
-
-
+    SUCCESS_REG("Successful Registration"),
+    VIEW_GAME_REQUEST("View Game Request");
 
 
     private String type;
