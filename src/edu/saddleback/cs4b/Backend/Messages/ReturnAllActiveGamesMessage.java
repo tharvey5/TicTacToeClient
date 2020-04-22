@@ -6,7 +6,7 @@ public class ReturnAllActiveGamesMessage extends BaseMessage
 
     public ReturnAllActiveGamesMessage(List<Game> newGames)
     {
-        super(MsgTypes.ACTIVE_GAMES);
+        super(MsgTypes.RETURN_ACTIVE_GAMES);
 
         games = newGames;
     }
