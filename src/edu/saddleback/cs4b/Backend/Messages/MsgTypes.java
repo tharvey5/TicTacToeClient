@@ -22,7 +22,12 @@ public enum MsgTypes {
     JOIN_GAME_REQUEST("Request to Join Game"),
     MOVE("Move"),
     NO_GAME_TO_VIEW("No Game to View"),
+    REG_ERROR("Registration Error"),
     REGISTRATION("Registration"),
+    REQUEST_ALL_GAMES("Request All Active Games"),
+
+
+
 
 
 
@@ -35,7 +40,7 @@ public enum MsgTypes {
 
 
     PROFILE("Profile"),
-    REG_ERROR("Registration Error"),
+
     SIGN_IN("Sign-in"),
     SIGN_OUT("Sign-out"),
     SUCCESS_REG("Successful Registration"),
