@@ -26,8 +26,8 @@ public enum MsgTypes {
     REGISTRATION("Registration"),
     REQUEST_ALL_GAMES("Request All Active Games"),
     RETURN_ACTIVE_GAMES("Active_Game"),
-
-
+    SIGN_IN("Sign-in"),
+    SIGN_OUT_CONFIRM("Sign Out Confirmation"),
 
 
 
@@ -35,7 +35,7 @@ public enum MsgTypes {
 
     PROFILE("Profile"),
 
-    SIGN_IN("Sign-in"),
+
     SIGN_OUT("Sign-out"),
     SUCCESS_REG("Successful Registration"),
     VIEW_GAME_REQUEST("View Game Request");
