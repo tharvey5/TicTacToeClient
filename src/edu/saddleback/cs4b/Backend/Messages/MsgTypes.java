@@ -29,7 +29,8 @@ public enum MsgTypes {
     SIGN_IN("Sign-in"),
     SIGN_OUT_CONFIRM("Sign Out Confirmation"),
     SIGN_OUT("Sign-out"),
-    SUCCESSFUL_VIEW_GAME("Successful View Game");
+    SUCCESSFUL_VIEW_GAME("Successful View Game"),
+    UNAVAILABLE_GAME("Unavailable Game"),
 
 
 

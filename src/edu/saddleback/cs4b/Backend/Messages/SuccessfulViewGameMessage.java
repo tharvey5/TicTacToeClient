@@ -12,6 +12,16 @@ public class SuccessfulViewGameMessage extends BaseMessage
     public SuccessfulViewGameMessage(String newGameID)
     {
         super(MsgTypes.SUCCESSFUL_VIEW_GAME);
+        gameID = newGameID;
+    }
 
+    public String getGameID()
+    {
+        return gameID;
+    }
+
+    public void setGameID(String newGameID)
+    {
+        this.gameID = newGameID;
     }
 }
