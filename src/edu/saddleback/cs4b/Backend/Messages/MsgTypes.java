@@ -29,16 +29,23 @@ public enum MsgTypes {
     SIGN_IN("Sign-in"),
     SIGN_OUT_CONFIRM("Sign Out Confirmation"),
     SIGN_OUT("Sign-out"),
-    SUCCESSFUL_VIEW_GAME("Successful View Game"),
-    UNAVAILABLE_GAME("Unavailable Game"),
-    UPDATE_PROFILE("Profile"),
-    VALID_MOVE("Valid Move"),
-
-
 
 
     SUCCESS_REG("Successful Registration"),
+    SUCCESS_UPDATE_PROFILE("Successful Registration"),
+
+
+
+    SUCCESS_VIEW_GAME("Successful View Game"),
+    UNAVAILABLE_GAME("Unavailable Game"),
+    UPDATE_PROFILE("Profile"),
+    VALID_MOVE("Valid Move"),
     VIEW_GAME_REQUEST("View Game Request");
+
+
+
+
+
 
 
     private String type;
