@@ -10,6 +10,14 @@ public enum MsgTypes {
     AVAILABLE_GAME("Available Game"),
     CREATE_GAME("Create Game"),
     DEACTIVATION_CONFIRM("Deactivation Confirmation"),
+    DENIED("Denied"),
+    DISCONNECTION("Disconnection"),
+    GAME_HISTORY_REQUEST("Request Game History"),
+    GAME_HISTORY_RESPONSE("Game History Response"),
+    GAME_NOT_CREATED("Game Not Created"),
+
+
+
 
 
 
@@ -19,10 +27,9 @@ public enum MsgTypes {
 
 
 
-    DENIED("Denied"),
-    DISCONNECTION("Disconnection"),
-    GAME_HISTORY_REQUEST("Request Game History"),
-    GAME_HISTORY_RESPONSE("Game History Response"),
+
+
+
     GAME_RESULT("Game Result"),
     INVALID_MOVE("Invalid Move"),
     JOIN_GAME_REQUEST("Request to Join Game"),
