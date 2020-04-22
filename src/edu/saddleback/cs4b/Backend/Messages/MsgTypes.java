@@ -3,7 +3,7 @@ package edu.saddleback.cs4b.Backend.Messages;
 public enum MsgTypes {
 
 
-    DEACTIVATION("Deactivation"),
+    ACCT_DEACTIVATION("Deactivation"),
     ACTIVE_USER("Active User"),
     ACTIVE_USER_RESPONSE("Active User Response"),
     AUTHENTICATION("Authentication"),
@@ -31,10 +31,9 @@ public enum MsgTypes {
     SIGN_OUT("Sign-out"),
     SUCCESSFUL_VIEW_GAME("Successful View Game"),
     UNAVAILABLE_GAME("Unavailable Game"),
+    UPDATE_PROFILE("Profile"),
 
 
-
-    PROFILE("Profile"),
 
 
 

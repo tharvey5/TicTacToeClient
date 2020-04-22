@@ -5,5 +5,5 @@ package edu.saddleback.cs4b.Backend.Messages;
  * account AND returned by the server once the account is deactivated
  */
 public class AcctDeactivationMessage extends BaseMessage {
-    public AcctDeactivationMessage() { super(MsgTypes.DEACTIVATION);}
+    public AcctDeactivationMessage() { super(MsgTypes.ACCT_DEACTIVATION);}
 }

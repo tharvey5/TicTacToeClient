@@ -2,23 +2,16 @@ package edu.saddleback.cs4b.Backend.Messages;
 
 import edu.saddleback.cs4b.Backend.Utilitys.Profile;
 
-/**
- * This is sent by the client when 1). They are registering a new profile or
- * 2). When they are updating existing details - this message is never to be
- * received by the client
- */
 public class UpdateProfileMessage extends BaseMessage {
     private Profile profile;
 
-    /**
-     * only to be used by the message factory
-     */
+
     UpdateProfileMessage() {
         this(null);
     }
 
     public UpdateProfileMessage(Profile profile) {
-        super(MsgTypes.PROFILE);
+        super(MsgTypes.UPDATE_PROFILE);
         setProfile(profile);
     }
 
