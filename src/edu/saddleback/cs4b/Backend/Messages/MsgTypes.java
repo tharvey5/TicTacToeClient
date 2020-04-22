@@ -28,15 +28,15 @@ public enum MsgTypes {
     RETURN_ACTIVE_GAMES("Active_Game"),
     SIGN_IN("Sign-in"),
     SIGN_OUT_CONFIRM("Sign Out Confirmation"),
-
-
+    SIGN_OUT("Sign-out"),
+    SUCCESSFUL_VIEW_GAME("Successful View Game");
 
 
 
     PROFILE("Profile"),
 
 
-    SIGN_OUT("Sign-out"),
+
     SUCCESS_REG("Successful Registration"),
     VIEW_GAME_REQUEST("View Game Request");
 
