@@ -1,4 +1,27 @@
 package edu.saddleback.cs4b.Backend.Messages;
 
-public class ReturnAllActiveGamesMessage {
+public class ReturnAllActiveGamesMessage extends BaseMessage
+{
+    List<Game> games;
+
+    public ReturnAllActiveGamesMessage(List<Game> newGames)
+    {
+        super(MsgTypes.ACTIVE_GAMES);
+
+        games = newGames;
+    }
+    public ReturnAllActiveGamesMessage()
+    {
+        this(null);
+    }
+
+    public List<Game> getGames()
+    {
+        return games;
+    }
+
+    public void setGames(List<Game> newGames)
+    {
+        games = newGames;
+    }
 }
