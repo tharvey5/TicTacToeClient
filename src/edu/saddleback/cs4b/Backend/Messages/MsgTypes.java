@@ -32,7 +32,7 @@ public enum MsgTypes {
     SUCCESSFUL_VIEW_GAME("Successful View Game"),
     UNAVAILABLE_GAME("Unavailable Game"),
     UPDATE_PROFILE("Profile"),
-
+    VALID_MOVE("Valid Move"),
 
 
 
