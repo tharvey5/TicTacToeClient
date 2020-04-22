@@ -15,6 +15,11 @@ public enum MsgTypes {
     GAME_HISTORY_REQUEST("Request Game History"),
     GAME_HISTORY_RESPONSE("Game History Response"),
     GAME_NOT_CREATED("Game Not Created"),
+    GAME_RESULT("Game Result"),
+    GAME_CREATED("Game Successfully Created"),
+
+
+
 
 
 
@@ -27,10 +32,6 @@ public enum MsgTypes {
 
 
 
-
-
-
-    GAME_RESULT("Game Result"),
     INVALID_MOVE("Invalid Move"),
     JOIN_GAME_REQUEST("Request to Join Game"),
     MOVE("Move"),
