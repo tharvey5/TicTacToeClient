@@ -24,7 +24,7 @@ public class AdminMessageFactory implements AbstractMessageFactory {
             message = new RegistrationErrorMessage();
         }
         else if (type.equals(MsgTypes.SUCCESS_REG.getType())) {
-            message = new SuccessfulRegistration();
+            message = new SuccessfulRegistrationMessage();
         }
         else if (type.equals(MsgTypes.AUTHENTICATION.getType())) {
             message = new AuthenticatedMessage();
@@ -33,7 +33,7 @@ public class AdminMessageFactory implements AbstractMessageFactory {
             message = new DeniedEntryMessage();
         }
         else if (type.equals(MsgTypes.PROFILE.getType())) {
-            message = new ProfileMessage();
+            message = new UpdateProfileMessage();
         }
         else if (type.equals(MsgTypes.DEACTIVATION.getType())) {
             message = new AcctDeactivationMessage();

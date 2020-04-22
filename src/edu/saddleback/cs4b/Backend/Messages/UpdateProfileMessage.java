@@ -7,17 +7,17 @@ import edu.saddleback.cs4b.Backend.Utilitys.Profile;
  * 2). When they are updating existing details - this message is never to be
  * received by the client
  */
-public class ProfileMessage extends BaseMessage {
+public class UpdateProfileMessage extends BaseMessage {
     private Profile profile;
 
     /**
      * only to be used by the message factory
      */
-    ProfileMessage() {
+    UpdateProfileMessage() {
         this(null);
     }
 
-    public ProfileMessage(Profile profile) {
+    public UpdateProfileMessage(Profile profile) {
         super(MsgTypes.PROFILE);
         setProfile(profile);
     }
