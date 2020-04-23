@@ -1,5 +1,7 @@
 package edu.saddleback.cs4b.Backend.Messages;
 
+import edu.saddleback.cs4b.Backend.Objects.Game;
+
 public class AvailableGameMessage extends BaseMessage
 {
     private Game game;
