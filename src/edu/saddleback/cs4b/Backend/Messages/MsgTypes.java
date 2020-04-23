@@ -25,7 +25,7 @@ public enum MsgTypes {
     REG_ERROR("Registration Error"),
     REGISTRATION("Registration"),
     REQUEST_ALL_GAMES("Request All Active Games"),
-    RETURN_ACTIVE_GAMES("Active_Game"),
+    RETURN_ACTIVE_GAMES("Return Active Games"),
     SIGN_IN("Sign-in"),
     SIGN_OUT_CONFIRM("Sign Out Confirmation"),
     SIGN_OUT("Sign-out"),
