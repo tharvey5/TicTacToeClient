@@ -7,7 +7,7 @@ import java.util.List;
  * has been disconnected from the channel. This is NOT used for acct
  * suspensions
  */
-public class DisconnectMessage extends BaseMessage{
+public class DisconnectMessage extends BaseMessage {
     private List<String> channels;
     private String userName;
 

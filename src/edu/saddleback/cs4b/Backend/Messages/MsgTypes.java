@@ -22,10 +22,12 @@ public enum MsgTypes {
     GAME_RESULT("Game Result"),
     JOIN_GAME_REQUEST("Request to Join Game"),
     CREATE_GAME("Create Game"),
-    GAME_HISTORY_REQUEST("Request Game History");
+    GAME_HISTORY_REQUEST("Request Game History"),
 
 
-
+     // messages that are only used on the server
+     ADDED_USER("Added User"),
+     REMOVED_USER("Removed User");
 
 
 
