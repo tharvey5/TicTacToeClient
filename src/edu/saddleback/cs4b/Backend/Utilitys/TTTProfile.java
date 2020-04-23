@@ -1,11 +1,14 @@
 package edu.saddleback.cs4b.Backend.Utilitys;
 
+import edu.saddleback.cs4b.Backend.Objects.Game;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class TTTProfile implements Serializable, Profile {
     private TTTUser user;
-    // private GameRecord gameRecord;
-    // private List<Games> activeGames;
+    private GameRecord gameRecord;
+    private List<Game> activeGames;
 
     /**
      * This ctor will be used to create a user profile, but can also
