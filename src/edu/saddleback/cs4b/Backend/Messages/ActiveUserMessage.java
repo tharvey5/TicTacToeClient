@@ -6,6 +6,11 @@ import java.util.List;
 public class ActiveUserMessage extends BaseMessage {
     private List<String> activeUsers;
 
+    public ActiveUserMessage()
+    {
+        this(null);
+    }
+
     public ActiveUserMessage(List<String> newActiveUsers)
     {
         super(MsgTypes.ACTIVE_USER);

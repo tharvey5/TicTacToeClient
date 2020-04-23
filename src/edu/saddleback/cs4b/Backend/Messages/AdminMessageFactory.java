@@ -8,7 +8,7 @@ public class AdminMessageFactory implements AbstractMessageFactory {
     @Override
     public  BaseMessage createMessage(String type) {
         BaseMessage message = null;
-        if (type.equals(MsgTypes.ACTIVE_USER_REQ.getType())) {
+        if (type.equals(MsgTypes.ACTIVE_USER.getType())) {
             message = new ActiveUserMessage();
         }
         else  if (type.equals(MsgTypes.DISCONNECTION.getType())) {
@@ -32,10 +32,10 @@ public class AdminMessageFactory implements AbstractMessageFactory {
         else if (type.equals(MsgTypes.DENIED.getType())) {
             message = new DeniedEntryMessage();
         }
-        else if (type.equals(MsgTypes.PROFILE.getType())) {
+        else if (type.equals(MsgTypes.UPDATE_PROFILE.getType())) {
             message = new UpdateProfileMessage();
         }
-        else if (type.equals(MsgTypes.DEACTIVATION.getType())) {
+        else if (type.equals(MsgTypes.ACCT_DEACTIVATION.getType())) {
             message = new AcctDeactivationMessage();
         }
         return message;
