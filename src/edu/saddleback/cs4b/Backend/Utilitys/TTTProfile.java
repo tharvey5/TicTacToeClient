@@ -44,7 +44,7 @@ public class TTTProfile implements Serializable, Profile {
 
     @Override
     public String getId() {
-        return Integer.toString(user.getId());
+        return user.getId();
     }
 
     @Override

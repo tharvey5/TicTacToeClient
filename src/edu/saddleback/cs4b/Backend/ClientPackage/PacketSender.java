@@ -8,6 +8,7 @@ import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
 import edu.saddleback.cs4b.Backend.PubSub.UISubject;
+import edu.saddleback.cs4b.UI.UIEventLog;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,46 +17,37 @@ import java.util.List;
 
 public class PacketSender implements UIObserver {
     private ObjectOutputStream out;
-    private UISubject subject;
     private AdminMessageFactory messageFactory;
-
-
-
-
-
 
     public PacketSender()
     {
-        this(null, null);
+        this(null);
     }
 
 
-    public PacketSender(ObjectOutputStream newOut, UISubject newSubject)
+    public PacketSender(ObjectOutputStream newOut)
     {
-        subject = newSubject;
         out = newOut;
         messageFactory = new AdminMessageFactory();
+        UIEventLog.getInstance().addObserver(this);
     }
-
-
-
 
     @Override
     public void update(SystemEvent event)
     {
-        String messageType;
+//        String messageType;
+//
+//        if(event instanceof MessageEvent)
+//        {
+//            messageType = ((MessageEvent) event).getMessage().getMessageType();
+//        }
+//        else
+//        {
+//            System.out.println("Not a valid event");
+//            return;
+//        }
 
-        if(event instanceof MessageEvent)
-        {
-            messageType = ((MessageEvent) event).getMessage().getMessageType();
-        }
-        else
-        {
-            System.out.println("Not a valid event");
-            return;
-        }
-
-        BaseMessage nextMessage = messageFactory.createMessage(messageType);
+        BaseMessage nextMessage = ((MessageEvent) event).getMessage();
 
         sendMessage(nextMessage);
     }
@@ -64,7 +56,7 @@ public class PacketSender implements UIObserver {
     {
         try
         {
-            out.writeObject(nextMessage);
+            out.writeObject(new Packet(nextMessage));
             out.flush();
         }
         catch (IOException ex)

@@ -35,11 +35,12 @@ public enum MsgTypes {
     UNAVAILABLE_GAME("Unavailable Game"),
     UPDATE_PROFILE("Profile"),
     VALID_MOVE("Valid Move"),
-    VIEW_GAME_REQUEST("View Game Request");
+    VIEW_GAME_REQUEST("View Game Request"),
 
 
-
-
+     // messages that are only used on the server
+     ADDED_USER("Added User"),
+     REMOVED_USER("Removed User");
 
 
 

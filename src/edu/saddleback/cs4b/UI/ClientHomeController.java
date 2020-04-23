@@ -2,9 +2,8 @@ package edu.saddleback.cs4b.UI;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -12,25 +11,25 @@ import javafx.scene.paint.Color;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ClientHomeScreenController implements Initializable
+public class ClientHomeController implements Initializable
 {
     @FXML
-    private Label mainMenuLabel;
+    private Button mainMenuButton;
 
     @FXML
-    private Label singlePlayerLabel;
+    private Button singlePlayerButton;
 
     @FXML
-    private Label multiplayerLabel;
+    private Button multiplayerButton;
 
     @FXML
-    private Label viewProfileLabel;
+    private Button profileButton;
 
     @FXML
-    private Label aboutUsLabel;
+    private Button aboutUsButton;
 
     @FXML
-    private Label logoutLabel;
+    private Button logoutButton;
 
     @FXML
     private BorderPane viewScreen;
@@ -41,7 +40,7 @@ public class ClientHomeScreenController implements Initializable
     @FXML
     public void highlightMainMenu()
     {
-        mainMenuLabel.setOnMouseEntered(mouseEvent -> mainMenuLabel.setTextFill(Color.YELLOW));
+        mainMenuButton.setOnMouseEntered(mouseEvent -> mainMenuButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -51,7 +50,7 @@ public class ClientHomeScreenController implements Initializable
     @FXML
     public void resetMainMenu()
     {
-        mainMenuLabel.setOnMouseExited(mouseEvent -> mainMenuLabel.setTextFill(Color.WHITE));
+        mainMenuButton.setOnMouseExited(mouseEvent -> mainMenuButton.setTextFill(Color.WHITE));
     }
 
     /**
@@ -60,7 +59,7 @@ public class ClientHomeScreenController implements Initializable
     @FXML
     public void highlightSinglePlayer()
     {
-        singlePlayerLabel.setOnMouseEntered(mouseEvent -> singlePlayerLabel.setTextFill(Color.YELLOW));
+        singlePlayerButton.setOnMouseEntered(mouseEvent -> singlePlayerButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -70,7 +69,7 @@ public class ClientHomeScreenController implements Initializable
     @FXML
     public void resetSinglePlayer()
     {
-        singlePlayerLabel.setOnMouseExited(mouseEvent -> singlePlayerLabel.setTextFill(Color.WHITE));
+        singlePlayerButton.setOnMouseExited(mouseEvent -> singlePlayerButton.setTextFill(Color.WHITE));
     }
 
     /**
@@ -79,7 +78,7 @@ public class ClientHomeScreenController implements Initializable
     @FXML
     public void highlightMultiplayer()
     {
-        multiplayerLabel.setOnMouseEntered(mouseEvent -> multiplayerLabel.setTextFill(Color.YELLOW));
+        multiplayerButton.setOnMouseEntered(mouseEvent -> multiplayerButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -89,16 +88,16 @@ public class ClientHomeScreenController implements Initializable
     @FXML
     public void resetMultiplayer()
     {
-        multiplayerLabel.setOnMouseExited(mouseEvent -> multiplayerLabel.setTextFill(Color.WHITE));
+        multiplayerButton.setOnMouseExited(mouseEvent -> multiplayerButton.setTextFill(Color.WHITE));
     }
 
     /**
      * WHEN THIS METHOD IS CALLED THE 'VIEW PROFILE' LABEL WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
      */
     @FXML
-    public void highlightViewProfile()
+    public void highlightProfile()
     {
-        viewProfileLabel.setOnMouseEntered(mouseEvent -> viewProfileLabel.setTextFill(Color.YELLOW));
+        profileButton.setOnMouseEntered(mouseEvent -> profileButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -106,9 +105,9 @@ public class ClientHomeScreenController implements Initializable
      * NO LONGER HOVERING OVER IT
      */
     @FXML
-    public void resetViewProfile()
+    public void resetProfile()
     {
-        viewProfileLabel.setOnMouseExited(mouseEvent -> viewProfileLabel.setTextFill(Color.WHITE));
+        profileButton.setOnMouseExited(mouseEvent -> profileButton.setTextFill(Color.WHITE));
     }
 
     /**
@@ -117,7 +116,7 @@ public class ClientHomeScreenController implements Initializable
     @FXML
     public void highlightAboutUs()
     {
-        aboutUsLabel.setOnMouseEntered(mouseEvent -> aboutUsLabel.setTextFill(Color.YELLOW));
+        aboutUsButton.setOnMouseEntered(mouseEvent -> aboutUsButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -127,7 +126,7 @@ public class ClientHomeScreenController implements Initializable
     @FXML
     public void resetAboutUs()
     {
-        aboutUsLabel.setOnMouseExited(mouseEvent -> aboutUsLabel.setTextFill(Color.WHITE));
+        aboutUsButton.setOnMouseExited(mouseEvent -> aboutUsButton.setTextFill(Color.WHITE));
     }
 
     /**
@@ -136,7 +135,7 @@ public class ClientHomeScreenController implements Initializable
     @FXML
     public void highlightLogout()
     {
-        logoutLabel.setOnMouseEntered(mouseEvent -> logoutLabel.setTextFill(Color.YELLOW));
+        logoutButton.setOnMouseEntered(mouseEvent -> logoutButton.setTextFill(Color.valueOf("#FFD700")));
     }
 
     /**
@@ -146,66 +145,84 @@ public class ClientHomeScreenController implements Initializable
     @FXML
     public void resetLogout()
     {
-        logoutLabel.setOnMouseExited(mouseEvent -> logoutLabel.setTextFill(Color.WHITE));
+        logoutButton.setOnMouseExited(mouseEvent -> logoutButton.setTextFill(Color.WHITE));
     }
 
     @FXML
-    public void handleMainMenuAction(MouseEvent event)
+    public void handleMainMenuAction()
     {
-        System.out.println("You clicked me!");
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("MainMenuScreen");
+        Pane view = object.getPage("MainMenu");
         viewScreen.setCenter(view);
     }
 
     @FXML
-    public void handleSinglePlayerAction(MouseEvent event)
+    public void handleSinglePlayerAction()
     {
-        System.out.println("You clicked me!");
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("SinglePlayerScreen");
+        Pane view = object.getPage("SinglePlayer");
         viewScreen.setCenter(view);
     }
 
     @FXML
-    public void handleMultiplayerAction(MouseEvent event)
+    public void handleMultiplayerAction()
     {
-        System.out.println("You clicked me!");
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("MultiplayerScreen");
+        Pane view = object.getPage("Multiplayer");
         viewScreen.setCenter(view);
     }
 
     @FXML
-    public void handleViewProfileAction(MouseEvent event)
+    public void handleProfileAction()
     {
-        System.out.println("You clicked me!");
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("ViewProfileScreen");
+        Pane view = object.getPage("Profile");
         viewScreen.setCenter(view);
     }
 
     @FXML
-    public void handleAboutUsAction(MouseEvent event)
+    public void handleEditProfileAction()
     {
-        System.out.println("You clicked me!");
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("AboutUsScreen");
+        Pane view = object.getPage("ProfileEdit");
         viewScreen.setCenter(view);
     }
 
     @FXML
-    public void handleLogoutAction(MouseEvent event)
+    public void handleEditProfileUsernameAction()
     {
-        System.out.println("You clicked me!");
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("LogoutScreen");
+        Pane view = object.getPage("ProfileChangeUsername");
         viewScreen.setCenter(view);
     }
 
+    @FXML
+    public void handleEditProfilePasswordAction()
+    {
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("ProfileChangePassword");
+        viewScreen.setCenter(view);
+    }
+
+    @FXML
+    public void handleAboutUsAction()
+    {
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("AboutUs");
+        viewScreen.setCenter(view);
+    }
+
+    @FXML
+    public void handleLogoutAction()
+    {
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("Logout");
+        viewScreen.setCenter(view);
+    }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
 
     }
 }

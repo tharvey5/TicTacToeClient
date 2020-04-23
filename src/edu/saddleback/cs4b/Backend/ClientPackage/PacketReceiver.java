@@ -12,40 +12,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PacketReceiver implements Subject, Runnable
+public class PacketReceiver implements Runnable
 {
     private ObjectInputStream in;
-    private List<Observer> observers;
+    //private List<Observer> observers;
+    private ClientEventLog clientLog = ClientEventLog.getInstance();
 
-    public PacketReceiver(ObjectInputStream newIn, Observer controller)
+    public PacketReceiver(ObjectInputStream newIn)
     {
         in = newIn;
-        observers = new ArrayList<>();
-        addObserver(controller);
+        //observers = new ArrayList<>();
     }
 
 
 
-    @Override
-    public void addObserver(Observer newObserver)
-    {
-        observers.add(newObserver);
-    }
-
-    @Override
-    public void removeObserver(Observer oldObserver)
-    {
-        observers.remove(oldObserver);
-    }
-
-    @Override
-    public void notifyObserver(SystemEvent event)
-    {
-        for(int i = 0; i < observers.size(); i++)
-        {
-            observers.get(i).update(event);
-        }
-    }
+//    @Override
+//    public void addObserver(Observer newObserver)
+//    {
+//        observers.add(newObserver);
+//    }
+//
+//    @Override
+//    public void removeObserver(Observer oldObserver)
+//    {
+//        observers.remove(oldObserver);
+//    }
+//
+//    @Override
+//    public void notifyObserver(SystemEvent event)
+//    {
+//        for(int i = 0; i < observers.size(); i++)
+//        {
+//            observers.get(i).update(event);
+//        }
+//    }
 
     @Override
     public void run()
@@ -60,7 +60,7 @@ public class PacketReceiver implements Subject, Runnable
                 BaseMessage data = message.getData();
 
                 SystemEvent messageEvent = new MessageEvent(data);
-                notifyObserver(messageEvent);
+                clientLog.notifyObserver(messageEvent);
 
                 //Might need to look for message to stop listening
                 /*

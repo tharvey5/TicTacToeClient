@@ -1,5 +1,10 @@
 package edu.saddleback.cs4b.Backend.Messages;
 
+
+import edu.saddleback.cs4b.Backend.Objects.Game;
+
+import java.util.List;
+
 public class ReturnAllActiveGamesMessage extends BaseMessage
 {
     List<Game> games;
