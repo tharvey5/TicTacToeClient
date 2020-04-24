@@ -11,17 +11,17 @@ public class TTTGameRecord implements GameRecord, Serializable
     int wins;
     int losses;
 
-    CONSTRUCTORS!!!!!!!!
+    public TTTGameRecord()
+    {
+        this(null, 0, 0);
+    }
 
-
-
-
-
-
-
-
-
-
+    public TTTGameRecord(List<Game> newGames, int newWins, int newLosses)
+    {
+        gameRecord = newGames;
+        wins = newWins;
+        losses = newLosses;
+    }
 
     public List<Game> getGameRecord()
     {
@@ -31,10 +31,13 @@ public class TTTGameRecord implements GameRecord, Serializable
     {
         gameRecord = newGameRecord;
     }
-
     public int  getNumGames()
     {
         return gameRecord.size();
+    }
+    public void addGame(Game newGame)
+    {
+        gameRecord.add(newGame);
     }
     public int  getWins()
     {

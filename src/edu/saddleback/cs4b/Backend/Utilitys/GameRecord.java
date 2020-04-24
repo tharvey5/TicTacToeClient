@@ -10,6 +10,7 @@ public interface GameRecord
     public void setGameRecord(List<Game> newGameRecord);
 
     public int  getNumGames();
+    public void addGame(Game newGame);
 
     public int  getWins();
     public void setWins(int newWins);
