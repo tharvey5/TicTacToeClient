@@ -1,8 +1,9 @@
 package edu.saddleback.cs4b.Backend.Objects;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class TTTMove implements Move
+public class TTTMove implements Move, Serializable
 {
     private String gameID;
     private String playerID;
