@@ -42,9 +42,15 @@ public class TTTMove implements Move, Serializable
         gameID = newGameID;
     }
     @Override
-    public LocalDateTime getStartTime()
+    public String getStartTime()
     {
-        return moveTime;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(Integer.toString(moveTime.getHour()));
+        sb.append(":");
+        sb.append(Integer.toString(moveTime.getMinute()));
+
+        return sb.toString();
     }
     @Override
     public void setStartTime(LocalDateTime time)
