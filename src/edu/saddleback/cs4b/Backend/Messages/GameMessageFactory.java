@@ -61,6 +61,18 @@ public class GameMessageFactory implements AbstractMessageFactory {
         {
             message = new ReturnAllActiveGamesMessage();
         }
+        else if (type.equals(MsgTypes.SET_TOKEN_ERROR.getType()))
+        {
+            message = new SetTokenErrorMessage();
+        }
+        else if (type.equals(MsgTypes.SET_TOKEN.getType()))
+        {
+            message = new SetTokenMessage();
+        }
+        else if (type.equals(MsgTypes.SUCCESS_SET_TOKEN.getType()))
+        {
+            message = new SuccessfulSetTokenMessage();
+        }
         else if (type.equals(MsgTypes.SUCCESS_VIEW_GAME.getType()))
         {
             message = new SuccessfulViewGameMessage();
