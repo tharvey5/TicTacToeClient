@@ -64,9 +64,9 @@ public class ProfileChangePasswordController implements Observer
 
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
-        if (message instanceof SuccessfulRegistration)
+        if (message instanceof SuccessfulRegistrationMessage)
         {
-            SuccessfulRegistration msg = (SuccessfulRegistration) message;
+            SuccessfulRegistrationMessage msg = (SuccessfulRegistrationMessage) message;
             ClientUser.setInstance(msg.getUser());
             swapHomeProfile("/edu/saddleback/cs4b/UI/ClientHome.fxml", saveChangesButton);
         }

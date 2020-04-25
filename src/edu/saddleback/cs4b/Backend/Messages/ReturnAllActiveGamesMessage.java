@@ -1,20 +1,21 @@
 package edu.saddleback.cs4b.Backend.Messages;
 
+
 import edu.saddleback.cs4b.Backend.Objects.Game;
 
 import java.util.List;
 
-public class GetAllActiveGamesMessage extends BaseMessage
+public class ReturnAllActiveGamesMessage extends BaseMessage
 {
     List<Game> games;
 
-    public GetAllActiveGamesMessage(List<Game> newGames)
+    public ReturnAllActiveGamesMessage(List<Game> newGames)
     {
-        super(MsgTypes.ACTIVE_GAMES);
+        super(MsgTypes.RETURN_ACTIVE_GAMES);
 
         games = newGames;
     }
-    public GetAllActiveGamesMessage()
+    public ReturnAllActiveGamesMessage()
     {
         this(null);
     }
