@@ -17,9 +17,9 @@ public class GameSuccessfullyCreatedMessage extends BaseMessage
         game = newGame;
     }
 
-    public Game getGame()
+    public String getGameId()
     {
-        return game;
+        return game.getGameID();
     }
 
     public void setGame(Game newGame)
