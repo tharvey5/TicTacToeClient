@@ -90,10 +90,10 @@ public class ClientRegistrationController implements Observer, Initializable
 
         if (!firstName.equals("") && !lastName.equals("") && !username.equals("") && !password.equals(""))
         {
-            ProfileMessage profileMessage = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
+            RegistrationMessage registrationMessage = (RegistrationMessage) factory.createMessage(MsgTypes.REGISTRATION.getType());
             Profile prof = new TTTProfile(username, firstName, lastName, password);
-            profileMessage.setProfile(prof);
-            uilog.notifyObservers(new MessageEvent(profileMessage));
+            registrationMessage.setProfile(prof);
+            uilog.notifyObservers(new MessageEvent(registrationMessage));
         }
         else
         {

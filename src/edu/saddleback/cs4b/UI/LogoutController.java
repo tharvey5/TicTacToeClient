@@ -52,7 +52,7 @@ public class LogoutController implements Observer
 
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
-        if(message instanceof SignOutMessage)
+        if(message instanceof SignOutConfirmationMessage)
         {
             swapSceneYes("/edu/saddleback/cs4b/UI/ClientLogin.fxml", yesButton);
         }

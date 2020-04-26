@@ -89,10 +89,10 @@ public class ProfileEditController implements Observer, Initializable
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
         System.out.println("Message Received");
-        if(message instanceof SuccessfulRegistrationMessage)
+        if(message instanceof SuccessfulUpdateProfileMessage)
         {
             System.out.println("Changes Updated");
-            SuccessfulRegistrationMessage msg = (SuccessfulRegistrationMessage) message;
+            SuccessfulUpdateProfileMessage msg = (SuccessfulUpdateProfileMessage) message;
             ClientUser.setInstance(msg.getUser());
             swapHomeProfile("/edu/saddleback/cs4b/UI/ClientHome.fxml", saveChangesButton);
 
@@ -111,10 +111,10 @@ public class ProfileEditController implements Observer, Initializable
 
         if(!firstName.equals("") && !lastName.equals(""))
         {
-            ProfileMessage profileUpdate = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
+            UpdateProfileMessage updateProfileMessage = (UpdateProfileMessage) factory.createMessage(MsgTypes.UPDATE_PROFILE.getType());
             Profile prof = new TTTProfile(user.getUsername(), firstName, lastName, user.getPassword());
-            profileUpdate.setProfile(prof);
-            uilog.notifyObservers(new MessageEvent(profileUpdate));
+            updateProfileMessage.setProfile(prof);
+            uilog.notifyObservers(new MessageEvent(updateProfileMessage));
         }
     }
 
