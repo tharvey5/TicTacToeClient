@@ -1,11 +1,14 @@
 package edu.saddleback.cs4b.Backend.Utilitys;
 
+import edu.saddleback.cs4b.Backend.Objects.Game;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class TTTProfile implements Serializable, Profile {
     private TTTUser user;
-    // private GameRecord gameRecord;
-    // private List<Games> activeGames;
+    private GameRecord gameRecord;
+    private List<Game> activeGames;
 
     /**
      * This ctor will be used to create a user profile, but can also
@@ -32,6 +35,55 @@ public class TTTProfile implements Serializable, Profile {
             throw new NullPointerException();
         }
         this.user = (TTTUser)user;
+    }
+
+
+
+    public GameRecord getGameRecord()
+    {
+        return gameRecord;
+    }
+
+    public void setGameRecord(GameRecord newGameRecord)
+    {
+        gameRecord = newGameRecord;
+    }
+
+    public List<Game> getActiveGames()
+    {
+        return activeGames;
+    }
+
+    public void setActiveGames(List<Game> newActiveGames)
+    {
+        activeGames = newActiveGames;
+    }
+
+    public void addActiveGame(Game newGame)
+    {
+        activeGames.add(newGame);
+    }
+    public void removeActiveGame(Game oldGame)
+    {
+        activeGames.remove(oldGame);
+    }
+    public void removeActiveGame(String gameID)
+    {
+        int i = 0;
+        while(i < activeGames.size() && activeGames.get(i).getGameID() != gameID)
+        {
+            ++i;
+        }
+
+        if(i < activeGames.size())
+        {
+            activeGames.remove(i);
+        }
+    }
+
+    public void addGameToRecord(Game newGame)
+    {
+        gameRecord.addGame(newGame);
     }
 
     @Override

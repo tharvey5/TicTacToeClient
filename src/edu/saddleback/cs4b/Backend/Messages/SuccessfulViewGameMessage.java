@@ -1,18 +1,17 @@
 package edu.saddleback.cs4b.Backend.Messages;
 
-public class JoinGameRequestMessage extends BaseMessage
+public class SuccessfulViewGameMessage extends BaseMessage
 {
-    private String gameID;
+    String gameID;
 
-    public JoinGameRequestMessage()
+    public SuccessfulViewGameMessage()
     {
         this(null);
     }
 
-    public JoinGameRequestMessage(String newGameID)
+    public SuccessfulViewGameMessage(String newGameID)
     {
-        super(MsgTypes.JOIN_GAME_REQUEST);
-
+        super(MsgTypes.SUCCESS_VIEW_GAME);
         gameID = newGameID;
     }
 
@@ -23,6 +22,6 @@ public class JoinGameRequestMessage extends BaseMessage
 
     public void setGameID(String newGameID)
     {
-        gameID = newGameID;
+        this.gameID = newGameID;
     }
 }

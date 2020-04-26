@@ -10,8 +10,10 @@ public class MessageFactoryProducer {
      * to get acceptable factory types
      */
     public static AbstractMessageFactory getFactory(String type) {
-        if (type.equals(FactoryTypes.ADMIN_FACT.toString())) {
+        if (type.equals(FactoryTypes.ADMIN_FACT.getTypes())) {
             return new AdminMessageFactory();
+        } else if (type.equals(FactoryTypes.GAME_FACT.getTypes())) {
+            return new GameMessageFactory();
         }
         return null;
     }

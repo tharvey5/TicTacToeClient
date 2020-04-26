@@ -1,9 +1,6 @@
 package edu.saddleback.cs4b.Backend.Messages;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class GameResultMessage extends BaseMessage{
+public class GameResultMessage extends BaseMessage {
     private WinType winType;
     private String winner;
 

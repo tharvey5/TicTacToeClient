@@ -6,13 +6,11 @@ import edu.saddleback.cs4b.Backend.PubSub.*;
 import edu.saddleback.cs4b.Backend.Utilitys.Profile;
 import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -72,7 +70,7 @@ public class ClientRegistrationController implements Observer, Initializable
 
     private void handleMessageEvents(BaseMessage message)
     {
-        if (message instanceof SuccessfulRegistration)
+        if (message instanceof SuccessfulRegistrationMessage)
         {
             swapScene("/edu/saddleback/cs4b/UI/AccountCreationSuccess.fxml", registerAccountButton);
         }

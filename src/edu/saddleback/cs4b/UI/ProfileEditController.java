@@ -89,10 +89,10 @@ public class ProfileEditController implements Observer, Initializable
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
         System.out.println("Message Received");
-        if(message instanceof SuccessfulRegistration)
+        if(message instanceof SuccessfulRegistrationMessage)
         {
             System.out.println("Changes Updated");
-            SuccessfulRegistration msg = (SuccessfulRegistration) message;
+            SuccessfulRegistrationMessage msg = (SuccessfulRegistrationMessage) message;
             ClientUser.setInstance(msg.getUser());
             swapHomeProfile("/edu/saddleback/cs4b/UI/ClientHome.fxml", saveChangesButton);
 
