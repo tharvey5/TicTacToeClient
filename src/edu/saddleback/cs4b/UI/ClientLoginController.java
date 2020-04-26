@@ -28,22 +28,22 @@ public class ClientLoginController implements Observer, Initializable
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
 
     @FXML
-    Button loginButton;
+    private Button loginButton;
 
     @FXML
-    Button createAccountButton;
+    private Button createAccountButton;
 
     @FXML
-    Button forgotPasswordButton;
+    private Button forgotPasswordButton;
 
     @FXML
-    TextField usernameField;
+    private TextField usernameField;
 
     @FXML
-    PasswordField passwordField;
+    private PasswordField passwordField;
 
     @FXML
-    Label passwordError;
+    private Label passwordError;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
