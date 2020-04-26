@@ -13,11 +13,11 @@ public class AdminMessageFactory implements AbstractMessageFactory {
             message = new AcctDeactivationMessage();
         }
         else if (type.equals(MsgTypes.ACTIVE_USER.getType())) {
-            message = new ActiveUserMessage();
+            message = new ActiveUserResponseMessage();
         }
         else if (type.equals(MsgTypes.ACTIVE_USER_RESPONSE.getType()))
         {
-            message = new ActiveUserResponseMessage();
+            message = new ActiveUserMessage();
         }
         else if (type.equals(MsgTypes.AUTHENTICATION.getType()))
         {

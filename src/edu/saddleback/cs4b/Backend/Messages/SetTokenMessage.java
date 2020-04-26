@@ -2,8 +2,6 @@ package edu.saddleback.cs4b.Backend.Messages;
 
 import edu.saddleback.cs4b.Backend.Objects.Token;
 
-import java.util.Set;
-
 public class SetTokenMessage extends BaseMessage
 {
     private Token token;
