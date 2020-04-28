@@ -68,7 +68,8 @@ public class GameBoardController implements Observer, Initializable
     private GridPane gameBoard;
 
 
-
+    private Node cachedClickLocation = null;
+    private String gameId = null;
 
 
     @Override
@@ -99,6 +100,7 @@ public class GameBoardController implements Observer, Initializable
         if(message instanceof GameSuccessfullyCreatedMessage)
         {
             GameSuccessfullyCreatedMessage msg = (GameSuccessfullyCreatedMessage) message;
+            //gameId = msg.getGameId();
         }
         else if(message instanceof AvailableGameMessage)
         {
@@ -109,6 +111,15 @@ public class GameBoardController implements Observer, Initializable
             SuccessfulViewGameMessage msg = (SuccessfulViewGameMessage) message;
             msg.getGameID();
         }
+        else if (message instanceof ValidMoveMessage)
+        {
+            ValidMoveMessage move = (ValidMoveMessage) message;
+            setToken(cachedClickLocation, Tokens.DEFAULT_O.getLocation());
+        }
+        else if (message instanceof InvalidMoveMessage)
+        {
+            // display to the player their move was invalid
+        }
     }
 
     @FXML
@@ -117,8 +128,10 @@ public class GameBoardController implements Observer, Initializable
         GameTiles tile = tileMapping.get(GridPane.getRowIndex((Node)e.getSource()) + ", " + GridPane.getColumnIndex((Node)e.getSource()));
         MoveMessage moveMessage = (MoveMessage) factory.createMessage(MsgTypes.MOVE.getType());
         moveMessage.setCoordinate(new TTTPosition(tile.getTileRow(), tile.getTileColumn()));
-        //uilog.notifyObservers(new MessageEvent(moveMessage));
+        moveMessage.setGameId("1");
+        uilog.notifyObservers(new MessageEvent(moveMessage));
 
+        cachedClickLocation = (Node)e.getSource();
         //setToken((Node)e.getSource(), Tokens.DEFAULT_O.getLocation());
     }
 

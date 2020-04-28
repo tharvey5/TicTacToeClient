@@ -1,6 +1,8 @@
 package edu.saddleback.cs4b.Backend.Objects;
 
-public class TTTPosition implements Coordinate
+import java.io.Serializable;
+
+public class TTTPosition implements Coordinate, Serializable
 {
     private int xCoord;
     private int yCoord;

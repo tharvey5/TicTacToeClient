@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 public class MultiplayerController implements Observer, Initializable
 {
     private UIEventLog uilog = UIEventLog.getInstance();
-    private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
+    private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.GAME_FACT.getTypes());
     private User user = ClientUser.getInstanceOf();
 
     @FXML
@@ -75,18 +75,11 @@ public class MultiplayerController implements Observer, Initializable
 
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
-        if(message instanceof GameSuccessfullyCreatedMessage)
+        if(message instanceof GameSuccessfullyCreatedMessage ||
+           message instanceof AvailableGameMessage ||
+           message instanceof SuccessfulViewGameMessage)
         {
-            GameSuccessfullyCreatedMessage msg = (GameSuccessfullyCreatedMessage) message;
-        }
-        else if(message instanceof AvailableGameMessage)
-        {
-            AvailableGameMessage msg = (AvailableGameMessage) message;
-        }
-        else if(message instanceof SuccessfulViewGameMessage)
-        {
-            SuccessfulViewGameMessage msg = (SuccessfulViewGameMessage) message;
-            msg.getGameID();
+            swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
         }
     }
 
@@ -99,7 +92,9 @@ public class MultiplayerController implements Observer, Initializable
     @FXML
     public void handleCreateGameAction()
     {
-        swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
+        CreateGameMessage createMessage = (CreateGameMessage) factory.createMessage(MsgTypes.CREATE_GAME.getType());
+        uilog.notifyObservers(new MessageEvent(createMessage));
+        //swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
     }
 
     @FXML
