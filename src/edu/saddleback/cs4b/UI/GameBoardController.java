@@ -1,8 +1,14 @@
 package edu.saddleback.cs4b.UI;
 
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
+import edu.saddleback.cs4b.Backend.Messages.*;
+import edu.saddleback.cs4b.Backend.Objects.TTTPosition;
+import edu.saddleback.cs4b.Backend.PubSub.EventType;
+import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.Utilitys.User;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -30,15 +36,12 @@ import java.util.ResourceBundle;
 
 public class GameBoardController implements Observer, Initializable
 {
-    private final int IMG_MSG_BANNER_HEIGHT = 30;
-    private final int IMG_MGS_BANNER_WIDTH = 30;
+    private UIEventLog uilog = UIEventLog.getInstance();
+    private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.GAME_FACT.getTypes());
+    private User user = ClientUser.getInstanceOf();
 
     private Map<String, String> userTokens = generateUserTokens();
     private Map<String, GameTiles> tileMapping = makeTileMapping();
-
-    private String[] gameTokens = {Tokens.DEFAULT_X.getLocation(), Tokens.DEFAULT_O.getLocation()};
-    private String currToken = gameTokens[0];
-
 
     @FXML
     private Label player1Label;
@@ -77,17 +80,46 @@ public class GameBoardController implements Observer, Initializable
     @Override
     public void update(SystemEvent e)
     {
+        if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType()))
+        {
+            BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
+            try
+            {
+                handleMessageEvents(message);
+            }
+            catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
+        }
+    }
 
+    private void handleMessageEvents(BaseMessage message) throws IOException
+    {
+        if(message instanceof GameSuccessfullyCreatedMessage)
+        {
+            GameSuccessfullyCreatedMessage msg = (GameSuccessfullyCreatedMessage) message;
+        }
+        else if(message instanceof AvailableGameMessage)
+        {
+            AvailableGameMessage msg = (AvailableGameMessage) message;
+        }
+        else if(message instanceof SuccessfulViewGameMessage)
+        {
+            SuccessfulViewGameMessage msg = (SuccessfulViewGameMessage) message;
+            msg.getGameID();
+        }
     }
 
     @FXML
     void boardElementClicked(Event e)
     {
         GameTiles tile = tileMapping.get(GridPane.getRowIndex((Node)e.getSource()) + ", " + GridPane.getColumnIndex((Node)e.getSource()));
-        // logTileClicked(tile);
-        setToken((Node)e.getSource(), currToken);
-        currToken = swapToken(currToken);
-        updateMessageBanner(currToken);
+        MoveMessage moveMessage = (MoveMessage) factory.createMessage(MsgTypes.MOVE.getType());
+        moveMessage.setCoordinate(new TTTPosition(tile.getTileRow(), tile.getTileColumn()));
+        //uilog.notifyObservers(new MessageEvent(moveMessage));
+
+        //setToken((Node)e.getSource(), Tokens.DEFAULT_O.getLocation());
     }
 
     void setToken(Node src, String token)
@@ -107,60 +139,21 @@ public class GameBoardController implements Observer, Initializable
         }
     }
 
-    String swapToken(String token)
-    {
-        return token == gameTokens[0] ? gameTokens[1] : gameTokens[0];
-    }
-
     void updateMessageBanner(String token)
     {
-        ImageView img = new ImageView();
-        img.setFitHeight(IMG_MSG_BANNER_HEIGHT);
-        img.setFitWidth(IMG_MGS_BANNER_WIDTH);
-        try
-        {
-            if(token.equals(gameTokens[0]))
-            {
-                outputGameMessagesLabel.setText("Player 1 Turn!");
-                img.setImage(new Image(new FileInputStream(gameTokens[0])));
-                outputGameMessagesLabel.setGraphic(img);
-            }
-            else
-            {
-                outputGameMessagesLabel.setText("Player 2 Turn!");
-                img.setImage(new Image(new FileInputStream(gameTokens[1])));
-                outputGameMessagesLabel.setGraphic(img);
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+
     }
 
     @FXML
     public void handleRematchAction()
     {
-        ObservableList<Node> boardTiles = gameBoard.getChildren();
 
-        // for each pane -> take their one child ImageView -> set the image to null
-        for(Node n : boardTiles)
-        {
-            Pane tile = (Pane)n;
-            ImageView imgView = (ImageView)tile.getChildren().get(0);
-            imgView.setImage(null);
-        }
-
-        gameTokens[0] = Tokens.DEFAULT_X.getLocation();
-        gameTokens[1] = Tokens.DEFAULT_O.getLocation();
-        currToken = gameTokens[0];
-        updateMessageBanner(gameTokens[0]);
     }
 
     @FXML
-    public void handleLeaveGameAction()
+    public void handleLeaveGameAction() throws IOException
     {
-
+        swapHomeMainMenu("/edu/saddleback/cs4b/UI/ClientHome.fxml", leaveGameButton);
     }
 
     /**

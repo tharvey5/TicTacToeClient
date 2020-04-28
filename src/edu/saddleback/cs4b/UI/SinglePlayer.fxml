@@ -63,7 +63,7 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Red-X.png" />
+                        <Image url="@TokenImages/Red-X.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -78,7 +78,7 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@X-default.png" />
+                        <Image url="@TokenImages/X-default.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -92,12 +92,12 @@
       </Label>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="108.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Blue-O.png" />
+            <Image url="@TokenImages/Blue-O.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="108.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@O-default.png" />
+            <Image url="@TokenImages/O-default.png" />
          </image>
       </ImageView>
       <VBox layoutX="41.0" layoutY="377.0" prefHeight="67.0" prefWidth="305.0" spacing="6.0">

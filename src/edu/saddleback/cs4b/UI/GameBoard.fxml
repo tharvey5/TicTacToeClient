@@ -13,7 +13,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2A363B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.GameBoardController">
    <children>
       <GridPane fx:id="gameBoard" alignment="CENTER" layoutX="200.0" layoutY="100.0" prefHeight="400.0" prefWidth="400.0">
@@ -30,7 +29,7 @@
          <children>
             <Pane id="board11" onMouseClicked="#boardElementClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@gametiles.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <ImageView fitHeight="107.0" fitWidth="127.0" layoutX="5.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Pane id="board12" onMouseClicked="#boardElementClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@gametiles.css" GridPane.columnIndex="2" GridPane.rowIndex="1">

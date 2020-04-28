@@ -19,10 +19,10 @@
       </Label>
       <Line endX="410.0" layoutX="151.0" layoutY="42.0" startX="-100.0" stroke="WHITE" />
       <Line endX="410.0" layoutX="151.0" layoutY="102.0" startX="-100.0" stroke="WHITE" />
-      <ListView layoutX="51.0" layoutY="122.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button fx:id="refreshButton" layoutX="51.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#handleRefreshAction" onMouseEntered="#highlightRefresh" onMouseExited="#resetRefresh" style="-fx-background-color: #FFFFFF;" text="Refresh">
+      <ListView fx:id="gameMenu" layoutX="51.0" layoutY="122.0" prefHeight="451.0" prefWidth="290.0" />
+      <Button fx:id="refreshButton" graphicTextGap="10.0" layoutX="355.0" layoutY="533.0" mnemonicParsing="false" onMouseClicked="#handleRefreshAction" onMouseEntered="#highlightRefresh" onMouseExited="#resetRefresh" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: #87CEFA;" text="Refresh">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -34,6 +34,30 @@
                </image>
             </ImageView>
          </graphic>
+      </Button>
+      <Button fx:id="joinButton" layoutX="355.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#handleJoinAction" onMouseEntered="#highlightJoin" onMouseExited="#resetJoin" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: #008000;" text="Join" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="spectateButton" layoutX="355.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#handleSpectateAction" onMouseEntered="#highlightSpectate" onMouseExited="#resetSpectate" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: #FF4500;" text="Spectate" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="createGameButton" layoutX="355.0" layoutY="260.0" mnemonicParsing="false" onMouseClicked="#handleCreateGameAction" onMouseEntered="#highlightCreateGame" onMouseExited="#resetCreateGame" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: #FFFFFF;" text="Create Game">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </children>
 </AnchorPane>
