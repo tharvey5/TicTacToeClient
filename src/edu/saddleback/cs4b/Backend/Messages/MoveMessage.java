@@ -4,18 +4,20 @@ import edu.saddleback.cs4b.Backend.Objects.Coordinate;
 
 public class MoveMessage extends BaseMessage
 {
-    Coordinate coordinate;
+    private Coordinate coordinate;
+    private String gameId;
 
     public MoveMessage()
     {
-        this(null);
+        this(null, null);
     }
 
-    public MoveMessage(Coordinate newCoordinate)
+    public MoveMessage(Coordinate newCoordinate, String gameId)
     {
         super(MsgTypes.MOVE);
 
         coordinate = newCoordinate;
+        this.gameId = gameId;
     }
 
     public Coordinate getCoordinate()
@@ -26,5 +28,13 @@ public class MoveMessage extends BaseMessage
     public void setCoordinate(Coordinate newCoord)
     {
         coordinate = newCoord;
+    }
+
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
     }
 }

@@ -12,10 +12,11 @@ public class AdminMessageFactory implements AbstractMessageFactory {
         {
             message = new AcctDeactivationMessage();
         }
-        else if (type.equals(MsgTypes.ACTIVE_USER.getType())) {
+        else if (type.equals(MsgTypes.ACTIVE_USER_RESPONSE.getType()))
+        {
             message = new ActiveUserResponseMessage();
         }
-        else if (type.equals(MsgTypes.ACTIVE_USER_RESPONSE.getType()))
+        else if (type.equals(MsgTypes.ACTIVE_USER.getType()))
         {
             message = new ActiveUserMessage();
         }
@@ -63,11 +64,6 @@ public class AdminMessageFactory implements AbstractMessageFactory {
         {
             message = new SuccessfulUpdateProfileMessage();
         }
-
-
-
-
-
         else if (type.equals(MsgTypes.UPDATE_PROFILE.getType()))
         {
             message = new UpdateProfileMessage();

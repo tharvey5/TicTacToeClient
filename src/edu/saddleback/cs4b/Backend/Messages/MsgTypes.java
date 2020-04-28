@@ -44,9 +44,7 @@ public enum MsgTypes {
      // messages that are only used on the server
      ADDED_USER("Added User"),
      REMOVED_USER("Removed User");
-
-
-
+    
     private String type;
     private MsgTypes(String type) {
         this.type = type;
