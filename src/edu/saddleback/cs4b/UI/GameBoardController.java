@@ -71,6 +71,9 @@ public class GameBoardController implements Observer, Initializable
     private Node cachedClickLocation = null;
     private String gameId = null;
 
+    public GameBoardController() {
+        ClientEventLog.getInstance().addObserver(this);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -97,21 +100,7 @@ public class GameBoardController implements Observer, Initializable
 
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
-        if(message instanceof GameSuccessfullyCreatedMessage)
-        {
-            GameSuccessfullyCreatedMessage msg = (GameSuccessfullyCreatedMessage) message;
-            //gameId = msg.getGameId();
-        }
-        else if(message instanceof AvailableGameMessage)
-        {
-            AvailableGameMessage msg = (AvailableGameMessage) message;
-        }
-        else if(message instanceof SuccessfulViewGameMessage)
-        {
-            SuccessfulViewGameMessage msg = (SuccessfulViewGameMessage) message;
-            msg.getGameID();
-        }
-        else if (message instanceof ValidMoveMessage)
+        if (message instanceof ValidMoveMessage)
         {
             ValidMoveMessage move = (ValidMoveMessage) message;
             setToken(cachedClickLocation, Tokens.DEFAULT_O.getLocation());
