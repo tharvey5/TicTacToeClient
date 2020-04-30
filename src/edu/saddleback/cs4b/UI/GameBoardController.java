@@ -125,8 +125,14 @@ public class GameBoardController implements Observer, Initializable
             setToken(findTile(move.getCoordinate()), userTokens.get(move.getToken().getTokenID()));
             if (move.getUser().equals(user.getUsername())) {
                 isTurn = false;
+                Platform.runLater(()-> {
+                    outputGameMessagesLabel.setText("Waiting...");
+                });
             } else {
                 isTurn = true;
+                Platform.runLater(()-> {
+                    outputGameMessagesLabel.setText("Make a Move");
+                });
             }
         }
         else if (message instanceof InvalidMoveMessage)
