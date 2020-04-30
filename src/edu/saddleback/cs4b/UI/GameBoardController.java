@@ -3,6 +3,7 @@ package edu.saddleback.cs4b.UI;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
 import edu.saddleback.cs4b.Backend.Messages.*;
+import edu.saddleback.cs4b.Backend.Objects.Coordinate;
 import edu.saddleback.cs4b.Backend.Objects.TTTPosition;
 import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
@@ -103,7 +104,7 @@ public class GameBoardController implements Observer, Initializable
         if (message instanceof ValidMoveMessage)
         {
             ValidMoveMessage move = (ValidMoveMessage) message;
-            setToken(cachedClickLocation, Tokens.DEFAULT_O.getLocation());
+            setToken(findTile(move.getCoordinate()), Tokens.DEFAULT_X.getLocation());
         }
         else if (message instanceof InvalidMoveMessage)
         {
@@ -122,6 +123,21 @@ public class GameBoardController implements Observer, Initializable
 
         cachedClickLocation = (Node)e.getSource();
         //setToken((Node)e.getSource(), Tokens.DEFAULT_O.getLocation());
+    }
+
+    // could make this more efficient by mapping the coordinate to its index vs a search
+    private Node findTile(Coordinate coordinate) {
+        Node node = null;
+        ObservableList<Node> children = gameBoard.getChildren();
+        for (Node n : children) {
+            GameTiles tile = tileMapping.get(GridPane.getRowIndex(n) + ", " + GridPane.getColumnIndex(n));
+            if (tile.getTileRow() == (Integer)coordinate.getXCoord() &&
+                    tile.getTileColumn() == (Integer)(coordinate.getYCoord())) {
+                node = n;
+                break;
+            }
+        }
+        return node;
     }
 
     void setToken(Node src, String token)

@@ -86,7 +86,9 @@ public class MultiplayerController implements Observer, Initializable
     @FXML
     public void handleJoinAction()
     {
-
+        JoinGameRequestMessage joinMessage = (JoinGameRequestMessage) factory.createMessage(MsgTypes.JOIN_GAME_REQUEST.getType());
+        joinMessage.setGameID("1");
+        uilog.notifyObservers(new MessageEvent(joinMessage));
     }
 
     @FXML
