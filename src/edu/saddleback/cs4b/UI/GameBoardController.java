@@ -10,6 +10,7 @@ import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
+import edu.saddleback.cs4b.UI.Util.GameManager;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -40,6 +41,7 @@ public class GameBoardController implements Observer, Initializable
     private UIEventLog uilog = UIEventLog.getInstance();
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.GAME_FACT.getTypes());
     private User user = ClientUser.getInstanceOf();
+    private GameManager gameManager = GameManager.getInstance();
 
     private Map<String, String> userTokens = generateUserTokens();
     private Map<String, GameTiles> tileMapping = makeTileMapping();
@@ -68,11 +70,28 @@ public class GameBoardController implements Observer, Initializable
     @FXML
     private GridPane gameBoard;
 
-    private String gameId = null;
-    private boolean isTurn = false; // todo implement this
+    private String gameId = "1";  // todo change this
+    private boolean isTurn;
 
     public GameBoardController() {
         ClientEventLog.getInstance().addObserver(this);
+        Platform.runLater(()-> {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (gameManager.isCreator()) {
+                outputGameMessagesLabel.setText("YOU START!");
+                isTurn = true;
+            } else if (gameManager.isPlayer()) {
+                outputGameMessagesLabel.setText("WAITING FOR PLAYER 1 TO MOVE");
+                isTurn = false;
+            } else {
+                outputGameMessagesLabel.setText("YOU ARE VIEWING GAME" + gameId);
+                isTurn = false;
+            }
+        });
     }
 
     @Override
@@ -104,12 +123,18 @@ public class GameBoardController implements Observer, Initializable
         {
             ValidMoveMessage move = (ValidMoveMessage) message;
             setToken(findTile(move.getCoordinate()), userTokens.get(move.getToken().getTokenID()));
+            if (move.getUser().equals(user.getUsername())) {
+                isTurn = false;
+            } else {
+                isTurn = true;
+            }
         }
         else if (message instanceof InvalidMoveMessage)
         {
             Platform.runLater(()-> {
                 outputGameMessagesLabel.setText("Invalid Placement Spot Taken");
             });
+            isTurn = true;
         }
         else if (message instanceof GameResultMessage)
         {
@@ -129,11 +154,13 @@ public class GameBoardController implements Observer, Initializable
     @FXML
     void boardElementClicked(Event e)
     {
-        GameTiles tile = tileMapping.get(GridPane.getRowIndex((Node)e.getSource()) + ", " + GridPane.getColumnIndex((Node)e.getSource()));
-        MoveMessage moveMessage = (MoveMessage) factory.createMessage(MsgTypes.MOVE.getType());
-        moveMessage.setCoordinate(new TTTPosition(tile.getTileRow(), tile.getTileColumn()));
-        moveMessage.setGameId("1");
-        uilog.notifyObservers(new MessageEvent(moveMessage));
+        if (isTurn) {
+            GameTiles tile = tileMapping.get(GridPane.getRowIndex((Node) e.getSource()) + ", " + GridPane.getColumnIndex((Node) e.getSource()));
+            MoveMessage moveMessage = (MoveMessage) factory.createMessage(MsgTypes.MOVE.getType());
+            moveMessage.setCoordinate(new TTTPosition(tile.getTileRow(), tile.getTileColumn()));
+            moveMessage.setGameId("1");
+            uilog.notifyObservers(new MessageEvent(moveMessage));
+        }
     }
 
     // could make this more efficient by mapping the coordinate to its index vs a search
