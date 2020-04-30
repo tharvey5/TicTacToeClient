@@ -8,6 +8,7 @@ import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
+import edu.saddleback.cs4b.UI.Util.GameManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,7 @@ public class MultiplayerController implements Observer, Initializable
     private UIEventLog uilog = UIEventLog.getInstance();
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.GAME_FACT.getTypes());
     private User user = ClientUser.getInstanceOf();
+    private GameManager gameManager = GameManager.getInstance();
 
     @FXML
     Button refreshButton;
@@ -75,11 +77,30 @@ public class MultiplayerController implements Observer, Initializable
 
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
-        if(message instanceof GameSuccessfullyCreatedMessage ||
-           message instanceof AvailableGameMessage ||
-           message instanceof SuccessfulViewGameMessage)
+//        if(message instanceof GameSuccessfullyCreatedMessage ||
+//           message instanceof AvailableGameMessage ||
+//           message instanceof SuccessfulViewGameMessage)
+//        {
+//            swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
+//
+//        }
+        if (message instanceof GameSuccessfullyCreatedMessage)
         {
             swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
+            gameManager.setCreator(true);
+            gameManager.setPlayer(true);
+        }
+        else if (message instanceof AvailableGameMessage)
+        {
+            swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
+            gameManager.setPlayer(true);
+            gameManager.setCreator(false);
+        }
+        else if (message instanceof SuccessfulViewGameMessage)
+        {
+            swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
+            gameManager.setCreator(false);
+            gameManager.setPlayer(false);
         }
     }
 
