@@ -1,9 +1,9 @@
 package edu.saddleback.cs4b.Backend.Messages;
 
 public class GameResultMessage extends BaseMessage {
-    private WinType winType;
+    private WinType winType; // todo i think we can get rid of this, can be deduced -- run by Andrew first
     private String winner;
-
+    private String gameId;
 
     public GameResultMessage()
     {
@@ -17,6 +17,10 @@ public class GameResultMessage extends BaseMessage {
         winType = newWinType;
         winner = newWinner;
     }
+
+    public String getGameId() { return gameId; }
+
+    public void setGameId(String gameId) { this.gameId = gameId; }
 
     public WinType getWinType()
     {

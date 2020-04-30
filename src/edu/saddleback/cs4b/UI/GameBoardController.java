@@ -81,6 +81,8 @@ public class GameBoardController implements Observer, Initializable
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            player1ScoreLabel.setText("0");
+            player2ScoreLabel.setText("0");
             if (gameManager.isCreator()) {
                 outputGameMessagesLabel.setText("YOU START!");
                 isTurn = true;
@@ -152,9 +154,15 @@ public class GameBoardController implements Observer, Initializable
             } else {
                 Platform.runLater(()->{
                     outputGameMessagesLabel.setText(resMsg.getWinner() + " has won the game");
+                    updateScoreboard(resMsg.getWinner());
                 });
             }
         }
+    }
+
+    private void updateScoreboard(String winner) {
+        //todo -- gonna hold off for possibly better information
+        // regarding the winner than doing it based on name
     }
 
     @FXML
