@@ -104,7 +104,7 @@ public class GameBoardController implements Observer, Initializable
         if (message instanceof ValidMoveMessage)
         {
             ValidMoveMessage move = (ValidMoveMessage) message;
-            setToken(findTile(move.getCoordinate()), Tokens.DEFAULT_X.getLocation());
+            setToken(findTile(move.getCoordinate()), userTokens.get(move.getToken().getTokenID()));
         }
         else if (message instanceof InvalidMoveMessage)
         {
