@@ -68,9 +68,8 @@ public class GameBoardController implements Observer, Initializable
     @FXML
     private GridPane gameBoard;
 
-
-    private Node cachedClickLocation = null;
     private String gameId = null;
+    private boolean isTurn = false; // todo implement this
 
     public GameBoardController() {
         ClientEventLog.getInstance().addObserver(this);
@@ -108,7 +107,22 @@ public class GameBoardController implements Observer, Initializable
         }
         else if (message instanceof InvalidMoveMessage)
         {
-            // display to the player their move was invalid
+            Platform.runLater(()-> {
+                outputGameMessagesLabel.setText("Invalid Placement Spot Taken");
+            });
+        }
+        else if (message instanceof GameResultMessage)
+        {
+            GameResultMessage resMsg = (GameResultMessage)message;
+            if (resMsg.getWinner() == null) {
+                Platform.runLater(()-> {
+                    outputGameMessagesLabel.setText("Game has ended in a tie");
+                });
+            } else {
+                Platform.runLater(()->{
+                    outputGameMessagesLabel.setText(resMsg.getWinner() + " has won the game");
+                });
+            }
         }
     }
 
@@ -120,9 +134,6 @@ public class GameBoardController implements Observer, Initializable
         moveMessage.setCoordinate(new TTTPosition(tile.getTileRow(), tile.getTileColumn()));
         moveMessage.setGameId("1");
         uilog.notifyObservers(new MessageEvent(moveMessage));
-
-        cachedClickLocation = (Node)e.getSource();
-        //setToken((Node)e.getSource(), Tokens.DEFAULT_O.getLocation());
     }
 
     // could make this more efficient by mapping the coordinate to its index vs a search
