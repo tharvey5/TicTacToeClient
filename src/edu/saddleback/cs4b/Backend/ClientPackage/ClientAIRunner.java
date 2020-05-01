@@ -2,6 +2,7 @@ package edu.saddleback.cs4b.Backend.ClientPackage;
 
 import edu.saddleback.cs4b.Backend.Messages.*;
 import edu.saddleback.cs4b.Backend.Objects.Coordinate;
+import edu.saddleback.cs4b.Backend.Objects.TTTToken;
 import edu.saddleback.cs4b.Backend.Objects.Token;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
@@ -17,13 +18,17 @@ import edu.saddleback.cs4b.UI.Util.GameManager;
  * universal login
  */
 public final class ClientAIRunner implements Observer, Runnable {
+    private static int MAX_MOVES = 9;
     private volatile static ClientAIRunner aiRunner = null;
     private User aiAcct = new TTTUser("AIHard", "AI", "Hard", "1234");
     private GameManager gameManager;
     private Token[][] board; // todo -- will we want to use our interface?
     private UIEventLog eventLog;
+    private HardAI ai;
+    private Token userToken;
 
     // state that controls the game flow
+    private volatile int movesMade;
     private volatile boolean isActive;
     private volatile int gameId;
     private volatile boolean gameFound;
@@ -34,6 +39,8 @@ public final class ClientAIRunner implements Observer, Runnable {
         this.gameId = -1;
         this.gameFound = false;
         this.cachedCoordinate = null;
+        this.movesMade = 0;
+        this.board = new Token[3][3];
     }
 
     private ClientAIRunner() {
@@ -42,8 +49,9 @@ public final class ClientAIRunner implements Observer, Runnable {
         ClientEventLog.getInstance().addObserver(this);
         GameManager.getInstance().addObserver(this);
         this.gameManager = GameManager.getInstance();
-        this.board = new Token[3][3];
         this.eventLog = UIEventLog.getInstance();
+        this.userToken = new TTTToken("1");
+        this.ai = new HardAI(userToken);
         initRunningState();
     }
 
@@ -79,30 +87,40 @@ public final class ClientAIRunner implements Observer, Runnable {
     @Override
     public void run() {
         // send the sign-in message
+        Coordinate aiPos = null;
+
         SignInMessage signIn = new SignInMessage(aiAcct);
         eventLog.notifyObservers(new MessageEvent(signIn));
-        listenForGameId();
 
-        // send a join game message
-        JoinGameRequestMessage joinMsg = new JoinGameRequestMessage();
-        joinMsg.setGameID(Integer.toString(gameId));
-        eventLog.notifyObservers(new MessageEvent(joinMsg));
+        while (true) {
+            listenForGameId();
+            // send a join game message
+            JoinGameRequestMessage joinMsg = new JoinGameRequestMessage();
+            joinMsg.setGameID(Integer.toString(gameId));
+            eventLog.notifyObservers(new MessageEvent(joinMsg));
 
-        listenForStart();
-        isActive = true;
-        while (isActive) {
-            listenForMove();
-            // set the values of the board equal to the token
+            listenForStart();
+            isActive = true;
+            while (isActive) {
+                listenForMove();
 
-            // reset after placement to listen for the next one
-            cachedCoordinate = null;
+                // set the values of the board equal to the token
+                board[cachedCoordinate.getXCoord()][cachedCoordinate.getYCoord()] = userToken;
+                movesMade++;
 
-            // call minimax on the newBoard
+                // reset after placement to listen for the next one
+                cachedCoordinate = null;
 
-            MoveMessage moveMsg = new MoveMessage();
-            moveMsg.setGameId(Integer.toString(gameId));
-            //moveMsg.setCoordinate(pos);
-            eventLog.notifyObservers(new MessageEvent(moveMsg));
+                // call minimax on the newBoard
+                aiPos = ai.getPlay(board, MAX_MOVES - movesMade);
+                board[aiPos.getXCoord()][aiPos.getYCoord()] = ai.getAiToken();
+                movesMade++;
+
+                MoveMessage moveMsg = new MoveMessage();
+                moveMsg.setGameId(Integer.toString(gameId));
+                //moveMsg.setCoordinate(pos);
+                eventLog.notifyObservers(new MessageEvent(moveMsg));
+            }
         }
     }
 

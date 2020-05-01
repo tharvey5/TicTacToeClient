@@ -9,12 +9,14 @@ public class HardAI {
     private Token usersSpot; // token for the user
     private Token aiToken;   // token for the ai
 
+    Token getAiToken() { return aiToken; }
+
     public HardAI(Token usersToken)
     {
         this.usersSpot = usersToken;
 
         // ai is default as the O
-        aiToken = new TTTToken("1");
+        aiToken = new TTTToken("2");
     }
 
     private TTTPosition spots[] = { new TTTPosition(0,0),
@@ -27,13 +29,13 @@ public class HardAI {
             new TTTPosition(2,1),
             new TTTPosition(1,1)};
 
-    @Override
+
     public String getID()
     {
         return "AI";
     }
 
-    @Override
+
     public TTTPosition getPlay(Token[][] board, int emptySpots)
     {
         int check = 0;
