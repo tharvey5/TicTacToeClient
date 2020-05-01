@@ -5,6 +5,7 @@ import edu.saddleback.cs4b.Backend.PubSub.Subject;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,6 +47,7 @@ public class GameManager implements Subject {
         id = null;
         isCreator = false;
         isPlayer = false;
+        observers = new ArrayList<>();
     }
 
     public static GameManager getInstance() {
