@@ -1,16 +1,46 @@
 package edu.saddleback.cs4b.UI.Util;
 
+import edu.saddleback.cs4b.Backend.PubSub.Observer;
+import edu.saddleback.cs4b.Backend.PubSub.Subject;
+import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
+
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * holds information about the game(s) that the user is(are) playing and can
  * be shared between classes throughout the duration of the program
  */
-public class GameManager {
+public class GameManager implements Subject {
     private volatile static GameManager gameManager = null;
     // List<String> ids;
     private String id;
     private boolean isCreator;
     private boolean isPlayer;
+    private List<Observer> observers;
 
+    @Override
+    public void addObserver(Observer o) {
+        if (o != null) {
+            observers.add(o);
+        }
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        if (o != null) {
+            observers.removeIf(ob->ob == o);
+        }
+    }
+
+    @Override
+    public void notifyObserver(SystemEvent e) {
+        Iterator<Observer> iterator = observers.iterator();
+        while(iterator.hasNext()) {
+            iterator.next().update(e);
+        }
+    }
 
     private GameManager() {
         id = null;
