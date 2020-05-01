@@ -90,7 +90,7 @@ public class GameBoardController implements Observer, Initializable
                 outputGameMessagesLabel.setText("WAITING FOR PLAYER 1 TO MOVE");
                 isTurn = false;
             } else {
-                outputGameMessagesLabel.setText("YOU ARE VIEWING GAME" + gameId);
+                outputGameMessagesLabel.setText("YOU ARE VIEWING GAME " + gameId);
                 isTurn = false;
             }
         });
@@ -125,19 +125,22 @@ public class GameBoardController implements Observer, Initializable
         {
             ValidMoveMessage move = (ValidMoveMessage) message;
             setToken(findTile(move.getCoordinate()), userTokens.get(move.getToken().getTokenID()));
-            if (move.getUser().equals(user.getUsername())) {
-                isTurn = false;
-                Platform.runLater(()-> {
-                    outputGameMessagesLabel.setText("Waiting...");
-                });
-            } else {
-                isTurn = true;
-                Platform.runLater(()-> {
-                    outputGameMessagesLabel.setText("Make a Move");
-                });
+
+            if (gameManager.isPlayer()) {
+                if (move.getUser().equals(user.getUsername())) {
+                    isTurn = false;
+                    Platform.runLater(() -> {
+                        outputGameMessagesLabel.setText("Waiting...");
+                    });
+                } else {
+                    isTurn = true;
+                    Platform.runLater(() -> {
+                        outputGameMessagesLabel.setText("Make a Move");
+                    });
+                }
             }
         }
-        else if (message instanceof InvalidMoveMessage)
+        else if (message instanceof InvalidMoveMessage && gameManager.isPlayer())
         {
             Platform.runLater(()-> {
                 outputGameMessagesLabel.setText("Invalid Placement Spot Taken");
@@ -168,7 +171,7 @@ public class GameBoardController implements Observer, Initializable
     @FXML
     void boardElementClicked(Event e)
     {
-        if (isTurn) {
+        if (isTurn && gameManager.isPlayer()) {
             GameTiles tile = tileMapping.get(GridPane.getRowIndex((Node) e.getSource()) + ", " + GridPane.getColumnIndex((Node) e.getSource()));
             MoveMessage moveMessage = (MoveMessage) factory.createMessage(MsgTypes.MOVE.getType());
             moveMessage.setCoordinate(new TTTPosition(tile.getTileRow(), tile.getTileColumn()));

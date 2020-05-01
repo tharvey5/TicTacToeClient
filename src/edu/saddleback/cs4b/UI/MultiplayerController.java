@@ -123,7 +123,9 @@ public class MultiplayerController implements Observer, Initializable
     @FXML
     public void handleSpectateAction()
     {
-
+        ViewGameRequestMessage viewGame = (ViewGameRequestMessage) factory.createMessage(MsgTypes.VIEW_GAME_REQUEST.getType());
+        viewGame.setGameID("1");
+        uilog.notifyObservers(new MessageEvent(viewGame));
     }
 
     @FXML
