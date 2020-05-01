@@ -63,15 +63,15 @@ public class HardAI {
 
     private int MiniMax(Token[][] board, TTTPosition position, int depth, boolean maximizingPlayer)
     {
-        if(depth == 0 || GameChecker.winner(board) != null )
+        if(depth == 0 || LocalLogicChecker.winner(board) != null )
         {
-            if (GameChecker.winner(board) == null) {
+            if (LocalLogicChecker.winner(board) == null) {
                 return 0;
             }
-            else if (GameChecker.winner(board) == aiToken) {
+            else if (LocalLogicChecker.winner(board) == aiToken) {
                 return 1;
             }
-            else if (GameChecker.winner(board) == usersSpot)
+            else if (LocalLogicChecker.winner(board) == usersSpot)
             {
                 return -1;
             }
