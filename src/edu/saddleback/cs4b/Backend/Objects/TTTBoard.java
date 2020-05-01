@@ -4,19 +4,19 @@ import java.io.Serializable;
 
 public class TTTBoard implements Board, Serializable
 {
-    final int ROW_SIZE = 3;
-    final int COL_SIZE = 3;
-    String[][] board;
+    private final int ROW_SIZE = 3;
+    private final int COL_SIZE = 3;
+    private Token[][] board;
 
     public TTTBoard()
     {
-        board = new String[ROW_SIZE][COL_SIZE];
+        board = new Token[ROW_SIZE][COL_SIZE];
     }
 
     @Override
     public Token getToken(int r, int c)
     {
-        return new TTTToken(board[r][c]);
+        return board[r][c];
     }
     @Override
     public Board getBoard() {
@@ -33,7 +33,7 @@ public class TTTBoard implements Board, Serializable
     @Override
     public void setToken(int r, int c, Token token)
     {
-        board[r][c] = token.getTokenID();
+        board[r][c] = token;
     }
     @Override
     public void setToken(Coordinate coordinate, Token token)

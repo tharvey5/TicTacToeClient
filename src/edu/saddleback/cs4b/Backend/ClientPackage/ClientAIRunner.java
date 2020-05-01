@@ -1,5 +1,7 @@
 package edu.saddleback.cs4b.Backend.ClientPackage;
 
+import edu.saddleback.cs4b.Backend.Objects.Board;
+import edu.saddleback.cs4b.Backend.Objects.Token;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.UI.Util.GameManager;
@@ -12,9 +14,10 @@ import edu.saddleback.cs4b.UI.Util.GameManager;
 public final class ClientAIRunner implements Observer {
     private volatile static ClientAIRunner aiRunner = null;
     private GameManager gameManager;
+    private Token[][] board; // todo -- will we want to use our interface?
 
     private ClientAIRunner() {
-        gameManager = GameManager.getInstance();
+        this.gameManager = GameManager.getInstance();
     }
 
     public static ClientAIRunner getInstance() {
@@ -28,7 +31,7 @@ public final class ClientAIRunner implements Observer {
         }
         return aiRunner;
     }
-    
+
     @Override
     public void update(SystemEvent e) {
 
