@@ -23,7 +23,7 @@ public final class ClientAIRunner implements Observer, Runnable {
     private User aiAcct = new TTTUser("HardAI", "AI", "Hard", "Homi Bodhanwala");
     private GameManager gameManager;
     private Token[][] board; // todo -- will we want to use our interface?
-    private UIEventLog eventLog;
+    private AIEventLog eventLog;
     private HardAI ai;
     private Token userToken;
 
@@ -46,10 +46,11 @@ public final class ClientAIRunner implements Observer, Runnable {
     private ClientAIRunner() {
 
         // listen for the messages to come back
-        ClientEventLog.getInstance().addObserver(this);
+        Client2EventLog.getInstance().addObserver(this);
         GameManager.getInstance().addObserver(this);
+
         this.gameManager = GameManager.getInstance();
-        this.eventLog = UIEventLog.getInstance();
+        this.eventLog = AIEventLog.getInstance();
         this.userToken = new TTTToken("1");
         this.ai = new HardAI(userToken);
         initRunningState();

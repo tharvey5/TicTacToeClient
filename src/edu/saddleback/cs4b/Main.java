@@ -1,9 +1,6 @@
 package edu.saddleback.cs4b;
 
-import edu.saddleback.cs4b.Backend.ClientPackage.AIEventLog;
-import edu.saddleback.cs4b.Backend.ClientPackage.Client;
-import edu.saddleback.cs4b.Backend.ClientPackage.ClientAIRunner;
-import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
+import edu.saddleback.cs4b.Backend.ClientPackage.*;
 import edu.saddleback.cs4b.UI.UIEventLog;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +19,7 @@ public class Main extends Application {
 
         new Thread(()->{
             Client client = new Client("localhost", 8080, UIEventLog.getInstance(), ClientEventLog.getInstance());
-            Client aiConnect = new Client("localhost", 8080, AIEventLog.getInstance(), )
+            Client aiConnect = new Client("localhost", 8080, AIEventLog.getInstance(), Client2EventLog.getInstance());
         }).start();
 
         //new Thread(ClientAIRunner.getInstance()).start();
