@@ -20,7 +20,7 @@ import edu.saddleback.cs4b.UI.Util.GameManager;
 public final class ClientAIRunner implements Observer, Runnable {
     private static int MAX_MOVES = 9;
     private volatile static ClientAIRunner aiRunner = null;
-    private User aiAcct = new TTTUser("AIHard", "AI", "Hard", "1234");
+    private User aiAcct = new TTTUser("HardAI", "AI", "Hard", "Homi Bodhanwala");
     private GameManager gameManager;
     private Token[][] board; // todo -- will we want to use our interface?
     private UIEventLog eventLog;
@@ -74,12 +74,16 @@ public final class ClientAIRunner implements Observer, Runnable {
             if (bm instanceof AvailableGameMessage) {
                 // todo -- verify the message is for this game
                 gameFound = true;
+                System.out.println("found");
             } else if (bm instanceof GameResultMessage) {
                 // todo -- verify its the ai game and not something else
                initRunningState();
-            } else if (bm instanceof MoveMessage) {
+            } else if (bm instanceof ValidMoveMessage) {
                 // todo -- verify that the move is for this game
-                cachedCoordinate = ((MoveMessage) bm).getCoordinate();
+                System.out.println("move");
+                if (!((ValidMoveMessage) bm).getUser().equals(aiAcct.getUsername())) {
+                    cachedCoordinate = ((ValidMoveMessage) bm).getCoordinate();
+                }
             }
         }
     }
@@ -89,14 +93,22 @@ public final class ClientAIRunner implements Observer, Runnable {
         // send the sign-in message
         Coordinate aiPos = null;
 
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         SignInMessage signIn = new SignInMessage(aiAcct);
-        eventLog.notifyObservers(new MessageEvent(signIn));
+        UIEventLog.getInstance().notifyObservers(new MessageEvent(signIn));
 
         while (true) {
-            listenForGameId();
+            //listenForGameId();
             // send a join game message
+
             JoinGameRequestMessage joinMsg = new JoinGameRequestMessage();
-            joinMsg.setGameID(Integer.toString(gameId));
+            //joinMsg.setGameID(Integer.toString(gameId));
+            joinMsg.setGameID("1");
             eventLog.notifyObservers(new MessageEvent(joinMsg));
 
             listenForStart();
@@ -111,13 +123,19 @@ public final class ClientAIRunner implements Observer, Runnable {
                 // reset after placement to listen for the next one
                 cachedCoordinate = null;
 
+                if (movesMade >= 9) {
+                    break;
+                }
+
                 // call minimax on the newBoard
                 aiPos = ai.getPlay(board, MAX_MOVES - movesMade);
+                System.out.println(aiPos);
                 board[aiPos.getXCoord()][aiPos.getYCoord()] = ai.getAiToken();
                 movesMade++;
 
                 MoveMessage moveMsg = new MoveMessage();
-                moveMsg.setGameId(Integer.toString(gameId));
+                moveMsg.setGameId("1");
+                moveMsg.setCoordinate(aiPos);
                 //moveMsg.setCoordinate(pos);
                 eventLog.notifyObservers(new MessageEvent(moveMsg));
             }

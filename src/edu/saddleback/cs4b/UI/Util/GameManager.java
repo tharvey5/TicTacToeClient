@@ -19,6 +19,7 @@ public class GameManager implements Subject {
     private String id;
     private boolean isCreator;
     private boolean isPlayer;
+    private boolean isSinglePlayer;
     private List<Observer> observers;
 
     @Override
@@ -47,6 +48,7 @@ public class GameManager implements Subject {
         id = null;
         isCreator = false;
         isPlayer = false;
+        isSinglePlayer = false;
         observers = new ArrayList<>();
     }
 
@@ -64,8 +66,10 @@ public class GameManager implements Subject {
     public String getId() { return id; }
     public boolean isCreator() { return isCreator; }
     public boolean isPlayer() { return isPlayer; }
+    public boolean isSinglePlayer() { return isSinglePlayer; }
 
     public void setId(String id) { this.id = id; }
     public void setCreator(boolean creator) { isCreator = creator; }
     public void setPlayer(boolean player) { isPlayer = player; }
+    public void setSinglePlayer(boolean singlePlayer) { isSinglePlayer = singlePlayer; }
 }

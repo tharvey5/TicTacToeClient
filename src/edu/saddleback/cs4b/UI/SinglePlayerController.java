@@ -1,5 +1,15 @@
 package edu.saddleback.cs4b.UI;
 
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
+import edu.saddleback.cs4b.Backend.Messages.*;
+import edu.saddleback.cs4b.Backend.PubSub.EventType;
+import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
+import edu.saddleback.cs4b.Backend.PubSub.Observer;
+import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.Utilitys.User;
+import edu.saddleback.cs4b.UI.Util.GameManager;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,8 +28,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SinglePlayerController implements Initializable
+public class SinglePlayerController implements Initializable, Observer
 {
+    private GameManager gameManager = GameManager.getInstance();
+    private UIEventLog uilog = UIEventLog.getInstance();
+    private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.GAME_FACT.getTypes());
+    private User user = ClientUser.getInstanceOf();
+
     @FXML
     private Button playGameButton;
     @FXML
@@ -52,6 +67,11 @@ public class SinglePlayerController implements Initializable
     @FXML
     private ToggleGroup turnGroup;
 
+    public SinglePlayerController()
+    {
+        ClientEventLog.getInstance().addObserver(this);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -73,6 +93,22 @@ public class SinglePlayerController implements Initializable
         this.selectModeNormal.setToggleGroup(difficultyGroup);
         this.selectModeHard.setToggleGroup(difficultyGroup);
         noDifficultySelection.setText("");
+    }
+
+    @Override
+    public void update(SystemEvent e)
+    {
+        if (e.getEvent().getType().equals(EventType.MESSAGE_EVENT.getType()))
+        {
+            BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
+            if (message instanceof GameSuccessfullyCreatedMessage)
+            {
+                swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", playGameButton);
+                gameManager.setCreator(true);
+                gameManager.setPlayer(true);
+                gameManager.setSinglePlayer(true);
+            }
+        }
     }
 
     /**
@@ -99,12 +135,15 @@ public class SinglePlayerController implements Initializable
     {
         if(missingToken() & missingTurn() & missingDifficulty())
         {
-            Parent parent = FXMLLoader.load(getClass().getResource("/edu/saddleback/cs4b/UI/GameBoard.fxml"));
-            Scene scene  = new Scene(parent);
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-            window.setScene(scene);
-            window.show();
+            //todo send the request for a new game to go here
+            CreateGameMessage createMsg = new CreateGameMessage();
+            uilog.notifyObservers(new MessageEvent(createMsg));
+//            Parent parent = FXMLLoader.load(getClass().getResource("/edu/saddleback/cs4b/UI/GameBoard.fxml"));
+//            Scene scene  = new Scene(parent);
+//            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+//
+//            window.setScene(scene);
+//            window.show();
         }
     }
 
@@ -162,6 +201,25 @@ public class SinglePlayerController implements Initializable
         return selected;
     }
 
+    public void swapScene(String sceneLocation, Button button)
+    {
+        Parent parent = null;
+        ClientEventLog.getInstance().removeObserver(this);
+        try
+        {
+            parent = FXMLLoader.load(getClass().getResource(sceneLocation));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        Scene scene  = new Scene(parent);
+        Stage window = (Stage)(button).getScene().getWindow();
 
-
+        Platform.runLater(()->
+        {
+            window.setScene(scene);
+            window.show();
+        });
+    }
 }
