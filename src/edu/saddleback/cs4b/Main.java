@@ -2,6 +2,8 @@ package edu.saddleback.cs4b;
 
 import edu.saddleback.cs4b.Backend.ClientPackage.Client;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientAIRunner;
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
+import edu.saddleback.cs4b.UI.UIEventLog;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +20,7 @@ public class Main extends Application {
         primaryStage.show();
 
         new Thread(()->{
-            Client client = new Client("localhost", 8080);
+            Client client = new Client("localhost", 8080, UIEventLog.getInstance(), ClientEventLog.getInstance());
         }).start();
 
         //new Thread(ClientAIRunner.getInstance()).start();

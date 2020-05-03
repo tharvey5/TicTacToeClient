@@ -4,10 +4,7 @@ import edu.saddleback.cs4b.Backend.Messages.AdminMessageFactory;
 import edu.saddleback.cs4b.Backend.Messages.BaseMessage;
 import edu.saddleback.cs4b.Backend.Messages.Packet;
 import edu.saddleback.cs4b.Backend.Messages.SignOutMessage;
-import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
-import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
-import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
-import edu.saddleback.cs4b.Backend.PubSub.UISubject;
+import edu.saddleback.cs4b.Backend.PubSub.*;
 import edu.saddleback.cs4b.UI.UIEventLog;
 
 import java.io.IOException;
@@ -21,15 +18,16 @@ public class PacketSender implements UIObserver {
 
     public PacketSender()
     {
-        this(null);
+        this(null, null);
     }
 
 
-    public PacketSender(ObjectOutputStream newOut)
+    public PacketSender(ObjectOutputStream newOut, UISubject subject)
     {
         out = newOut;
         messageFactory = new AdminMessageFactory();
-        UIEventLog.getInstance().addObserver(this);
+        //UIEventLog.getInstance().addObserver(this);
+        subject.addObserver(this);
     }
 
     @Override

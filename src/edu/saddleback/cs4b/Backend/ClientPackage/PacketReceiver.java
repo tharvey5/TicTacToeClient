@@ -16,11 +16,12 @@ public class PacketReceiver implements Runnable
 {
     private ObjectInputStream in;
     //private List<Observer> observers;
-    private ClientEventLog clientLog = ClientEventLog.getInstance();
+    private Subject clientLog = ClientEventLog.getInstance();
 
-    public PacketReceiver(ObjectInputStream newIn)
+    public PacketReceiver(ObjectInputStream newIn, Subject logger)
     {
         in = newIn;
+        clientLog = logger;
         //observers = new ArrayList<>();
     }
 
