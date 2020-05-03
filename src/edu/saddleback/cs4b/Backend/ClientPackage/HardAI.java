@@ -49,7 +49,7 @@ public class HardAI {
             if(board[row][col] == null)
             {
                 board[spots[check].getXCoord()][spots[check].getYCoord()] = aiToken;
-                int val= MiniMax(board, spots[check], emptySpots - 1, false);
+                int val= MiniMax(board, spots[check], emptySpots - 1, false, 0);
                 if(val > maxVal)
                 {
                     spot = spots[check];
@@ -63,7 +63,7 @@ public class HardAI {
         return spot;
     }
 
-    private int MiniMax(Token[][] board, TTTPosition position, int depth, boolean maximizingPlayer)
+    private int MiniMax(Token[][] board, TTTPosition position, int depth, boolean maximizingPlayer, int numOfChildren)
     {
         if(depth == 0 || LocalLogicChecker.winner(board) != null )
         {
@@ -71,11 +71,11 @@ public class HardAI {
                 return 0;
             }
             else if (LocalLogicChecker.winner(board) == aiToken) {
-                return 1;
+                return depth + 1;
             }
             else if (LocalLogicChecker.winner(board) == usersSpot)
             {
-                return -1;
+                return (numOfChildren*(-1));
             }
         }
 
@@ -90,7 +90,7 @@ public class HardAI {
             {
                 if(board[spots[check].getXCoord()][spots[check].getYCoord()] == null) {
                     board[spots[check].getXCoord()][spots[check].getYCoord()] = aiToken;
-                    eval = MiniMax(board, spots[check], depth - 1, false);
+                    eval = MiniMax(board, spots[check], depth - 1, false, numOfChildren + 1);
                     maxEval = Math.max(maxEval, eval);
                     board[spots[check].getXCoord()][spots[check].getYCoord()] = null;
                 }
@@ -108,7 +108,7 @@ public class HardAI {
             {
                 if(board[spots[check].getXCoord()][spots[check].getYCoord()] == null) {
                     board[spots[check].getXCoord()][spots[check].getYCoord()] = usersSpot;
-                    eval = MiniMax(board, spots[check], depth - 1, true);
+                    eval = MiniMax(board, spots[check], depth - 1, true, numOfChildren + 1);
                     minEval = Math.min(minEval, eval);
                     board[spots[check].getXCoord()][spots[check].getYCoord()] = null;
                 }

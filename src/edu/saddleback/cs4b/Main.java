@@ -22,7 +22,7 @@ public class Main extends Application {
             Client aiConnect = new Client("localhost", 8080, AIEventLog.getInstance(), Client2EventLog.getInstance());
         }).start();
 
-        //new Thread(ClientAIRunner.getInstance()).start();
+        new Thread(ClientAIRunner.getInstance()).start();
     }
 
 

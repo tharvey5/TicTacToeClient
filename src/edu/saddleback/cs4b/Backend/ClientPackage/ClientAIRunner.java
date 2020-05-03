@@ -11,6 +11,7 @@ import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import edu.saddleback.cs4b.UI.UIEventLog;
 import edu.saddleback.cs4b.UI.Util.GameManager;
+import edu.saddleback.cs4b.UI.Util.RequestAIMessage;
 
 /**
  * This class will be used to run the AI for users who wish to play a
@@ -32,6 +33,7 @@ public final class ClientAIRunner implements Observer, Runnable {
     private volatile boolean isActive;
     private volatile int gameId;
     private volatile boolean gameFound;
+    private volatile boolean gameOver;
     private volatile Coordinate cachedCoordinate;
 
     private void initRunningState() {
@@ -53,6 +55,7 @@ public final class ClientAIRunner implements Observer, Runnable {
         this.eventLog = AIEventLog.getInstance();
         this.userToken = new TTTToken("1");
         this.ai = new HardAI(userToken);
+        this.gameOver = false;
         initRunningState();
     }
 
@@ -78,13 +81,19 @@ public final class ClientAIRunner implements Observer, Runnable {
                 System.out.println("found");
             } else if (bm instanceof GameResultMessage) {
                 // todo -- verify its the ai game and not something else
+               gameOver = true;
                initRunningState();
+               System.out.println("game completed");
             } else if (bm instanceof ValidMoveMessage) {
                 // todo -- verify that the move is for this game
                 System.out.println("move");
                 if (!((ValidMoveMessage) bm).getUser().equals(aiAcct.getUsername())) {
                     cachedCoordinate = ((ValidMoveMessage) bm).getCoordinate();
                 }
+            } else if (bm instanceof RequestAIMessage) {
+                gameId = Integer.parseInt(GameManager.getInstance().getId());
+
+                System.out.println("ai notified of newgame for game " + gameId);
             }
         }
     }
@@ -101,11 +110,13 @@ public final class ClientAIRunner implements Observer, Runnable {
         }
 
         SignInMessage signIn = new SignInMessage(aiAcct);
-        UIEventLog.getInstance().notifyObservers(new MessageEvent(signIn));
+        eventLog.notifyObservers(new MessageEvent(signIn));
 
         while (true) {
-            //listenForGameId();
+            listenForGameId();
+            this.gameOver = false;
             // send a join game message
+            System.out.println("ai joined game");
 
             JoinGameRequestMessage joinMsg = new JoinGameRequestMessage();
             //joinMsg.setGameID(Integer.toString(gameId));
@@ -116,6 +127,9 @@ public final class ClientAIRunner implements Observer, Runnable {
             isActive = true;
             while (isActive) {
                 listenForMove();
+                if (gameOver) {
+                    break;
+                }
 
                 // set the values of the board equal to the token
                 board[cachedCoordinate.getXCoord()][cachedCoordinate.getYCoord()] = userToken;
@@ -152,6 +166,6 @@ public final class ClientAIRunner implements Observer, Runnable {
     }
 
     private void listenForMove() {
-        while(cachedCoordinate == null) {};
+        while(cachedCoordinate == null && !gameOver) {};
     }
 }

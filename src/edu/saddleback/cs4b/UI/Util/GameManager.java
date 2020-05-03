@@ -1,9 +1,6 @@
 package edu.saddleback.cs4b.UI.Util;
 
-import edu.saddleback.cs4b.Backend.PubSub.Observer;
-import edu.saddleback.cs4b.Backend.PubSub.Subject;
-import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
-import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
+import edu.saddleback.cs4b.Backend.PubSub.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -68,7 +65,11 @@ public class GameManager implements Subject {
     public boolean isPlayer() { return isPlayer; }
     public boolean isSinglePlayer() { return isSinglePlayer; }
 
-    public void setId(String id) { this.id = id; }
+    public void setId(String id) {
+        this.id = id;
+        notifyObserver(new MessageEvent(new RequestAIMessage()));
+        System.out.println("Game id was set");
+    }
     public void setCreator(boolean creator) { isCreator = creator; }
     public void setPlayer(boolean player) { isPlayer = player; }
     public void setSinglePlayer(boolean singlePlayer) { isSinglePlayer = singlePlayer; }
