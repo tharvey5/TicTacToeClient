@@ -86,12 +86,17 @@ public final class ClientAIRunner implements Observer, Runnable {
                System.out.println("game completed");
             } else if (bm instanceof ValidMoveMessage) {
                 // todo -- verify that the move is for this game
-                System.out.println("move");
-                if (!((ValidMoveMessage) bm).getUser().equals(aiAcct.getUsername())) {
-                    cachedCoordinate = ((ValidMoveMessage) bm).getCoordinate();
+                if (((ValidMoveMessage) bm).getGameId().equals(gameManager.getId())) {
+                    System.out.println("move");
+                    if (!((ValidMoveMessage) bm).getUser().equals(aiAcct.getUsername())) {
+                        cachedCoordinate = ((ValidMoveMessage) bm).getCoordinate();
+                    }
                 }
             } else if (bm instanceof RequestAIMessage) {
-                gameId = GameManager.getInstance().getId();
+                if (gameManager.isSinglePlayer()) {
+                    gameId = GameManager.getInstance().getId();
+                }
+
 
                 System.out.println("ai notified of newgame for game " + gameId);
             }
@@ -128,6 +133,7 @@ public final class ClientAIRunner implements Observer, Runnable {
             while (isActive) {
                 listenForMove();
                 if (gameOver) {
+                    System.out.println("gameover break clause ");
                     break;
                 }
 
@@ -139,10 +145,12 @@ public final class ClientAIRunner implements Observer, Runnable {
                 cachedCoordinate = null;
 
                 if (movesMade >= 9) {
+                    System.out.println("game over too many moves ");
                     break;
                 }
 
                 // call minimax on the newBoard
+                System.out.println(MAX_MOVES - movesMade);
                 aiPos = ai.getPlay(board, MAX_MOVES - movesMade);
                 System.out.println(aiPos);
                 board[aiPos.getXCoord()][aiPos.getYCoord()] = ai.getAiToken();
@@ -158,7 +166,7 @@ public final class ClientAIRunner implements Observer, Runnable {
     }
 
     private void listenForGameId() {
-        while(gameId == null) {};
+        while(gameId == null && !gameManager.isSinglePlayer()) {};
     }
 
     private void listenForStart() {

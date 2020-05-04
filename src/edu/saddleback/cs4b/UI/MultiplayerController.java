@@ -17,13 +17,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class MultiplayerController implements Observer, Initializable
 {
@@ -45,7 +49,10 @@ public class MultiplayerController implements Observer, Initializable
     Button createGameButton;
 
     @FXML
-    ListView gameMenu;
+    ListView<String> gameMenu;
+
+    @FXML
+    TextField positionBox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -105,16 +112,28 @@ public class MultiplayerController implements Observer, Initializable
             gameManager.setPlayer(false);
             gameManager.setId(((SuccessfulViewGameMessage) message).getGameID());
         }
+        else if (message instanceof ReturnAllActiveGamesMessage) {
+            Set<String> games = ((ReturnAllActiveGamesMessage) message).getGameAndPlayers().keySet();
+            for (String s : games) {
+                Platform.runLater(()-> {
+                    gameMenu.getItems().add(s);
+                });
+            }
+        }
     }
 
     @FXML
     public void handleJoinAction()
     {
-        JoinGameRequestMessage joinMessage = (JoinGameRequestMessage) factory.createMessage(MsgTypes.JOIN_GAME_REQUEST.getType());
 
+        JoinGameRequestMessage joinMessage = (JoinGameRequestMessage) factory.createMessage(MsgTypes.JOIN_GAME_REQUEST.getType());
         // this needs to be based on the options on the menu
-        //joinMessage.setGameID("1");
+        String id = gameMenu.getItems().get(0);
+        System.out.println(id);
+        joinMessage.setGameID(id);
+
         uilog.notifyObservers(new MessageEvent(joinMessage));
+
     }
 
     @FXML
@@ -136,7 +155,8 @@ public class MultiplayerController implements Observer, Initializable
     @FXML
     public void handleRefreshAction()
     {
-
+        RequestAllActiveGamesMessage activeGamesMessage = new RequestAllActiveGamesMessage();
+        uilog.notifyObservers(new MessageEvent(activeGamesMessage));
     }
 
     /**
