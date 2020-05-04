@@ -31,14 +31,14 @@ public final class ClientAIRunner implements Observer, Runnable {
     // state that controls the game flow
     private volatile int movesMade;
     private volatile boolean isActive;
-    private volatile int gameId;
+    private volatile String gameId;
     private volatile boolean gameFound;
     private volatile boolean gameOver;
     private volatile Coordinate cachedCoordinate;
 
     private void initRunningState() {
         this.isActive = false;
-        this.gameId = -1;
+        this.gameId = null;
         this.gameFound = false;
         this.cachedCoordinate = null;
         this.movesMade = 0;
@@ -91,7 +91,7 @@ public final class ClientAIRunner implements Observer, Runnable {
                     cachedCoordinate = ((ValidMoveMessage) bm).getCoordinate();
                 }
             } else if (bm instanceof RequestAIMessage) {
-                gameId = Integer.parseInt(GameManager.getInstance().getId());
+                gameId = GameManager.getInstance().getId();
 
                 System.out.println("ai notified of newgame for game " + gameId);
             }
@@ -120,7 +120,7 @@ public final class ClientAIRunner implements Observer, Runnable {
 
             JoinGameRequestMessage joinMsg = new JoinGameRequestMessage();
             //joinMsg.setGameID(Integer.toString(gameId));
-            joinMsg.setGameID("1");
+            joinMsg.setGameID(gameId);
             eventLog.notifyObservers(new MessageEvent(joinMsg));
 
             listenForStart();
@@ -149,7 +149,7 @@ public final class ClientAIRunner implements Observer, Runnable {
                 movesMade++;
 
                 MoveMessage moveMsg = new MoveMessage();
-                moveMsg.setGameId("1");
+                moveMsg.setGameId(gameId);
                 moveMsg.setCoordinate(aiPos);
                 //moveMsg.setCoordinate(pos);
                 eventLog.notifyObservers(new MessageEvent(moveMsg));
@@ -158,7 +158,7 @@ public final class ClientAIRunner implements Observer, Runnable {
     }
 
     private void listenForGameId() {
-        while(gameId == -1) {};
+        while(gameId == null) {};
     }
 
     private void listenForStart() {

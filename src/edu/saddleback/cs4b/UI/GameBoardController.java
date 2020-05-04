@@ -70,7 +70,7 @@ public class GameBoardController implements Observer, Initializable
     @FXML
     private GridPane gameBoard;
 
-    private String gameId = "1";  // todo change this
+    //private String gameId = "";  // todo change this
     private boolean isTurn;
 
     public GameBoardController() {
@@ -90,7 +90,7 @@ public class GameBoardController implements Observer, Initializable
                 outputGameMessagesLabel.setText("WAITING FOR PLAYER 1 TO MOVE");
                 isTurn = false;
             } else {
-                outputGameMessagesLabel.setText("YOU ARE VIEWING GAME " + gameId);
+                outputGameMessagesLabel.setText("YOU ARE VIEWING GAME " + gameManager.getId());
                 isTurn = false;
             }
         });
@@ -150,6 +150,10 @@ public class GameBoardController implements Observer, Initializable
         else if (message instanceof GameResultMessage)
         {
             GameResultMessage resMsg = (GameResultMessage)message;
+
+            // clears the data about the previous game in the manager
+            // makes room for a new game
+            gameManager.clear();
             if (resMsg.getWinner() == null) {
                 Platform.runLater(()-> {
                     outputGameMessagesLabel.setText("Game has ended in a tie");
@@ -175,7 +179,7 @@ public class GameBoardController implements Observer, Initializable
             GameTiles tile = tileMapping.get(GridPane.getRowIndex((Node) e.getSource()) + ", " + GridPane.getColumnIndex((Node) e.getSource()));
             MoveMessage moveMessage = (MoveMessage) factory.createMessage(MsgTypes.MOVE.getType());
             moveMessage.setCoordinate(new TTTPosition(tile.getTileRow(), tile.getTileColumn()));
-            moveMessage.setGameId("1");
+            moveMessage.setGameId(gameManager.getId());
             uilog.notifyObservers(new MessageEvent(moveMessage));
         }
     }

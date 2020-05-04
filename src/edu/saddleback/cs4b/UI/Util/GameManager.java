@@ -17,6 +17,7 @@ public class GameManager implements Subject {
     private boolean isCreator;
     private boolean isPlayer;
     private boolean isSinglePlayer;
+
     private List<Observer> observers;
 
     @Override
@@ -42,10 +43,7 @@ public class GameManager implements Subject {
     }
 
     private GameManager() {
-        id = null;
-        isCreator = false;
-        isPlayer = false;
-        isSinglePlayer = false;
+        clear();
         observers = new ArrayList<>();
     }
 
@@ -73,4 +71,14 @@ public class GameManager implements Subject {
     public void setCreator(boolean creator) { isCreator = creator; }
     public void setPlayer(boolean player) { isPlayer = player; }
     public void setSinglePlayer(boolean singlePlayer) { isSinglePlayer = singlePlayer; }
+
+    /**
+     * clears the state of a game you are playing
+     */
+    public void clear() {
+        id = null;
+        isCreator = false;
+        isPlayer = false;
+        isSinglePlayer = false;
+    }
 }

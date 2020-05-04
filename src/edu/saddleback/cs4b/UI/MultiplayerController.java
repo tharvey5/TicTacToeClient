@@ -89,18 +89,21 @@ public class MultiplayerController implements Observer, Initializable
             swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
             gameManager.setCreator(true);
             gameManager.setPlayer(true);
+            gameManager.setId(((GameSuccessfullyCreatedMessage) message).getGameId());
         }
         else if (message instanceof AvailableGameMessage)
         {
             swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
             gameManager.setPlayer(true);
             gameManager.setCreator(false);
+            gameManager.setId(((AvailableGameMessage) message).getGameId());
         }
         else if (message instanceof SuccessfulViewGameMessage)
         {
             swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
             gameManager.setCreator(false);
             gameManager.setPlayer(false);
+            gameManager.setId(((SuccessfulViewGameMessage) message).getGameID());
         }
     }
 
@@ -108,7 +111,9 @@ public class MultiplayerController implements Observer, Initializable
     public void handleJoinAction()
     {
         JoinGameRequestMessage joinMessage = (JoinGameRequestMessage) factory.createMessage(MsgTypes.JOIN_GAME_REQUEST.getType());
-        joinMessage.setGameID("1");
+
+        // this needs to be based on the options on the menu
+        //joinMessage.setGameID("1");
         uilog.notifyObservers(new MessageEvent(joinMessage));
     }
 

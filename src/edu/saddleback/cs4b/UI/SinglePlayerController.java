@@ -107,7 +107,8 @@ public class SinglePlayerController implements Initializable, Observer
                 gameManager.setCreator(true);
                 gameManager.setPlayer(true);
                 gameManager.setSinglePlayer(true);
-                gameManager.setId("1");
+                System.out.println(((GameSuccessfullyCreatedMessage) message).getGameId());
+                gameManager.setId(((GameSuccessfullyCreatedMessage) message).getGameId());
                 System.out.println("Player has joined");
             }
         }
