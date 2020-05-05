@@ -3,6 +3,7 @@ package edu.saddleback.cs4b.Backend.Utilitys;
 import edu.saddleback.cs4b.Backend.Objects.Game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TTTProfile implements Serializable, Profile {
@@ -17,6 +18,8 @@ public class TTTProfile implements Serializable, Profile {
      */
     public TTTProfile(TTTUser user) throws NullPointerException {
         setUser(user);
+        this.gameRecord = new TTTGameRecord();
+        this.activeGames = new ArrayList<>();
     }
 
     /**
@@ -24,6 +27,8 @@ public class TTTProfile implements Serializable, Profile {
      */
     public TTTProfile(String userName, String firstName, String lastName, String password) {
         setUser(new TTTUser(userName, firstName, lastName, password));
+        this.gameRecord = new TTTGameRecord();
+        this.activeGames = new ArrayList<>();
     }
 
     /**
