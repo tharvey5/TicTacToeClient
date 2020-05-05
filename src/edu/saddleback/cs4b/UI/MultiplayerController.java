@@ -125,15 +125,15 @@ public class MultiplayerController implements Observer, Initializable
     @FXML
     public void handleJoinAction()
     {
+        if (!positionBox.getText().equals("")) {
+            JoinGameRequestMessage joinMessage = (JoinGameRequestMessage) factory.createMessage(MsgTypes.JOIN_GAME_REQUEST.getType());
+            // this needs to be based on the options on the menu
+            int sId = Integer.parseInt(positionBox.getText());
+            String id = gameMenu.getItems().get(sId);
+            joinMessage.setGameID(id);
 
-        JoinGameRequestMessage joinMessage = (JoinGameRequestMessage) factory.createMessage(MsgTypes.JOIN_GAME_REQUEST.getType());
-        // this needs to be based on the options on the menu
-        String id = gameMenu.getItems().get(0);
-        System.out.println(id);
-        joinMessage.setGameID(id);
-
-        uilog.notifyObservers(new MessageEvent(joinMessage));
-
+            uilog.notifyObservers(new MessageEvent(joinMessage));
+        }
     }
 
     @FXML
