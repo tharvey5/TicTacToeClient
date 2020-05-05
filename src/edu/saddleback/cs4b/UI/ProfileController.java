@@ -1,6 +1,9 @@
 package edu.saddleback.cs4b.UI;
 
+import edu.saddleback.cs4b.Backend.ClientPackage.Client;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
+import edu.saddleback.cs4b.Backend.Utilitys.Profile;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,6 +24,10 @@ import java.util.ResourceBundle;
 public class ProfileController implements Initializable
 {
     private User user = ClientUser.getInstanceOf();
+    private TTTProfile profile = (TTTProfile)ClientUser.getProfile();
+    //private String wlBanner = ClientUser.getWinLossRecord();
+
+    //private String wlBanner = Integer.toString(profile.getGameRecord().getWins());
 
     @FXML
     Label firstNameLabel;
@@ -49,6 +56,8 @@ public class ProfileController implements Initializable
         this.firstNameLabel.setText(user.getFirstName());
         this.lastNameLabel.setText(user.getLastName());
         this.usernameLabel.setText(user.getUsername());
+        this.winLossTieLabel.setText("" + profile.getGameRecord().getWins() + " / " +
+                profile.getGameRecord().getLosses() + " / " + profile.getGameRecord().getTies());
     }
 
     @FXML

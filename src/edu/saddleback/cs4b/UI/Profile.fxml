@@ -74,7 +74,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="winLossTieLabel" layoutX="329.0" layoutY="221.0" text="W/L/T" textFill="WHITE">
+            <Label fx:id="winLossTieLabel" layoutX="342.0" layoutY="221.0" text="W/L/T" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>

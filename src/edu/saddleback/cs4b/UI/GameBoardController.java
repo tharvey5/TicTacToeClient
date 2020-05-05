@@ -9,6 +9,7 @@ import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import edu.saddleback.cs4b.UI.Util.GameManager;
 import javafx.application.Platform;

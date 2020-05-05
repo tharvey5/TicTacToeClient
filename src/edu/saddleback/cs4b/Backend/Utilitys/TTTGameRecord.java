@@ -3,6 +3,7 @@ package edu.saddleback.cs4b.Backend.Utilitys;
 import edu.saddleback.cs4b.Backend.Objects.Game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TTTGameRecord implements GameRecord, Serializable
@@ -13,7 +14,7 @@ public class TTTGameRecord implements GameRecord, Serializable
 
     public TTTGameRecord()
     {
-        this(null, 0, 0);
+        this(new ArrayList<>(), 0, 0);
     }
 
     public TTTGameRecord(List<Game> newGames, int newWins, int newLosses)

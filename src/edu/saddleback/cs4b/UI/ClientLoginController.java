@@ -79,6 +79,7 @@ public class ClientLoginController implements Observer, Initializable
         {
             AuthenticatedMessage msg = (AuthenticatedMessage) message;
             ClientUser.setInstance(msg.getAuthUser());
+            ClientUser.setProfile(msg.getProfile());
 
             swapHome("/edu/saddleback/cs4b/UI/ClientHome.fxml", loginButton);
         }
