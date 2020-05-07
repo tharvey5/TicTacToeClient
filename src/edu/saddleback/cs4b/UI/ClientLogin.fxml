@@ -65,7 +65,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Label>
-      <Button fx:id="loginButton" layoutX="489.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#handleLoginAction" onMouseEntered="#highlightLogin" onMouseExited="#resetLogin" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: #2A363B#2A363B;" text="Login" textFill="WHITE">
+      <Button fx:id="loginButton" layoutX="489.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#handleLoginAction" onMouseEntered="#highlightLogin" onMouseExited="#resetLogin" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: #2A363B;" text="Login" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

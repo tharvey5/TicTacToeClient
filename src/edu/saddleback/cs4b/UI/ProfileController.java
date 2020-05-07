@@ -1,7 +1,13 @@
 package edu.saddleback.cs4b.UI;
 
 import edu.saddleback.cs4b.Backend.ClientPackage.Client;
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
+import edu.saddleback.cs4b.Backend.Messages.*;
+import edu.saddleback.cs4b.Backend.PubSub.EventType;
+import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
+import edu.saddleback.cs4b.Backend.PubSub.Observer;
+import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.Utilitys.Profile;
 import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
@@ -25,9 +31,6 @@ public class ProfileController implements Initializable
 {
     private User user = ClientUser.getInstanceOf();
     private TTTProfile profile = (TTTProfile)ClientUser.getProfile();
-    //private String wlBanner = ClientUser.getWinLossRecord();
-
-    //private String wlBanner = Integer.toString(profile.getGameRecord().getWins());
 
     @FXML
     Label firstNameLabel;
@@ -50,6 +53,9 @@ public class ProfileController implements Initializable
     @FXML
     ImageView profilePicture;
 
+    @FXML
+    Button viewHistoryBtn;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -70,6 +76,21 @@ public class ProfileController implements Initializable
 
         ClientHomeController crtl = loader.getController();
         crtl.handleEditProfileAction();
+
+        Platform.runLater(() ->
+        {
+            window.setScene(scene);
+            window.show();
+        });
+    }
+
+    @FXML
+    public void handleViewHistoryAction() throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/saddleback/cs4b/UI/ViewGameHistory.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage window = (Stage) (viewHistoryBtn).getScene().getWindow();
 
         Platform.runLater(() ->
         {

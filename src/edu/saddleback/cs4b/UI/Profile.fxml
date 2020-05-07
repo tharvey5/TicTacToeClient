@@ -89,6 +89,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <Button fx:id="viewHistoryBtn" layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onMouseClicked="#handleViewHistoryAction" text="View History" />
          </children>
       </AnchorPane>
    </children>
