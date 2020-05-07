@@ -56,6 +56,9 @@ public class ProfileEditController implements Observer, Initializable
     @FXML
     Label winLossTieLabel;
 
+    @FXML
+    Button deleteAcctBtn;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -101,6 +104,10 @@ public class ProfileEditController implements Observer, Initializable
         {
             System.out.println("Denied Change");
         }
+        else if (message instanceof DeactivationConfirmationMessage)
+        {
+            swapToLogin("/edu/saddleback/cs4b/UI/ClientLogin.fxml" , deleteAcctBtn);
+        }
     }
 
     @FXML
@@ -122,6 +129,12 @@ public class ProfileEditController implements Observer, Initializable
     public void handleChangeProfilePictureAction()
     {
 
+    }
+
+    @FXML
+    public void handleDeleteAccountAction() {
+        AcctDeactivationMessage message = (AcctDeactivationMessage) factory.createMessage(MsgTypes.ACCT_DEACTIVATION.getType());
+        uilog.notifyObservers(new MessageEvent(message));
     }
 
     @FXML
@@ -259,6 +272,21 @@ public class ProfileEditController implements Observer, Initializable
 
         ClientHomeController crtl = loader.getController();
         crtl.handleEditProfilePasswordAction();
+
+        Platform.runLater(()->
+        {
+            window.setScene(scene);
+            window.show();
+        });
+    }
+
+    public void swapToLogin(String sceneLocation, Button button) throws IOException
+    {
+        ClientEventLog.getInstance().removeObserver(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneLocation));
+        Parent root = loader.load();
+        Scene scene  = new Scene(root);
+        Stage window = (Stage)(button).getScene().getWindow();
 
         Platform.runLater(()->
         {
