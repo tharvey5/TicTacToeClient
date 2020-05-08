@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ClientLoginController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ClientLoginController">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #2A363B;">
          <children>
@@ -61,10 +61,6 @@
             <Image url="@passwordicon.png" />
          </image>
       </ImageView>
-      <Label fx:id="forgotPasswordLabel" layoutX="450.0" layoutY="495.0" onMouseClicked="#handleForgotPasswordAction" onMouseEntered="#highlightForgotPassword" onMouseExited="#resetForgotPassword" text="Forgot Password?" textFill="#0099ff">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Label>
       <Button fx:id="loginButton" layoutX="489.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#handleLoginAction" onMouseEntered="#highlightLogin" onMouseExited="#resetLogin" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: #2A363B;" text="Login" textFill="WHITE">
          <font>
             <Font size="18.0" />
@@ -92,5 +88,6 @@
             <Font size="16.0" />
          </font>
       </PasswordField>
+      <Button fx:id="forgotPasswordButton" layoutX="445.0" layoutY="489.0" mnemonicParsing="false" onMouseClicked="#handleForgotPasswordAction" onMouseEntered="#highlightForgotPassword" onMouseExited="#resetForgotPassword" style="-fx-background-color: #FFFFFF;" text="Forgot Password?" textFill="#00bfff" />
    </children>
 </AnchorPane>

@@ -122,11 +122,16 @@ public class ViewGameHistoryController implements Observer, Initializable
             info.setOpponent(g.getOtherPlayer().getUsername());
             info.setResult(g.getWinner() == null ? "tie" : g.getWinner().getUsername());
 
-            //info.setMoves(g.getMoves().getMoves());
-            //info.setViewers(g.viewers());
+            info.setMoves(g.getMoves().getMoves());
+            info.setViewers(g.viewers());
             infoList.add(info);
         }
         gameInfoTable.setItems(infoList);
+
+        if(gameInfoTable.getSelectionModel().getSelectedItem() != null)
+        {
+            detailsTable.setItems(infoList);
+        }
     }
 
     private void handleMessageEvents(BaseMessage message) throws IOException
@@ -142,6 +147,7 @@ public class ViewGameHistoryController implements Observer, Initializable
     @FXML
     public void handleRefreshAction()
     {
+        gameInfoTable.getItems().clear();
         GameHistoryRequestMessage requestMessage = (GameHistoryRequestMessage) factory.createMessage(MsgTypes.GAME_HISTORY_REQUEST.getType());
         uilog.notifyObservers(new MessageEvent(requestMessage));
     }

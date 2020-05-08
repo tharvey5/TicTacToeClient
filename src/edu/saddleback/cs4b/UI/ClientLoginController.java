@@ -174,7 +174,7 @@ public class ClientLoginController implements Observer, Initializable
     @FXML
     public void resetForgotPassword()
     {
-        forgotPasswordButton.setOnMouseExited(mouseEvent -> forgotPasswordButton.setTextFill(Color.valueOf("#0099FF")));
+        forgotPasswordButton.setOnMouseExited(mouseEvent -> forgotPasswordButton.setTextFill(Color.valueOf("#00bFFF")));
     }
 
     public void swapHome(String sceneLocation, Button button) throws IOException
