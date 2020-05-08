@@ -89,7 +89,10 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button fx:id="viewHistoryBtn" layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onMouseClicked="#handleViewHistoryAction" text="View History" />
+            <Button fx:id="viewHistoryBtn" layoutX="14.0" layoutY="546.0" mnemonicParsing="false" onMouseClicked="#handleViewHistoryAction" onMouseEntered="#highlightViewHistory" onMouseExited="#resetViewHistory" style="-fx-background-color: #FFFFFF;" text="View History">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </children>

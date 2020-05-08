@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ClientLoginController">
    <children>
-      <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #2A363B#2A363B;">
+      <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #2A363B;">
          <children>
             <Circle fill="WHITE" layoutX="217.0" layoutY="300.0" radius="151.0" stroke="BLACK" strokeType="INSIDE" />
             <Label layoutX="80.0" layoutY="256.0" text="SQL INJECTORS" textFill="#2a363b">
@@ -73,7 +73,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="createAccountButton" layoutX="489.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#handleCreateAccountAction" onMouseEntered="#highlightCreateAccount" onMouseExited="#resetCreateAccount" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: #2A363B#2A363B;" text="Create Account" textFill="WHITE">
+      <Button fx:id="createAccountButton" layoutX="489.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#handleCreateAccountAction" onMouseEntered="#highlightCreateAccount" onMouseExited="#resetCreateAccount" prefHeight="35.0" prefWidth="257.0" style="-fx-background-color: #2A363B;" text="Create Account" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

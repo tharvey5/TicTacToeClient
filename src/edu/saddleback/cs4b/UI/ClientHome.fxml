@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ClientHomeController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #2A363B;">
          <children>
             <Line endX="80.0" layoutX="99.0" layoutY="149.0" startX="-80.0" stroke="WHITE" />
             <Circle fill="WHITE" layoutX="99.0" layoutY="70.0" radius="56.0" stroke="BLACK" strokeType="INSIDE" />
@@ -37,7 +37,7 @@
             </ImageView>
             <VBox layoutX="20.0" layoutY="161.0" prefHeight="279.0" prefWidth="161.0" spacing="1.0">
                <children>
-                  <Button fx:id="mainMenuButton" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#handleMainMenuAction" onMouseEntered="#highlightMainMenu" onMouseExited="#resetMainMenu" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Main Menu" textFill="WHITE">
+                  <Button fx:id="mainMenuButton" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#handleMainMenuAction" onMouseEntered="#highlightMainMenu" onMouseExited="#resetMainMenu" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B;" text="Main Menu" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -45,7 +45,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="singlePlayerButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#handleSinglePlayerAction" onMouseEntered="#highlightSinglePlayer" onMouseExited="#resetSinglePlayer" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Single Player" textFill="WHITE">
+                  <Button fx:id="singlePlayerButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#handleSinglePlayerAction" onMouseEntered="#highlightSinglePlayer" onMouseExited="#resetSinglePlayer" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B;" text="Single Player" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -53,7 +53,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="multiplayerButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#handleMultiplayerAction" onMouseEntered="#highlightMultiplayer" onMouseExited="#resetMultiplayer" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Multiplayer" textFill="WHITE">
+                  <Button fx:id="multiplayerButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#handleMultiplayerAction" onMouseEntered="#highlightMultiplayer" onMouseExited="#resetMultiplayer" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B;" text="Multiplayer" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -61,7 +61,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="profileButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="102.0" mnemonicParsing="false" onMouseClicked="#handleProfileAction" onMouseEntered="#highlightProfile" onMouseExited="#resetProfile" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Profile" textFill="WHITE">
+                  <Button fx:id="profileButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="102.0" mnemonicParsing="false" onMouseClicked="#handleProfileAction" onMouseEntered="#highlightProfile" onMouseExited="#resetProfile" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B;" text="Profile" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -69,7 +69,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="aboutUsButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#handleAboutUsAction" onMouseEntered="#highlightAboutUs" onMouseExited="#resetAboutUs" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="About Us" textFill="WHITE">
+                  <Button fx:id="aboutUsButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#handleAboutUsAction" onMouseEntered="#highlightAboutUs" onMouseExited="#resetAboutUs" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: #2A363B;" text="About Us" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -77,7 +77,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="logoutButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#handleLogoutAction" onMouseEntered="#highlightLogout" onMouseExited="#resetLogout" prefHeight="45.0" prefWidth="161.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B #2A363B#2A363B;" text="Logout" textFill="WHITE">
+                  <Button fx:id="logoutButton" alignment="TOP_LEFT" layoutX="10.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#handleLogoutAction" onMouseEntered="#highlightLogout" onMouseExited="#resetLogout" prefHeight="45.0" prefWidth="161.0" style="-fx-background-color: #2A363B;" text="Logout" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
