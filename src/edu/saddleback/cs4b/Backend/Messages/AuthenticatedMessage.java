@@ -1,5 +1,7 @@
 package edu.saddleback.cs4b.Backend.Messages;
 
+import edu.saddleback.cs4b.Backend.Messages.BaseMessage;
+import edu.saddleback.cs4b.Backend.Messages.MsgTypes;
 import edu.saddleback.cs4b.Backend.Utilitys.Profile;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 
