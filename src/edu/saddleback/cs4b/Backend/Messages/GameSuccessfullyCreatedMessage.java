@@ -2,6 +2,8 @@ package edu.saddleback.cs4b.Backend.Messages;
 
 import edu.saddleback.cs4b.Backend.Objects.Game;
 
+import java.util.List;
+
 public class GameSuccessfullyCreatedMessage extends BaseMessage
 {
     private Game game;

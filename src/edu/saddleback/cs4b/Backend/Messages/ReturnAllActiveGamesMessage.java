@@ -29,7 +29,7 @@ public class ReturnAllActiveGamesMessage extends BaseMessage
     public Map<String, List<String>> getGameAndPlayers() { return gameAndPlayers; }
 
     public void setGameAndPlayers(Map<String, List<String>> gameAndPlayers) {
-        this.gameAndPlayers = gameAndPlayers;
+        this.gameAndPlayers = gameAndPlayers; 
     }
 
     public void setGames(List<Game> newGames)
