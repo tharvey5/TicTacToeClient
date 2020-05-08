@@ -57,7 +57,7 @@ public class ProfileEditController implements Observer, Initializable
     Label winLossTieLabel;
 
     @FXML
-    Button deleteAcctBtn;
+    Button deactivateAccountBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -106,7 +106,7 @@ public class ProfileEditController implements Observer, Initializable
         }
         else if (message instanceof DeactivationConfirmationMessage)
         {
-            swapToLogin("/edu/saddleback/cs4b/UI/ClientLogin.fxml" , deleteAcctBtn);
+            swapToLogin("/edu/saddleback/cs4b/UI/ClientLogin.fxml" , deactivateAccountBtn);
         }
     }
 
@@ -132,7 +132,8 @@ public class ProfileEditController implements Observer, Initializable
     }
 
     @FXML
-    public void handleDeleteAccountAction() {
+    public void handleDeactivateAccountAction()
+    {
         AcctDeactivationMessage message = (AcctDeactivationMessage) factory.createMessage(MsgTypes.ACCT_DEACTIVATION.getType());
         uilog.notifyObservers(new MessageEvent(message));
     }
@@ -223,6 +224,25 @@ public class ProfileEditController implements Observer, Initializable
     public void resetChangePassword()
     {
         changePasswordButton.setOnMouseExited(mouseEvent -> changePasswordButton.setTextFill(Color.BLACK));
+    }
+
+    /**
+     * WHEN THIS METHOD IS CALLED THE 'DEACTIVATE ACCOUNT' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
+     */
+    @FXML
+    public void highlightDeactivateAccount()
+    {
+        changePasswordButton.setOnMouseEntered(mouseEvent -> changePasswordButton.setTextFill(Color.valueOf("#FFD700")));
+    }
+
+    /**
+     * WHEN THIS METHOD IS CALLED THE 'DEACTIVATE ACCOUNT' BUTTON WILL CHANGE BACK TO THE DEFAULT TEXT COLOR WHEN THE MOUSE IS
+     * NO LONGER HOVERING OVER IT
+     */
+    @FXML
+    public void resetDeactivateAccount()
+    {
+        changePasswordButton.setOnMouseExited(mouseEvent -> changePasswordButton.setTextFill(Color.WHITE));
     }
 
     public void swapHomeProfile(String sceneLocation, Button button) throws IOException

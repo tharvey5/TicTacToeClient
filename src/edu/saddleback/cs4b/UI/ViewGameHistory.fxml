@@ -3,28 +3,43 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2A363B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ViewGameHistoryController">
    <children>
-      <TableView layoutX="42.0" layoutY="59.0" prefHeight="501.0" prefWidth="479.0">
+      <TableView fx:id="gameInfoTable" layoutX="14.0" layoutY="60.0" prefHeight="500.0" prefWidth="516.0">
         <columns>
-          <TableColumn prefWidth="58.0" text="ID" />
-          <TableColumn prefWidth="92.0" text="Start Time" />
-            <TableColumn prefWidth="75.0" text="End Time" />
-            <TableColumn prefWidth="85.0" text="Host" />
-            <TableColumn prefWidth="83.0" text="Opponent" />
-            <TableColumn prefWidth="84.0" text="Result" />
+          <TableColumn fx:id="idCol" prefWidth="86.0" text="ID" />
+          <TableColumn fx:id="startTimeCol" prefWidth="86.0" text="Start Time" />
+            <TableColumn fx:id="endTimeCol" prefWidth="86.0" text="End Time" />
+            <TableColumn fx:id="hostCol" prefWidth="86.0" text="Host" />
+            <TableColumn fx:id="opponentCol" prefWidth="86.0" text="Opponent" />
+            <TableColumn fx:id="resultCol" prefWidth="86.0" text="Result" />
         </columns>
       </TableView>
-      <TableView layoutX="553.0" layoutY="59.0" prefHeight="501.0" prefWidth="227.0">
+      <TableView fx:id="detailsTable" layoutX="546.0" layoutY="60.0" prefHeight="500.0" prefWidth="240.0">
         <columns>
-          <TableColumn prefWidth="117.0" text="Moves" />
-            <TableColumn prefWidth="106.0" text="Viewers" />
+          <TableColumn fx:id="movesCol" prefWidth="120.0" text="Moves" />
+            <TableColumn fx:id="viewersCol" prefWidth="120.0" text="Viewers" />
         </columns>
       </TableView>
-      <Button layoutX="42.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
-      <Button fx:id="refreshBtn" layoutX="721.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#handleRefreshAction" text="Refresh" />
+      <Button fx:id="returnToProfileBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#handleReturnToProfileAction" onMouseEntered="#highlightReturnToProfile" onMouseExited="#resetReturnToProfile" style="-fx-background-color: #FFFFFF;" text="Return To Profile">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="refreshBtn" layoutX="688.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#handleRefreshAction" onMouseEntered="#highlightRefresh" onMouseExited="#resetRefresh" style="-fx-background-color: #FFFFFF;" text="Refresh">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@refresh.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </AnchorPane>
