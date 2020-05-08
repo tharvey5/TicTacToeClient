@@ -1,14 +1,6 @@
 package edu.saddleback.cs4b.UI;
 
-import edu.saddleback.cs4b.Backend.ClientPackage.Client;
-import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
-import edu.saddleback.cs4b.Backend.Messages.*;
-import edu.saddleback.cs4b.Backend.PubSub.EventType;
-import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
-import edu.saddleback.cs4b.Backend.PubSub.Observer;
-import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
-import edu.saddleback.cs4b.Backend.Utilitys.Profile;
 import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import javafx.application.Platform;
@@ -116,5 +108,24 @@ public class ProfileController implements Initializable
     public void resetEditProfile()
     {
         editProfileButton.setOnMouseExited(mouseEvent -> editProfileButton.setTextFill(Color.BLACK));
+    }
+
+    /**
+     * WHEN THIS METHOD IS CALLED THE 'VIEW HISTORY' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
+     */
+    @FXML
+    public void highlightViewHistory()
+    {
+        viewHistoryBtn.setOnMouseEntered(mouseEvent -> viewHistoryBtn.setTextFill(Color.valueOf("#FFD700")));
+    }
+
+    /**
+     * WHEN THIS METHOD IS CALLED THE 'VIEW HISTORY' BUTTON WILL CHANGE BACK TO THE DEFAULT TEXT COLOR WHEN THE MOUSE IS
+     * NO LONGER HOVERING OVER IT
+     */
+    @FXML
+    public void resetViewHistory()
+    {
+        viewHistoryBtn.setOnMouseExited(mouseEvent -> viewHistoryBtn.setTextFill(Color.BLACK));
     }
 }
