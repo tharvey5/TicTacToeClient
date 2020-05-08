@@ -3,8 +3,7 @@ package edu.saddleback.cs4b.UI;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
 import edu.saddleback.cs4b.Backend.Messages.*;
-import edu.saddleback.cs4b.Backend.Objects.Game;
-import edu.saddleback.cs4b.Backend.Objects.Move;
+import edu.saddleback.cs4b.Backend.Objects.*;
 import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
@@ -26,6 +25,7 @@ import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -65,15 +65,16 @@ public class ViewGameHistoryController implements Observer, Initializable
     TableColumn<GameInfo, String> resultCol;
 
     @FXML
-    TableView<GameInfo> detailsTable;
+    TableView<TTTPosition> detailsTable;
 
     @FXML
-    TableColumn<GameInfo, List<Move>> movesCol;
+    TableColumn<TTTPosition, Integer> movesCol;
 
     @FXML
     TableColumn<GameInfo, List<PublicUser>> viewersCol;
 
     private ObservableList<GameInfo> infoList = FXCollections.observableArrayList();
+    private ObservableList<TTTPosition> coordList = FXCollections.observableArrayList();
 
     public ViewGameHistoryController()
     {
@@ -90,8 +91,8 @@ public class ViewGameHistoryController implements Observer, Initializable
         opponentCol.setCellValueFactory(new PropertyValueFactory<>("opponent"));
         resultCol.setCellValueFactory(new PropertyValueFactory<>("result"));
 
-        movesCol.setCellValueFactory(new PropertyValueFactory<>("moves"));
-        viewersCol.setCellValueFactory(new PropertyValueFactory<>("viewers"));
+        movesCol.setCellValueFactory(new PropertyValueFactory<>("positionAsString"));
+        //viewersCol.setCellValueFactory(new PropertyValueFactory<>("viewers"));
     }
 
     @Override
@@ -112,6 +113,11 @@ public class ViewGameHistoryController implements Observer, Initializable
     }
 
     public void displayToUI(List<Game> games) {
+        List<Move> testMoves = new ArrayList<>();
+        testMoves.add(new TTTMove("", "", 1, 2));
+        testMoves.add(new TTTMove("", "", 2, 0));
+        testMoves.add(new TTTMove("", "", 1, 0));
+        testMoves.add(new TTTMove("", "", 0, 0));
         for (Game g : games) {
             GameInfo info = new GameInfo();
 
@@ -122,16 +128,15 @@ public class ViewGameHistoryController implements Observer, Initializable
             info.setOpponent(g.getOtherPlayer().getUsername());
             info.setResult(g.getWinner() == null ? "tie" : g.getWinner().getUsername());
 
-            info.setMoves(g.getMoves().getMoves());
+            // todo replace with test
+            //info.setMoves(g.getMoves().getMoves());
+            info.setMoves(testMoves);
+
+
             info.setViewers(g.viewers());
             infoList.add(info);
         }
         gameInfoTable.setItems(infoList);
-
-        if(gameInfoTable.getSelectionModel().getSelectedItem() != null)
-        {
-            detailsTable.setItems(infoList);
-        }
     }
 
     private void handleMessageEvents(BaseMessage message) throws IOException
@@ -156,6 +161,21 @@ public class ViewGameHistoryController implements Observer, Initializable
     public void handleReturnToProfileAction()
     {
 
+    }
+
+    @FXML
+    public void onRowClicked() {
+        if(gameInfoTable.getSelectionModel().getSelectedItem() != null)
+        {
+            System.out.println("show viewers and moves");
+            detailsTable.getItems().clear();
+            //detailsTable.setItems(infoList);
+            List<Move> moves = gameInfoTable.getSelectionModel().getSelectedItem().getMoves();
+            for (Move m : moves) {
+                coordList.add((TTTPosition)m.getCoordinate());
+            }
+            detailsTable.setItems(coordList);
+        }
     }
 
     /**

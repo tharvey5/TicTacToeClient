@@ -37,6 +37,8 @@ public class TTTPosition implements Coordinate, Serializable
         this.yCoord = yCoord;
     }
 
+    public String getPositionAsString() { return toString(); }
+
     public String toString()
     {
         return "(" + xCoord + ", " + yCoord + ")";

@@ -76,14 +76,19 @@ public class GameBoardController implements Observer, Initializable
 
     public GameBoardController() {
         ClientEventLog.getInstance().addObserver(this);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
         Platform.runLater(()-> {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-//            player1ScoreLabel.setText("0");
-//            player2ScoreLabel.setText("0");
+            player1ScoreLabel.setText("0");
+            player2ScoreLabel.setText("0");
             if (gameManager.isCreator()) {
                 outputGameMessagesLabel.setText("YOU START!");
                 isTurn = true;
@@ -95,12 +100,6 @@ public class GameBoardController implements Observer, Initializable
                 isTurn = false;
             }
         });
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
-
     }
 
     @Override

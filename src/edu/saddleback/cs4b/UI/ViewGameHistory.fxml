@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2A363B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ViewGameHistoryController">
    <children>
-      <TableView fx:id="gameInfoTable" layoutX="14.0" layoutY="60.0" prefHeight="500.0" prefWidth="516.0">
+      <TableView fx:id="gameInfoTable" layoutX="14.0" layoutY="60.0" onMouseClicked="#onRowClicked" prefHeight="500.0" prefWidth="516.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="86.0" text="ID" />
           <TableColumn fx:id="startTimeCol" prefWidth="86.0" text="Start Time" />
