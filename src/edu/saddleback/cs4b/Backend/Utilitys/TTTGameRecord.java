@@ -8,9 +8,15 @@ import java.util.List;
 
 public class TTTGameRecord implements GameRecord, Serializable
 {
-    List<Game> gameRecord;
-    int wins;
-    int losses;
+    private List<Game> gameRecord;
+    private int wins;
+    private int losses;
+    private int totalGames;
+
+    @Override
+    public void setTotalGames(int total) {
+        this.totalGames = total;
+    }
 
     public TTTGameRecord()
     {
@@ -36,7 +42,7 @@ public class TTTGameRecord implements GameRecord, Serializable
     @Override
     public int  getNumGames()
     {
-        return gameRecord.size();
+        return totalGames;
     }
     @Override
     public void addGame(Game newGame)
