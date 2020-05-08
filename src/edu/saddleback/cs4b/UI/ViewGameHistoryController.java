@@ -4,10 +4,12 @@ import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
 import edu.saddleback.cs4b.Backend.Messages.*;
 import edu.saddleback.cs4b.Backend.Objects.Game;
+import edu.saddleback.cs4b.Backend.Objects.Move;
 import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.Utilitys.PublicUser;
 import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import edu.saddleback.cs4b.UI.Util.GameInfo;
@@ -66,12 +68,12 @@ public class ViewGameHistoryController implements Observer, Initializable
     TableView<GameInfo> detailsTable;
 
     @FXML
-    TableColumn<GameInfo, List> movesCol;
+    TableColumn<GameInfo, List<Move>> movesCol;
 
     @FXML
-    TableColumn<GameInfo, List> viewersCol;
+    TableColumn<GameInfo, List<PublicUser>> viewersCol;
 
-    private ObservableList<GameInfo> gameInfo = FXCollections.observableArrayList();
+    private ObservableList<GameInfo> infoList = FXCollections.observableArrayList();
 
     public ViewGameHistoryController()
     {
@@ -88,8 +90,8 @@ public class ViewGameHistoryController implements Observer, Initializable
         opponentCol.setCellValueFactory(new PropertyValueFactory<>("opponent"));
         resultCol.setCellValueFactory(new PropertyValueFactory<>("result"));
 
-        movesCol.setCellValueFactory(new PropertyValueFactory<>("opponent"));
-        viewersCol.setCellValueFactory(new PropertyValueFactory<>("result"));
+        movesCol.setCellValueFactory(new PropertyValueFactory<>("moves"));
+        viewersCol.setCellValueFactory(new PropertyValueFactory<>("viewers"));
     }
 
     @Override
@@ -109,16 +111,31 @@ public class ViewGameHistoryController implements Observer, Initializable
         }
     }
 
-    public void displayToUI()
-    {
+    public void displayToUI(List<Game> games) {
+        for (Game g : games) {
+            GameInfo info = new GameInfo();
 
+            info.setId(g.getGameID());
+            info.setStartTime(g.getStartTime());
+            info.setEndTime(g.getEndTime());
+            info.setHost(g.getCreator().getUsername());
+            info.setOpponent(g.getOtherPlayer().getUsername());
+            info.setResult(g.getWinner() == null ? "tie" : g.getWinner().getUsername());
+
+            //info.setMoves(g.getMoves().getMoves());
+            //info.setViewers(g.viewers());
+            infoList.add(info);
+        }
+        gameInfoTable.setItems(infoList);
     }
 
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
         if (message instanceof GameHistoryResponseMessage)
         {
+            System.out.println("games");
             List<Game> games = ((GameHistoryResponseMessage) message).getGames();
+            displayToUI(games);
         }
     }
 

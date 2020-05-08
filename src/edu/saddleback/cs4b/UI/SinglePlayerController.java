@@ -103,13 +103,13 @@ public class SinglePlayerController implements Initializable, Observer
             BaseMessage message = ((MessageEvent)e.getEvent()).getMessage();
             if (message instanceof GameSuccessfullyCreatedMessage)
             {
-                swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", playGameButton);
                 gameManager.setCreator(true);
                 gameManager.setPlayer(true);
                 gameManager.setSinglePlayer(true);
                 System.out.println(((GameSuccessfullyCreatedMessage) message).getGameId());
                 gameManager.setId(((GameSuccessfullyCreatedMessage) message).getGameId());
                 System.out.println("Player has joined");
+                swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", playGameButton);
             }
         }
     }

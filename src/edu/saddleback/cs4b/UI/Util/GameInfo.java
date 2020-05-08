@@ -1,5 +1,8 @@
 package edu.saddleback.cs4b.UI.Util;
 
+import edu.saddleback.cs4b.Backend.Objects.Move;
+import edu.saddleback.cs4b.Backend.Utilitys.PublicUser;
+
 import java.util.List;
 
 public class GameInfo
@@ -11,9 +14,24 @@ public class GameInfo
     private String opponent;
     private String result;
 
-    private List moves;
-    private List viewers;
+    private List<Move> moves;
+    private List<PublicUser> viewers;
 
+    public List<Move> getMoves() {
+        return moves;
+    }
+
+    public void setMoves(List<Move> moves) {
+        this.moves = moves;
+    }
+
+    public List<PublicUser> getViewers() {
+        return viewers;
+    }
+
+    public void setViewers(List<PublicUser> viewers) {
+        this.viewers = viewers;
+    }
 
     public String getId()
     {

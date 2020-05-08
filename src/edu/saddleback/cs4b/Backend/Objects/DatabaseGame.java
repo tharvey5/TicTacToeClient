@@ -1,6 +1,7 @@
 package edu.saddleback.cs4b.Backend.Objects;
 
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
+import edu.saddleback.cs4b.Backend.PubSub.Subject;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.Utilitys.PublicUser;
 
@@ -8,7 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class DatabaseGame implements Game, Serializable
+public class DatabaseGame implements Game, Serializable, Subject
 {
 
     private String startTime;

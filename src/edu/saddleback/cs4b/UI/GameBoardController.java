@@ -82,8 +82,8 @@ public class GameBoardController implements Observer, Initializable
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            player1ScoreLabel.setText("0");
-            player2ScoreLabel.setText("0");
+//            player1ScoreLabel.setText("0");
+//            player2ScoreLabel.setText("0");
             if (gameManager.isCreator()) {
                 outputGameMessagesLabel.setText("YOU START!");
                 isTurn = true;
