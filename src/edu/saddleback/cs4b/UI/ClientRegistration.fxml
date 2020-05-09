@@ -54,7 +54,9 @@
             </Label>
             <Line endX="100.0" layoutX="442.0" layoutY="228.0" startX="-100.0" />
             <Label fx:id="usernameError" layoutX="51.0" layoutY="279.0" text="Error Message" textFill="RED" />
-            <PasswordField fx:id="passwordField" layoutX="51.0" layoutY="314.0" prefHeight="27.0" prefWidth="211.0" promptText="Create Password" />
+            <PasswordField fx:id="passwordField" layoutX="50.0" layoutY="301.0" prefHeight="27.0" prefWidth="211.0" promptText="Create Password" />
+            <PasswordField fx:id="confirmPasswordField" layoutX="50.0" layoutY="341.0" prefHeight="27.0" prefWidth="211.0" promptText="Confirm Password" />
+            <Label fx:id="passwordError" layoutX="51.0" layoutY="372.0" text="Error Message" textFill="RED" />
          </children>
          <effect>
             <DropShadow spread="0.5" />
