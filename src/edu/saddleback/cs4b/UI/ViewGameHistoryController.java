@@ -147,6 +147,15 @@ public class ViewGameHistoryController implements Observer, Initializable
             List<Game> games = ((GameHistoryResponseMessage) message).getGames();
             displayToUI(games);
         }
+        else if (message instanceof RespondMovesMessage) {
+            detailsTable.getItems().clear();
+            List<Move> moves = ((RespondMovesMessage) message).getMoves();
+            System.out.println(moves.size());
+            for (Move m : moves) {
+                coordList.add((TTTPosition)m.getCoordinate());
+            }
+            detailsTable.setItems(coordList);
+        }
     }
 
     @FXML
@@ -167,14 +176,17 @@ public class ViewGameHistoryController implements Observer, Initializable
     public void onRowClicked() {
         if(gameInfoTable.getSelectionModel().getSelectedItem() != null)
         {
-            System.out.println("show viewers and moves");
-            detailsTable.getItems().clear();
-            //detailsTable.setItems(infoList);
-            List<Move> moves = gameInfoTable.getSelectionModel().getSelectedItem().getMoves();
-            for (Move m : moves) {
-                coordList.add((TTTPosition)m.getCoordinate());
-            }
-            detailsTable.setItems(coordList);
+//            System.out.println("show viewers and moves");
+//            detailsTable.getItems().clear();
+//            //detailsTable.setItems(infoList);
+//            List<Move> moves = gameInfoTable.getSelectionModel().getSelectedItem().getMoves();
+//            for (Move m : moves) {
+//                coordList.add((TTTPosition)m.getCoordinate());
+//            }
+//            detailsTable.setItems(coordList);
+            RequestMovesOfGameMessage reqMsg = new RequestMovesOfGameMessage();
+            reqMsg.setGameId(gameInfoTable.getSelectionModel().getSelectedItem().getId());
+            uilog.notifyObservers(new MessageEvent(reqMsg));
         }
     }
 
