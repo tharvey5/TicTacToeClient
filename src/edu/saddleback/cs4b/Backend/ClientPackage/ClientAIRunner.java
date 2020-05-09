@@ -70,6 +70,14 @@ public final class ClientAIRunner implements Observer, Runnable {
         return aiRunner;
     }
 
+    public void clearBoard() {
+        for (Token[] row : board) {
+            for (Token col : row) {
+                col = null;
+            }
+        }
+    }
+
     @Override
     public void update(SystemEvent e) {
         //todo make sure that we have message for game id
@@ -129,6 +137,7 @@ public final class ClientAIRunner implements Observer, Runnable {
             eventLog.notifyObservers(new MessageEvent(joinMsg));
 
             listenForStart();
+            clearBoard();
             isActive = true;
             while (isActive) {
                 listenForMove();
@@ -140,6 +149,7 @@ public final class ClientAIRunner implements Observer, Runnable {
                 // set the values of the board equal to the token
                 board[cachedCoordinate.getXCoord()][cachedCoordinate.getYCoord()] = userToken;
                 movesMade++;
+                displayBoard();
 
                 // reset after placement to listen for the next one
                 cachedCoordinate = null;
@@ -155,13 +165,26 @@ public final class ClientAIRunner implements Observer, Runnable {
                 System.out.println(aiPos);
                 board[aiPos.getXCoord()][aiPos.getYCoord()] = ai.getAiToken();
                 movesMade++;
+                displayBoard();
 
                 MoveMessage moveMsg = new MoveMessage();
                 moveMsg.setGameId(gameId);
                 moveMsg.setCoordinate(aiPos);
                 //moveMsg.setCoordinate(pos);
+
+                System.out.println("before send");
                 eventLog.notifyObservers(new MessageEvent(moveMsg));
+                System.out.println("after send");
             }
+        }
+    }
+
+    private void displayBoard() {
+        for (Token[] row : board) {
+            for (Token col : row) {
+                System.out.print(col == null ? "null " : col.getTokenID() + " ");
+            }
+            System.out.println();
         }
     }
 

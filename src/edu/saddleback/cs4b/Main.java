@@ -19,6 +19,9 @@ public class Main extends Application {
 
         new Thread(()->{
             Client client = new Client("localhost", 8080, UIEventLog.getInstance(), ClientEventLog.getInstance());
+        }).start();
+
+        new Thread(()-> {
             Client aiConnect = new Client("localhost", 8080, AIEventLog.getInstance(), Client2EventLog.getInstance());
         }).start();
 

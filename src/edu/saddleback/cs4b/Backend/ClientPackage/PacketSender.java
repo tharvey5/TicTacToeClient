@@ -50,7 +50,7 @@ public class PacketSender implements UIObserver {
         sendMessage(nextMessage);
     }
 
-    private void sendMessage(BaseMessage nextMessage)
+    private synchronized void sendMessage(BaseMessage nextMessage)
     {
         try
         {
