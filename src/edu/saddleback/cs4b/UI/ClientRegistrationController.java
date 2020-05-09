@@ -113,10 +113,6 @@ public class ClientRegistrationController implements Observer, Initializable
                 confirmPasswordField.clear();
             }
         }
-        else
-        {
-
-        }
     }
 
     @FXML
