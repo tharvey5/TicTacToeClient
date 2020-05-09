@@ -37,35 +37,6 @@ public class SinglePlayerController implements Initializable, Observer
 
     @FXML
     private Button playGameButton;
-    @FXML
-    private Label noTokenSelection;
-    @FXML
-    private Label noTurnSelection;
-    @FXML
-    private Label noDifficultySelection;
-
-    @FXML
-    private RadioButton token_1_XO;
-    @FXML
-    private RadioButton token_2_XO;
-    @FXML
-    private ToggleGroup tokenGroup;
-
-    @FXML
-    private RadioButton selectModeEasy;
-    @FXML
-    private RadioButton selectModeNormal;
-    @FXML
-    private RadioButton selectModeHard;
-    @FXML
-    private ToggleGroup difficultyGroup;
-
-    @FXML
-    private RadioButton selectTurnPlayer;
-    @FXML
-    private RadioButton selectTurnComputer;
-    @FXML
-    private ToggleGroup turnGroup;
 
     public SinglePlayerController()
     {
@@ -75,24 +46,7 @@ public class SinglePlayerController implements Initializable, Observer
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        // Assigns token RadioButtons to ToggleGroup 'tokenGroup'
-        tokenGroup = new ToggleGroup();
-        this.token_1_XO.setToggleGroup(tokenGroup);
-        this.token_2_XO.setToggleGroup(tokenGroup);
-        noTokenSelection.setText("");
 
-        // Assigns turn RadioButtons to ToggleGroup 'turnGroup'
-        turnGroup = new ToggleGroup();
-        this.selectTurnPlayer.setToggleGroup(turnGroup);
-        this.selectTurnComputer.setToggleGroup(turnGroup);
-        noTurnSelection.setText("");
-
-        // Assigns difficulty RadioButtons to ToggleGroup 'difficultyGroup'
-        difficultyGroup = new ToggleGroup();
-        this.selectModeEasy.setToggleGroup(difficultyGroup);
-        this.selectModeNormal.setToggleGroup(difficultyGroup);
-        this.selectModeHard.setToggleGroup(difficultyGroup);
-        noDifficultySelection.setText("");
     }
 
     @Override
@@ -136,73 +90,11 @@ public class SinglePlayerController implements Initializable, Observer
     @FXML
     public void handlePlayGameAction(MouseEvent event) throws IOException
     {
-        if(missingToken() & missingTurn() & missingDifficulty())
-        {
-            //todo send the request for a new game to go here
-            CreateGameMessage createMsg = new CreateGameMessage();
-            uilog.notifyObservers(new MessageEvent(createMsg));
-//            Parent parent = FXMLLoader.load(getClass().getResource("/edu/saddleback/cs4b/UI/GameBoard.fxml"));
-//            Scene scene  = new Scene(parent);
-//            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//
-//            window.setScene(scene);
-//            window.show();
-        }
+        //todo send the request for a new game to go here
+        CreateGameMessage createMsg = new CreateGameMessage();
+        uilog.notifyObservers(new MessageEvent(createMsg));
     }
 
-    @FXML
-    public boolean missingToken()
-    {
-        boolean selected = true;
-
-        try
-        {
-            noTokenSelection.setText("");
-            tokenGroup.getSelectedToggle().isSelected();
-        }
-        catch(Exception e)
-        {
-            noTokenSelection.setText("* Please select your tokens *");
-            selected = false;
-        }
-        return selected;
-    }
-
-    @FXML
-    public boolean missingTurn()
-    {
-        boolean selected = true;
-
-        try
-        {
-            noTurnSelection.setText("");
-            turnGroup.getSelectedToggle().isSelected();
-        }
-        catch(Exception e)
-        {
-            noTurnSelection.setText("* Please select who goes first *");
-            selected = false;
-        }
-        return selected;
-    }
-
-    @FXML
-    public boolean missingDifficulty()
-    {
-        boolean selected = true;
-
-        try
-        {
-            noDifficultySelection.setText("");
-            difficultyGroup.getSelectedToggle().isSelected();
-        }
-        catch(Exception e)
-        {
-            noDifficultySelection.setText("* Please select a difficulty *");
-            selected = false;
-        }
-        return selected;
-    }
 
     public void swapScene(String sceneLocation, Button button)
     {
