@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,7 +23,7 @@
       <Line endX="410.0" layoutX="151.0" layoutY="42.0" startX="-100.0" stroke="WHITE" />
       <Line endX="410.0" layoutX="151.0" layoutY="102.0" startX="-100.0" stroke="WHITE" />
       <ListView fx:id="gameMenu" layoutX="51.0" layoutY="188.0" prefHeight="385.0" prefWidth="290.0" />
-      <Button fx:id="refreshButton" graphicTextGap="10.0" layoutX="355.0" layoutY="533.0" mnemonicParsing="false" onMouseClicked="#handleRefreshAction" onMouseEntered="#highlightRefresh" onMouseExited="#resetRefresh" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: #87CEFA;" text="Refresh">
+      <Button fx:id="refreshButton" graphicTextGap="10.0" layoutX="402.0" layoutY="533.0" mnemonicParsing="false" onMouseClicked="#handleRefreshAction" onMouseEntered="#highlightRefresh" onMouseExited="#resetRefresh" prefHeight="40.0" prefWidth="161.0" style="-fx-background-color: #87CEFA;" text="Refresh">
          <font>
             <Font size="20.0" />
          </font>
@@ -36,7 +38,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="joinButton" layoutX="355.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#handleJoinAction" onMouseEntered="#highlightJoin" onMouseExited="#resetJoin" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: #008000;" text="Join" textFill="WHITE">
+      <Button fx:id="joinButton" layoutX="402.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#handleJoinAction" onMouseEntered="#highlightJoin" onMouseExited="#resetJoin" prefHeight="40.0" prefWidth="161.0" style="-fx-background-color: #008000;" text="Join" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
@@ -44,7 +46,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="spectateButton" layoutX="355.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#handleSpectateAction" onMouseEntered="#highlightSpectate" onMouseExited="#resetSpectate" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: #FF4500;" text="Spectate" textFill="WHITE">
+      <Button fx:id="spectateButton" layoutX="402.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#handleSpectateAction" onMouseEntered="#highlightSpectate" onMouseExited="#resetSpectate" prefHeight="40.0" prefWidth="161.0" style="-fx-background-color: #FF4500;" text="Spectate" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
@@ -52,7 +54,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="createGameButton" layoutX="355.0" layoutY="260.0" mnemonicParsing="false" onMouseClicked="#handleCreateGameAction" onMouseEntered="#highlightCreateGame" onMouseExited="#resetCreateGame" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: #FFFFFF;" text="Create Game">
+      <Button fx:id="createGameButton" layoutX="402.0" layoutY="260.0" mnemonicParsing="false" onMouseClicked="#handleCreateGameAction" onMouseEntered="#highlightCreateGame" onMouseExited="#resetCreateGame" prefHeight="40.0" prefWidth="161.0" style="-fx-background-color: #FFFFFF;" text="Create Game">
          <font>
             <Font size="20.0" />
          </font>
@@ -61,5 +63,13 @@
          </cursor>
       </Button>
       <TextField fx:id="positionBox" layoutX="113.0" layoutY="129.0" />
+      <TableView fx:id="gameTable" layoutX="14.0" layoutY="173.0" onMouseClicked="#onRowClicked" prefHeight="413.0" prefWidth="380.0">
+        <columns>
+          <TableColumn fx:id="idCol" text="ID" />
+          <TableColumn fx:id="titleCol" prefWidth="140.0" text="Game Title" />
+            <TableColumn fx:id="hostCol" text="Host" />
+            <TableColumn fx:id="opponentCol" text="Opponent" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

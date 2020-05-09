@@ -97,6 +97,10 @@ public class ViewGameHistoryController implements Observer, Initializable
 
         movesCol.setCellValueFactory(new PropertyValueFactory<>("positionAsString"));
         //viewersCol.setCellValueFactory(new PropertyValueFactory<>("viewers"));
+
+        gameInfoTable.getItems().clear();
+        GameHistoryRequestMessage requestMessage = (GameHistoryRequestMessage) factory.createMessage(MsgTypes.GAME_HISTORY_REQUEST.getType());
+        uilog.notifyObservers(new MessageEvent(requestMessage));
     }
 
     @Override

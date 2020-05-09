@@ -8,6 +8,7 @@ import java.util.List;
 public class GameInfo
 {
     private String id;
+    private String title;
     private String startTime;
     private String endTime;
     private String host;
@@ -17,19 +18,23 @@ public class GameInfo
     private List<Move> moves;
     private List<PublicUser> viewers;
 
-    public List<Move> getMoves() {
+    public List<Move> getMoves()
+    {
         return moves;
     }
 
-    public void setMoves(List<Move> moves) {
+    public void setMoves(List<Move> moves)
+    {
         this.moves = moves;
     }
 
-    public List<PublicUser> getViewers() {
+    public List<PublicUser> getViewers()
+    {
         return viewers;
     }
 
-    public void setViewers(List<PublicUser> viewers) {
+    public void setViewers(List<PublicUser> viewers)
+    {
         this.viewers = viewers;
     }
 
@@ -41,6 +46,16 @@ public class GameInfo
     public void setId(String id)
     {
         this.id = id;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
     }
 
     public String getStartTime()

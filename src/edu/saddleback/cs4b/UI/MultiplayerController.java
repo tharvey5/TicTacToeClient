@@ -3,21 +3,24 @@ package edu.saddleback.cs4b.UI;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
 import edu.saddleback.cs4b.Backend.Messages.*;
+import edu.saddleback.cs4b.Backend.Objects.Game;
 import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
+import edu.saddleback.cs4b.UI.Util.GameInfo;
 import edu.saddleback.cs4b.UI.Util.GameManager;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -54,10 +57,30 @@ public class MultiplayerController implements Observer, Initializable
     @FXML
     TextField positionBox;
 
+    @FXML
+    TableView<GameInfo> gameTable;
+
+    @FXML
+    TableColumn<GameInfo, String> idCol;
+
+    @FXML
+    TableColumn<GameInfo, String> titleCol;
+
+    @FXML
+    TableColumn<GameInfo, String> hostCol;
+
+    @FXML
+    TableColumn<GameInfo, String> opponentCol;
+
+    private ObservableList<GameInfo> infoList = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        hostCol.setCellValueFactory(new PropertyValueFactory<>("host"));
+        opponentCol.setCellValueFactory(new PropertyValueFactory<>("opponent"));
     }
 
     public MultiplayerController()
@@ -84,13 +107,6 @@ public class MultiplayerController implements Observer, Initializable
 
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
-//        if(message instanceof GameSuccessfullyCreatedMessage ||
-//           message instanceof AvailableGameMessage ||
-//           message instanceof SuccessfulViewGameMessage)
-//        {
-//            swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
-//
-//        }
         if (message instanceof GameSuccessfullyCreatedMessage)
         {
             swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
@@ -112,20 +128,51 @@ public class MultiplayerController implements Observer, Initializable
             gameManager.setPlayer(false);
             gameManager.setId(((SuccessfulViewGameMessage) message).getGameID());
         }
-        else if (message instanceof ReturnAllActiveGamesMessage) {
+        else if (message instanceof ReturnAllActiveGamesMessage)
+        {
             Set<String> games = ((ReturnAllActiveGamesMessage) message).getGameAndPlayers().keySet();
-            for (String s : games) {
-                Platform.runLater(()-> {
+            for (String s : games)
+            {
+                Platform.runLater(()->
+                {
                     gameMenu.getItems().add(s);
                 });
             }
         }
     }
 
+    public void displayToUI(List<Game> games)
+    {
+        for (Game g : games)
+        {
+            GameInfo info = new GameInfo();
+
+            info.setId(g.getGameID());
+            info.setTitle(g.getCreator().getUsername() + "\'s game");
+            info.setHost(g.getCreator().getUsername());
+            info.setOpponent(g.getOtherPlayer().getUsername());
+
+            infoList.add(info);
+        }
+        gameTable.setItems(infoList);
+    }
+
+    @FXML
+    public void onRowClicked()
+    {
+        if(gameTable.getSelectionModel().getSelectedItem() != null)
+        {
+            RequestMovesOfGameMessage reqMsg = new RequestMovesOfGameMessage();
+            reqMsg.setGameId(gameTable.getSelectionModel().getSelectedItem().getId());
+            uilog.notifyObservers(new MessageEvent(reqMsg));
+        }
+    }
+
     @FXML
     public void handleJoinAction()
     {
-        if (!positionBox.getText().equals("")) {
+        if (!positionBox.getText().equals(""))
+        {
             JoinGameRequestMessage joinMessage = (JoinGameRequestMessage) factory.createMessage(MsgTypes.JOIN_GAME_REQUEST.getType());
             // this needs to be based on the options on the menu
             int sId = Integer.parseInt(positionBox.getText());
@@ -141,7 +188,6 @@ public class MultiplayerController implements Observer, Initializable
     {
         CreateGameMessage createMessage = (CreateGameMessage) factory.createMessage(MsgTypes.CREATE_GAME.getType());
         uilog.notifyObservers(new MessageEvent(createMessage));
-        //swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", createGameButton);
     }
 
     @FXML
