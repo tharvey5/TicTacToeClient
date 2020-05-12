@@ -30,9 +30,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ViewGameHistoryController implements Observer, Initializable
 {
@@ -50,6 +48,9 @@ public class ViewGameHistoryController implements Observer, Initializable
 
     @FXML
     TableView<GameInfo> gameInfoTable;
+
+    @FXML
+    TableView<TTTPublicUser> viewersTable;
 
     @FXML
     TableColumn<GameInfo, String> idCol;
@@ -80,6 +81,8 @@ public class ViewGameHistoryController implements Observer, Initializable
 
     private ObservableList<GameInfo> infoList = FXCollections.observableArrayList();
     private ObservableList<TTTPosition> coordList = FXCollections.observableArrayList();
+    private ObservableList<TTTPublicUser> viewerList = FXCollections.observableArrayList();
+    private Map<String, Game> gameMap = new Hashtable<>(); // <gameId, Game>
 
     public ViewGameHistoryController()
     {
@@ -125,6 +128,10 @@ public class ViewGameHistoryController implements Observer, Initializable
     {
         for (Game g : games) {
             GameInfo info = new GameInfo();
+
+            if (!gameMap.containsKey(g.getGameID())) {
+                gameMap.put(g.getGameID(), g);
+            }
 
             info.setId(g.getGameID());
             info.setStartTime(g.getStartTime());
@@ -178,9 +185,17 @@ public class ViewGameHistoryController implements Observer, Initializable
     {
         if(gameInfoTable.getSelectionModel().getSelectedItem() != null)
         {
+            viewersTable.getItems().clear();
+            String id = gameInfoTable.getSelectionModel().getSelectedItem().getId();
             RequestMovesOfGameMessage reqMsg = new RequestMovesOfGameMessage();
-            reqMsg.setGameId(gameInfoTable.getSelectionModel().getSelectedItem().getId());
+            reqMsg.setGameId(id);
             uilog.notifyObservers(new MessageEvent(reqMsg));
+
+            List<PublicUser> viewers = gameMap.get(id).viewers();
+            for (PublicUser u : viewers) {
+                viewerList.add((TTTPublicUser)u);
+            }
+            viewersTable.setItems(viewerList);
         }
     }
 

@@ -20,10 +20,9 @@
             <TableColumn fx:id="resultCol" prefWidth="86.0" text="Result" />
         </columns>
       </TableView>
-      <TableView fx:id="detailsTable" layoutX="546.0" layoutY="60.0" prefHeight="500.0" prefWidth="240.0">
+      <TableView fx:id="detailsTable" layoutX="546.0" layoutY="60.0" prefHeight="500.0" prefWidth="122.0">
         <columns>
           <TableColumn fx:id="movesCol" prefWidth="120.0" text="Moves" />
-            <TableColumn fx:id="viewersCol" prefWidth="120.0" text="Viewers" />
         </columns>
       </TableView>
       <Button fx:id="returnToProfileBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#handleReturnToProfileAction" onMouseEntered="#highlightReturnToProfile" onMouseExited="#resetReturnToProfile" style="-fx-background-color: #FFFFFF;" text="Return To Profile">
@@ -41,5 +40,10 @@
                </image>
             </ImageView>
          </graphic></Button>
+      <TableView fx:id="viewersTable" layoutX="668.0" layoutY="60.0" prefHeight="500.0" prefWidth="122.0">
+         <columns>
+            <TableColumn fx:id="viewersCol" prefWidth="120.0" text="Viewers" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
