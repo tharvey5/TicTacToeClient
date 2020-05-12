@@ -23,6 +23,7 @@ public class DatabaseGame implements Game, Serializable, Subject
     private PublicUser winner;
     private String id;
     private List<PublicUser> viewers;
+    private Board gameBoard;
 
     // copy ctor
     public DatabaseGame(Game game) {
@@ -47,6 +48,15 @@ public class DatabaseGame implements Game, Serializable, Subject
         this.id = game.getGameID();
         this.viewers = new ArrayList<>();
         this.viewers.addAll(game.viewers());
+
+        this.gameBoard = new TTTBoard();
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                if (game.getGameBoard().getToken(i, j) != null) {
+                    this.gameBoard.setToken(i, j, new TTTToken(game.getGameBoard().getToken(i, j).getTokenID()));
+                }
+            }
+        }
     }
 
     public DatabaseGame(String startTime, String endTime, PublicUser startPlayer, PublicUser otherPlayer, PublicUser creator, Moves moves, PublicUser winner, String id, List<PublicUser> viewers)
@@ -180,7 +190,7 @@ public class DatabaseGame implements Game, Serializable, Subject
 
     @Override
     public Board getGameBoard() {
-        return null;
+        return gameBoard;
     }
 
     @Override

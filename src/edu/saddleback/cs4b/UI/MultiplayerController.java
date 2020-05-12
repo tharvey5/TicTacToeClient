@@ -117,6 +117,7 @@ public class MultiplayerController implements Observer, Initializable
             gameManager.setPlayer(true);
             gameManager.setCreator(false);
             gameManager.setId(((AvailableGameMessage) message).getGameId());
+            gameManager.setGame(((AvailableGameMessage) message).getGame());
             swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", joinButton);
         }
         else if (message instanceof SuccessfulViewGameMessage)
@@ -124,6 +125,7 @@ public class MultiplayerController implements Observer, Initializable
             gameManager.setCreator(false);
             gameManager.setPlayer(false);
             gameManager.setId(((SuccessfulViewGameMessage) message).getGameID());
+            gameManager.setGame(((SuccessfulViewGameMessage) message).getGame());
             swapScene("/edu/saddleback/cs4b/UI/GameBoard.fxml", spectateButton);
         }
         else if (message instanceof ReturnAllActiveGamesMessage)

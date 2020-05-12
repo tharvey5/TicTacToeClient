@@ -4,6 +4,7 @@ import edu.saddleback.cs4b.Backend.ClientPackage.Client;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
 import edu.saddleback.cs4b.Backend.Messages.*;
+import edu.saddleback.cs4b.Backend.Objects.Board;
 import edu.saddleback.cs4b.Backend.Objects.Coordinate;
 import edu.saddleback.cs4b.Backend.Objects.TTTPosition;
 import edu.saddleback.cs4b.Backend.PubSub.EventType;
@@ -101,7 +102,19 @@ public class GameBoardController implements Observer, Initializable
                 outputGameMessagesLabel.setText("YOU ARE VIEWING GAME " + gameManager.getGame().getCreator() + " \'s game");
                 isTurn = false;
             }
+
+            fillBoard(gameManager.getGame().getGameBoard());
         });
+    }
+
+    private void fillBoard(Board gameBoard) {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                if (gameBoard.getToken(i, j) != null) {
+                    setToken(findTile(new TTTPosition(i, j)), userTokens.get(gameBoard.getToken(i, j).getTokenID()));
+                }
+            }
+        }
     }
 
     @Override
