@@ -1,5 +1,6 @@
 package edu.saddleback.cs4b.UI;
 
+import edu.saddleback.cs4b.Backend.ClientPackage.Client;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
 import edu.saddleback.cs4b.Backend.Messages.*;
@@ -9,7 +10,6 @@ import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
-import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import edu.saddleback.cs4b.UI.Util.GameManager;
 import javafx.application.Platform;
@@ -48,16 +48,16 @@ public class GameBoardController implements Observer, Initializable
     private Map<String, GameTiles> tileMapping = makeTileMapping();
 
     @FXML
-    private Label player1Label;
+    private Label yourNameLabel;
 
     @FXML
-    private Label player1ScoreLabel;
+    private Label yourNameScoreLabel;
 
     @FXML
-    private Label player2Label;
+    private Label opponentLabel;
 
     @FXML
-    private Label player2ScoreLabel;
+    private Label opponentScoreLabel;
 
     @FXML
     private Button leaveGameButton;
@@ -87,8 +87,9 @@ public class GameBoardController implements Observer, Initializable
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            player1ScoreLabel.setText("0");
-            player2ScoreLabel.setText("0");
+            yourNameLabel.setText(ClientUser.getInstanceOf().getUsername());
+            yourNameScoreLabel.setText("0");
+            opponentScoreLabel.setText("0");
             if (gameManager.isCreator()) {
                 outputGameMessagesLabel.setText("YOU START!");
                 isTurn = true;
@@ -125,7 +126,6 @@ public class GameBoardController implements Observer, Initializable
         {
             ValidMoveMessage move = (ValidMoveMessage) message;
             setToken(findTile(move.getCoordinate()), userTokens.get(move.getToken().getTokenID()));
-
             if (gameManager.isPlayer()) {
                 if (move.getUser().equals(user.getUsername())) {
                     isTurn = false;

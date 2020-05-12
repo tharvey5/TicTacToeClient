@@ -1,5 +1,6 @@
 package edu.saddleback.cs4b.UI.Util;
 
+import edu.saddleback.cs4b.Backend.Objects.Game;
 import edu.saddleback.cs4b.Backend.PubSub.*;
 
 import java.util.ArrayList;
@@ -13,7 +14,8 @@ import java.util.List;
 public class GameManager implements Subject
 {
     private volatile static GameManager gameManager = null;
-    // List<String> ids;
+    private Game game;
+
     private String id;
     private boolean isCreator;
     private boolean isPlayer;
