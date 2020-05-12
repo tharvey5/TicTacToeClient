@@ -110,6 +110,9 @@ public class GameManager implements Subject
         isSinglePlayer = singlePlayer;
     }
 
+    public Game getGame() { return game; }
+    public void setGame(Game game) { this.game = game; }
+
     /**
      * clears the state of a game you are playing
      */

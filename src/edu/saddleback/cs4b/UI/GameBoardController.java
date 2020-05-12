@@ -87,7 +87,8 @@ public class GameBoardController implements Observer, Initializable
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            yourNameLabel.setText(ClientUser.getInstanceOf().getUsername());
+            //todo fix this
+            //yourNameLabel.setText(gameManager.getGame().getCreator().getUsername());
             yourNameScoreLabel.setText("0");
             opponentScoreLabel.setText("0");
             if (gameManager.isCreator()) {
@@ -97,7 +98,7 @@ public class GameBoardController implements Observer, Initializable
                 outputGameMessagesLabel.setText("WAITING FOR PLAYER 1 TO MOVE");
                 isTurn = false;
             } else {
-                outputGameMessagesLabel.setText("YOU ARE VIEWING GAME " + gameManager.getId());
+                outputGameMessagesLabel.setText("YOU ARE VIEWING GAME " + gameManager.getGame().getCreator() + " \'s game");
                 isTurn = false;
             }
         });
@@ -133,6 +134,7 @@ public class GameBoardController implements Observer, Initializable
                         outputGameMessagesLabel.setText("Waiting...");
                     });
                 } else {
+                    opponentLabel.setText(move.getUser());
                     isTurn = true;
                     Platform.runLater(() -> {
                         outputGameMessagesLabel.setText("Make a Move");

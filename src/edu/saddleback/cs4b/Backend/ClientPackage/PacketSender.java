@@ -54,6 +54,7 @@ public class PacketSender implements UIObserver {
     {
         try
         {
+            out.reset();
             out.writeObject(new Packet(nextMessage));
             out.flush();
         }

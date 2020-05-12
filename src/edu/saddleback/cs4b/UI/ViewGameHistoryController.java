@@ -10,6 +10,7 @@ import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.Utilitys.PublicUser;
 import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTPublicUser;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import edu.saddleback.cs4b.UI.Util.GameInfo;
 import javafx.application.Platform;
@@ -75,7 +76,7 @@ public class ViewGameHistoryController implements Observer, Initializable
     TableColumn<TTTPosition, Integer> movesCol;
 
     @FXML
-    TableColumn<GameInfo, List<PublicUser>> viewersCol;
+    TableColumn<TTTPublicUser, String> viewersCol;
 
     private ObservableList<GameInfo> infoList = FXCollections.observableArrayList();
     private ObservableList<TTTPosition> coordList = FXCollections.observableArrayList();
@@ -96,7 +97,7 @@ public class ViewGameHistoryController implements Observer, Initializable
         resultCol.setCellValueFactory(new PropertyValueFactory<>("result"));
 
         movesCol.setCellValueFactory(new PropertyValueFactory<>("positionAsString"));
-        //viewersCol.setCellValueFactory(new PropertyValueFactory<>("viewers"));
+        viewersCol.setCellValueFactory(new PropertyValueFactory<>("username"));
 
         gameInfoTable.getItems().clear();
         GameHistoryRequestMessage requestMessage = (GameHistoryRequestMessage) factory.createMessage(MsgTypes.GAME_HISTORY_REQUEST.getType());
