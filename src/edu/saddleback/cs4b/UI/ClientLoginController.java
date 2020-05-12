@@ -7,7 +7,9 @@ import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
+import edu.saddleback.cs4b.UI.Util.GameManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -80,7 +82,7 @@ public class ClientLoginController implements Observer, Initializable
             AuthenticatedMessage msg = (AuthenticatedMessage) message;
             ClientUser.setInstance(msg.getAuthUser());
             ClientUser.setProfile(msg.getProfile());
-
+            GameManager.getInstance().setLocalRecord(((TTTProfile)msg.getProfile()).getGameRecord());
             swapHome("/edu/saddleback/cs4b/UI/ClientHome.fxml", loginButton);
         }
         else if(message instanceof DeniedEntryMessage)

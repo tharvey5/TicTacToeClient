@@ -2,6 +2,8 @@ package edu.saddleback.cs4b.UI.Util;
 
 import edu.saddleback.cs4b.Backend.Objects.Game;
 import edu.saddleback.cs4b.Backend.PubSub.*;
+import edu.saddleback.cs4b.Backend.Utilitys.GameRecord;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTGameRecord;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,12 +18,41 @@ public class GameManager implements Subject
     private volatile static GameManager gameManager = null;
     private Game game;
 
+    private GameRecord localRecord;
+
     private String id;
     private boolean isCreator;
     private boolean isPlayer;
     private boolean isSinglePlayer;
 
     private List<Observer> observers;
+
+    public void setLocalRecord(GameRecord record) {
+        if (record != null) {
+            this.localRecord = record;
+        } else {
+            this.localRecord = new TTTGameRecord();
+        }
+    }
+
+    public void updateWins() {
+        int wins = localRecord.getWins() + 1;
+        localRecord.setWins(wins);
+        addGame();
+    }
+
+    public void updateLosses() {
+        int losses = localRecord.getLosses() + 1;
+        localRecord.setLosses(losses);
+        addGame();
+    }
+
+    public void addGame() {
+        int games = localRecord.getNumGames() + 1;
+        localRecord.setTotalGames(games);
+    }
+
+    public GameRecord getRecord() { return localRecord; }
 
     @Override
     public void addObserver(Observer o)

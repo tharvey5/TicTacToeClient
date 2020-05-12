@@ -134,9 +134,9 @@ public class GameBoardController implements Observer, Initializable
                         outputGameMessagesLabel.setText("Waiting...");
                     });
                 } else {
-                    opponentLabel.setText(move.getUser());
                     isTurn = true;
                     Platform.runLater(() -> {
+                        opponentLabel.setText(move.getUser());
                         outputGameMessagesLabel.setText("Make a Move");
                     });
                 }
@@ -157,10 +157,16 @@ public class GameBoardController implements Observer, Initializable
             // makes room for a new game
             gameManager.clear();
             if (resMsg.getWinner() == null) {
+                gameManager.addGame();
                 Platform.runLater(()-> {
                     outputGameMessagesLabel.setText("Game has ended in a tie");
                 });
             } else {
+                if (ClientUser.getInstanceOf().getUsername().equals(resMsg.getWinner())) {
+                    gameManager.updateWins();
+                } else {
+                    gameManager.updateLosses();
+                }
                 Platform.runLater(()->{
                     outputGameMessagesLabel.setText(resMsg.getWinner() + " has won the game");
                     updateScoreboard(resMsg.getWinner());
