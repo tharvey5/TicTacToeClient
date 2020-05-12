@@ -1,5 +1,6 @@
 package edu.saddleback.cs4b.UI;
 
+import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -151,6 +152,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void handleMainMenuAction()
     {
+        ClientEventLog.getInstance().clearObservers();
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("MainMenu");
         viewScreen.setCenter(view);
@@ -159,6 +161,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void handleSinglePlayerAction()
     {
+        ClientEventLog.getInstance().clearObservers();
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("SinglePlayer");
         viewScreen.setCenter(view);
@@ -167,6 +170,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void handleMultiplayerAction()
     {
+        ClientEventLog.getInstance().clearObservers();
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("Multiplayer");
         viewScreen.setCenter(view);
@@ -175,6 +179,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void handleProfileAction()
     {
+        ClientEventLog.getInstance().clearObservers();
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("Profile");
         viewScreen.setCenter(view);
@@ -183,6 +188,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void handleEditProfileAction()
     {
+        ClientEventLog.getInstance().clearObservers();
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("ProfileEdit");
         viewScreen.setCenter(view);
@@ -191,6 +197,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void handleEditProfileUsernameAction()
     {
+        ClientEventLog.getInstance().clearObservers();
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("ProfileChangeUsername");
         viewScreen.setCenter(view);
@@ -199,6 +206,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void handleEditProfilePasswordAction()
     {
+        ClientEventLog.getInstance().clearObservers();
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("ProfileChangePassword");
         viewScreen.setCenter(view);
@@ -207,6 +215,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void handleAboutUsAction()
     {
+        ClientEventLog.getInstance().clearObservers();
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("AboutUs");
         viewScreen.setCenter(view);
@@ -215,6 +224,7 @@ public class ClientHomeController implements Initializable
     @FXML
     public void handleLogoutAction()
     {
+        ClientEventLog.getInstance().clearObservers();
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("Logout");
         viewScreen.setCenter(view);

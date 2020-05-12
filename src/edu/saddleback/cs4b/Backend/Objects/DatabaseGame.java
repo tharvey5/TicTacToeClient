@@ -4,9 +4,11 @@ import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.Subject;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.Utilitys.PublicUser;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTPublicUser;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseGame implements Game, Serializable, Subject
@@ -21,6 +23,31 @@ public class DatabaseGame implements Game, Serializable, Subject
     private PublicUser winner;
     private String id;
     private List<PublicUser> viewers;
+
+    // copy ctor
+    public DatabaseGame(Game game) {
+        //todo refactor when the other classes are cloneable
+        this.startTime = game.getStartTime();
+        this.endTime = game.getEndTime();
+
+        if (game.getStartPlayer() != null) {
+            this.startPlayer = new TTTPublicUser(game.getStartPlayer().getId(), game.getStartPlayer().getUsername());
+            this.creator = this.startPlayer;
+        }
+        if (game.getOtherPlayer() != null) {
+            this.otherPlayer = new TTTPublicUser(game.getOtherPlayer().getId(), game.getOtherPlayer().getUsername());
+        }
+
+        //this.moves = new DatabaseMoves(new ArrayList<>(game.getMoves().getMoves()));
+        this.moves = new DatabaseMoves(new ArrayList<>());
+
+        if (game.getWinner() != null) {
+            this.winner = new TTTPublicUser(game.getWinner().getId(), game.getWinner().getUsername());
+        }
+        this.id = game.getGameID();
+        this.viewers = new ArrayList<>();
+        this.viewers.addAll(game.viewers());
+    }
 
     public DatabaseGame(String startTime, String endTime, PublicUser startPlayer, PublicUser otherPlayer, PublicUser creator, Moves moves, PublicUser winner, String id, List<PublicUser> viewers)
     {

@@ -5,6 +5,7 @@ import edu.saddleback.cs4b.Backend.PubSub.Subject;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -35,5 +36,9 @@ public class ClientEventLog implements Subject {
         while (iterator.hasNext()) {
             iterator.next().update(e);
         }
+    }
+
+    public void clearObservers() {
+        observers = new CopyOnWriteArrayList<>();
     }
 }

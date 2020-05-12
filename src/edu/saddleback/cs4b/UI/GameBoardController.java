@@ -1,5 +1,6 @@
 package edu.saddleback.cs4b.UI;
 
+import edu.saddleback.cs4b.Backend.ClientPackage.Client;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientEventLog;
 import edu.saddleback.cs4b.Backend.ClientPackage.ClientUser;
 import edu.saddleback.cs4b.Backend.Messages.*;
@@ -9,7 +10,6 @@ import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
-import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import edu.saddleback.cs4b.Backend.Utilitys.User;
 import edu.saddleback.cs4b.UI.Util.GameManager;
 import javafx.application.Platform;
@@ -48,16 +48,16 @@ public class GameBoardController implements Observer, Initializable
     private Map<String, GameTiles> tileMapping = makeTileMapping();
 
     @FXML
-    private Label player1Label;
+    private Label yourNameLabel;
 
     @FXML
-    private Label player1ScoreLabel;
+    private Label yourNameScoreLabel;
 
     @FXML
-    private Label player2Label;
+    private Label opponentLabel;
 
     @FXML
-    private Label player2ScoreLabel;
+    private Label opponentScoreLabel;
 
     @FXML
     private Button leaveGameButton;
@@ -87,8 +87,10 @@ public class GameBoardController implements Observer, Initializable
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            player1ScoreLabel.setText("0");
-            player2ScoreLabel.setText("0");
+            //todo fix this
+            //yourNameLabel.setText(gameManager.getGame().getCreator().getUsername());
+            yourNameScoreLabel.setText("0");
+            opponentScoreLabel.setText("0");
             if (gameManager.isCreator()) {
                 outputGameMessagesLabel.setText("YOU START!");
                 isTurn = true;
@@ -96,7 +98,7 @@ public class GameBoardController implements Observer, Initializable
                 outputGameMessagesLabel.setText("WAITING FOR PLAYER 1 TO MOVE");
                 isTurn = false;
             } else {
-                outputGameMessagesLabel.setText("YOU ARE VIEWING GAME " + gameManager.getId());
+                outputGameMessagesLabel.setText("YOU ARE VIEWING GAME " + gameManager.getGame().getCreator() + " \'s game");
                 isTurn = false;
             }
         });
@@ -125,7 +127,6 @@ public class GameBoardController implements Observer, Initializable
         {
             ValidMoveMessage move = (ValidMoveMessage) message;
             setToken(findTile(move.getCoordinate()), userTokens.get(move.getToken().getTokenID()));
-
             if (gameManager.isPlayer()) {
                 if (move.getUser().equals(user.getUsername())) {
                     isTurn = false;
@@ -135,6 +136,7 @@ public class GameBoardController implements Observer, Initializable
                 } else {
                     isTurn = true;
                     Platform.runLater(() -> {
+                        opponentLabel.setText(move.getUser());
                         outputGameMessagesLabel.setText("Make a Move");
                     });
                 }
@@ -155,10 +157,16 @@ public class GameBoardController implements Observer, Initializable
             // makes room for a new game
             gameManager.clear();
             if (resMsg.getWinner() == null) {
+                gameManager.addGame();
                 Platform.runLater(()-> {
                     outputGameMessagesLabel.setText("Game has ended in a tie");
                 });
             } else {
+                if (ClientUser.getInstanceOf().getUsername().equals(resMsg.getWinner())) {
+                    gameManager.updateWins();
+                } else {
+                    gameManager.updateLosses();
+                }
                 Platform.runLater(()->{
                     outputGameMessagesLabel.setText(resMsg.getWinner() + " has won the game");
                     updateScoreboard(resMsg.getWinner());

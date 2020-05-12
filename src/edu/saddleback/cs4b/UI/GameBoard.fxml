@@ -100,22 +100,22 @@
             <Image url="@Injection.png" />
          </image>
       </ImageView>
-      <Label fx:id="player1Label" alignment="CENTER" layoutX="55.0" layoutY="86.0" text="Player 1" textFill="WHITE" underline="true">
+      <Label fx:id="yourNameLabel" alignment="CENTER" layoutX="55.0" layoutY="86.0" text="Player 1" textFill="WHITE" underline="true">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="player2Label" alignment="CENTER" layoutX="668.0" layoutY="86.0" text="Player 2" textFill="WHITE" underline="true">
+      <Label fx:id="opponentLabel" alignment="CENTER" layoutX="668.0" layoutY="86.0" text="Opponent" textFill="WHITE" underline="true">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="player1ScoreLabel" alignment="CENTER" layoutX="64.0" layoutY="119.0" text="Score" textFill="WHITE">
+      <Label fx:id="yourNameScoreLabel" alignment="CENTER" layoutX="64.0" layoutY="119.0" text="Score" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="player2ScoreLabel" alignment="CENTER" layoutX="679.0" layoutY="119.0" text="Score" textFill="WHITE">
+      <Label fx:id="opponentScoreLabel" alignment="CENTER" layoutX="679.0" layoutY="119.0" text="Score" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
