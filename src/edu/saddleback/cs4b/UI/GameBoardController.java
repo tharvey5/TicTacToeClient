@@ -99,7 +99,7 @@ public class GameBoardController implements Observer, Initializable
                 outputGameMessagesLabel.setText("WAITING FOR PLAYER 1 TO MOVE");
                 isTurn = false;
             } else {
-                outputGameMessagesLabel.setText("YOU ARE VIEWING GAME " + gameManager.getGame().getCreator() + " \'s game");
+                outputGameMessagesLabel.setText("YOU ARE VIEWING GAME " + gameManager.getGame().getCreator().getUsername() + " \'s game");
                 isTurn = false;
             }
 
