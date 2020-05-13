@@ -105,6 +105,13 @@ public final class ClientAIRunner implements Observer, Runnable {
                     gameId = GameManager.getInstance().getId();
                     System.out.println("ai notified of newgame for game " + gameId);
                 }
+                // todo added before demo
+            } else if (bm instanceof AuthenticatedMessage) {
+                if (((AuthenticatedMessage) bm).getAuthUser().getUsername().matches("HardAI.*")) {
+                    aiAcct = ((AuthenticatedMessage) bm).getAuthUser();
+                    System.out.println(aiAcct.getUsername());
+                    System.out.println("name change");
+                }
             }
         }
     }
