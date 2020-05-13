@@ -103,10 +103,8 @@ public final class ClientAIRunner implements Observer, Runnable {
             } else if (bm instanceof RequestAIMessage) {
                 if (gameManager.isSinglePlayer()) {
                     gameId = GameManager.getInstance().getId();
+                    System.out.println("ai notified of newgame for game " + gameId);
                 }
-
-
-                System.out.println("ai notified of newgame for game " + gameId);
             }
         }
     }
@@ -189,7 +187,8 @@ public final class ClientAIRunner implements Observer, Runnable {
     }
 
     private void listenForGameId() {
-        while(gameId == null && !gameManager.isSinglePlayer()) {};
+        while(gameId == null) {};
+        while (!gameManager.isSinglePlayer()){}
     }
 
     private void listenForStart() {

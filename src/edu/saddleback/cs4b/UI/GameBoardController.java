@@ -84,6 +84,7 @@ public class GameBoardController implements Observer, Initializable
                 e.printStackTrace();
             }
 
+            yourNameLabel.setText(user.getUsername());
             if (gameManager.isCreator())
             {
                 outputGameMessagesLabel.setText("YOU START!");
