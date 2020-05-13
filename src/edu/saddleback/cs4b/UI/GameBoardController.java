@@ -98,6 +98,7 @@ public class GameBoardController implements Observer, Initializable
                 isTurn = false;
             } else {
                 yourNameLabel.setText(gameManager.getGame().getCreator().getUsername());
+                opponentLabel.setText(gameManager.getGame().getOtherPlayer().getUsername());
                 outputGameMessagesLabel.setText("YOU ARE VIEWING GAME " + gameManager.getGame().getCreator().getUsername() + " \'s game");
                 isTurn = false;
             }
