@@ -36,7 +36,6 @@ public class MultiplayerController implements Observer, Initializable
 {
     private UIEventLog uilog = UIEventLog.getInstance();
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.GAME_FACT.getTypes());
-    private User user = ClientUser.getInstanceOf();
     private GameManager gameManager = GameManager.getInstance();
 
     @FXML
@@ -186,6 +185,16 @@ public class MultiplayerController implements Observer, Initializable
         gameTable.getItems().clear();
         RequestAllActiveGamesMessage activeGamesMessage = new RequestAllActiveGamesMessage();
         uilog.notifyObservers(new MessageEvent(activeGamesMessage));
+    }
+
+    @FXML
+    public void onRowClicked()
+    {
+        if(gameTable.getSelectionModel().getSelectedItem() != null)
+        {
+            spectateButton.setDisable(false);
+            joinButton.setDisable(false);
+        }
     }
 
     /**

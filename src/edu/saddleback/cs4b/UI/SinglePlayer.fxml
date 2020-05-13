@@ -17,7 +17,7 @@
       </Label>
       <Line endX="410.0" layoutX="141.0" layoutY="92.0" startX="-100.0" stroke="WHITE" />
       <Line endX="410.0" layoutX="141.0" layoutY="32.0" startX="-100.0" stroke="WHITE" />
-      <Button fx:id="playGameButton" layoutX="382.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#handlePlayGameAction" onMouseEntered="#highlightPlayGame" onMouseExited="#resetPlayGame" prefHeight="27.0" prefWidth="204.0" style="-fx-background-color: #008000; -fx-background-radius: 40;" text="Play Game" textFill="WHITE">
+      <Button fx:id="playGameButton" layoutX="135.0" layoutY="249.0" mnemonicParsing="false" onMouseClicked="#handlePlayGameAction" onMouseEntered="#highlightPlayGame" onMouseExited="#resetPlayGame" prefHeight="51.0" prefWidth="330.0" style="-fx-background-color: #008000; -fx-background-radius: 40;" text="Play Game" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>

@@ -27,62 +27,54 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Pane id="board11" onMouseClicked="#boardElementClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@gametiles.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Pane id="board11" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#boardElementClicked" prefHeight="130.0" prefWidth="130.0" stylesheets="@gametiles.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="115.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <Pane id="board12" onMouseClicked="#boardElementClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@gametiles.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Pane id="board12" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#boardElementClicked" prefHeight="130.0" prefWidth="130.0" stylesheets="@gametiles.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <ImageView fitHeight="108.0" fitWidth="129.0" layoutX="4.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="115.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <Pane id="board10" onMouseClicked="#boardElementClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@gametiles.css" GridPane.rowIndex="1">
+            <Pane id="board10" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#boardElementClicked" prefHeight="130.0" prefWidth="130.0" stylesheets="@gametiles.css" GridPane.rowIndex="1">
                <children>
-                  <ImageView fitHeight="109.0" fitWidth="128.0" layoutX="5.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="115.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <Pane id="board20" onMouseClicked="#boardElementClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@gametiles.css" GridPane.rowIndex="2">
+            <Pane id="board20" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#boardElementClicked" prefHeight="130.0" prefWidth="130.0" stylesheets="@gametiles.css" GridPane.rowIndex="2">
                <children>
-                  <ImageView fitHeight="112.0" fitWidth="128.0" layoutX="5.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="115.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <Pane id="board21" onMouseClicked="#boardElementClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@gametiles.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Pane id="board21" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#boardElementClicked" prefHeight="130.0" prefWidth="130.0" stylesheets="@gametiles.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <ImageView fitHeight="112.0" fitWidth="129.0" layoutX="4.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="115.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <Pane onMouseClicked="#boardElementClicked" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#boardElementClicked" prefHeight="130.0" prefWidth="130.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <ImageView fitHeight="109.0" fitWidth="130.0" layoutX="4.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="115.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <Pane id="board00" onMouseClicked="#boardElementClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@gametiles.css">
+            <Pane id="board00" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#boardElementClicked" prefHeight="130.0" prefWidth="130.0" stylesheets="@gametiles.css">
                <children>
-                  <ImageView fitHeight="109.0" fitWidth="130.0" layoutX="4.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="115.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <Pane id="board01" onMouseClicked="#boardElementClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@gametiles.css" GridPane.columnIndex="1">
+            <Pane id="board01" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#boardElementClicked" prefHeight="130.0" prefWidth="130.0" stylesheets="@gametiles.css" GridPane.columnIndex="1">
                <children>
-                  <ImageView fitHeight="109.0" fitWidth="130.0" layoutX="4.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="115.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <Pane id="board02" onMouseClicked="#boardElementClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@gametiles.css" GridPane.columnIndex="2">
+            <Pane id="board02" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#boardElementClicked" prefHeight="130.0" prefWidth="130.0" stylesheets="@gametiles.css" GridPane.columnIndex="2">
                <children>
-                  <ImageView fitHeight="109.0" fitWidth="130.0" layoutX="4.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="115.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
          </children>
       </GridPane>
       <Button fx:id="leaveGameButton" layoutX="14.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#handleLeaveGameAction" onMouseEntered="#highlightLeaveGame" onMouseExited="#resetLeaveGame" style="-fx-background-color: #FFFFFF;" text="Leave Game">
-         <font>
-            <Font size="24.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <Button fx:id="rematchButton" layoutX="627.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#handleRematchAction" onMouseEntered="#highlightRematch" onMouseExited="#resetRematch" prefHeight="45.0" prefWidth="159.0" style="-fx-background-color: #FFFFFF;" text="Rematch">
          <font>
             <Font size="24.0" />
          </font>
@@ -106,16 +98,6 @@
          </font>
       </Label>
       <Label fx:id="opponentLabel" alignment="CENTER" layoutX="668.0" layoutY="86.0" text="Opponent" textFill="WHITE" underline="true">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="yourNameScoreLabel" alignment="CENTER" layoutX="64.0" layoutY="119.0" text="Score" textFill="WHITE">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="opponentScoreLabel" alignment="CENTER" layoutX="679.0" layoutY="119.0" text="Score" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>

@@ -52,19 +52,10 @@ public class GameBoardController implements Observer, Initializable
     private Label yourNameLabel;
 
     @FXML
-    private Label yourNameScoreLabel;
-
-    @FXML
     private Label opponentLabel;
 
     @FXML
-    private Label opponentScoreLabel;
-
-    @FXML
     private Button leaveGameButton;
-
-    @FXML
-    private Button rematchButton;
 
     @FXML
     private Label outputGameMessagesLabel;
@@ -82,20 +73,24 @@ public class GameBoardController implements Observer, Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        Platform.runLater(()-> {
-            try {
+        Platform.runLater(()->
+        {
+            try
+            {
                 Thread.sleep(100);
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e)
+            {
                 e.printStackTrace();
             }
-            //todo fix this
-            //yourNameLabel.setText(gameManager.getGame().getCreator().getUsername());
-            yourNameScoreLabel.setText("0");
-            opponentScoreLabel.setText("0");
-            if (gameManager.isCreator()) {
+
+            if (gameManager.isCreator())
+            {
                 outputGameMessagesLabel.setText("YOU START!");
                 isTurn = true;
-            } else if (gameManager.isPlayer()) {
+            }
+            else if (gameManager.isPlayer())
+            {
                 outputGameMessagesLabel.setText("WAITING FOR PLAYER 1 TO MOVE");
                 isTurn = false;
             } else {
@@ -140,15 +135,21 @@ public class GameBoardController implements Observer, Initializable
         {
             ValidMoveMessage move = (ValidMoveMessage) message;
             setToken(findTile(move.getCoordinate()), userTokens.get(move.getToken().getTokenID()));
-            if (gameManager.isPlayer()) {
-                if (move.getUser().equals(user.getUsername())) {
+            if (gameManager.isPlayer())
+            {
+                if (move.getUser().equals(user.getUsername()))
+                {
                     isTurn = false;
-                    Platform.runLater(() -> {
+                    Platform.runLater(() ->
+                    {
                         outputGameMessagesLabel.setText("Waiting...");
                     });
-                } else {
+                }
+                else
+                {
                     isTurn = true;
-                    Platform.runLater(() -> {
+                    Platform.runLater(() ->
+                    {
                         opponentLabel.setText(move.getUser());
                         outputGameMessagesLabel.setText("Make a Move");
                     });
@@ -157,7 +158,8 @@ public class GameBoardController implements Observer, Initializable
         }
         else if (message instanceof InvalidMoveMessage && gameManager.isPlayer())
         {
-            Platform.runLater(()-> {
+            Platform.runLater(()->
+            {
                 outputGameMessagesLabel.setText("Invalid Placement Spot Taken");
             });
             isTurn = true;
@@ -169,34 +171,36 @@ public class GameBoardController implements Observer, Initializable
             // clears the data about the previous game in the manager
             // makes room for a new game
             gameManager.clear();
-            if (resMsg.getWinner() == null) {
+            if (resMsg.getWinner() == null)
+            {
                 gameManager.addGame();
-                Platform.runLater(()-> {
+                Platform.runLater(()->
+                {
                     outputGameMessagesLabel.setText("Game has ended in a tie");
                 });
-            } else {
-                if (ClientUser.getInstanceOf().getUsername().equals(resMsg.getWinner())) {
+            }
+            else
+            {
+                if (ClientUser.getInstanceOf().getUsername().equals(resMsg.getWinner()))
+                {
                     gameManager.updateWins();
-                } else {
+                }
+                else
+                {
                     gameManager.updateLosses();
                 }
                 Platform.runLater(()->{
                     outputGameMessagesLabel.setText(resMsg.getWinner() + " has won the game");
-                    updateScoreboard(resMsg.getWinner());
                 });
             }
         }
     }
 
-    private void updateScoreboard(String winner) {
-        //todo -- gonna hold off for possibly better information
-        // regarding the winner than doing it based on name
-    }
-
     @FXML
     void boardElementClicked(Event e)
     {
-        if (isTurn && gameManager.isPlayer()) {
+        if (isTurn && gameManager.isPlayer())
+        {
             GameTiles tile = tileMapping.get(GridPane.getRowIndex((Node) e.getSource()) + ", " + GridPane.getColumnIndex((Node) e.getSource()));
             MoveMessage moveMessage = (MoveMessage) factory.createMessage(MsgTypes.MOVE.getType());
             moveMessage.setCoordinate(new TTTPosition(tile.getTileRow(), tile.getTileColumn()));
@@ -206,13 +210,16 @@ public class GameBoardController implements Observer, Initializable
     }
 
     // could make this more efficient by mapping the coordinate to its index vs a search
-    private Node findTile(Coordinate coordinate) {
+    private Node findTile(Coordinate coordinate)
+    {
         Node node = null;
         ObservableList<Node> children = gameBoard.getChildren();
-        for (Node n : children) {
+        for (Node n : children)
+        {
             GameTiles tile = tileMapping.get(GridPane.getRowIndex(n) + ", " + GridPane.getColumnIndex(n));
             if (tile.getTileRow() == (Integer)coordinate.getXCoord() &&
-                    tile.getTileColumn() == (Integer)(coordinate.getYCoord())) {
+                    tile.getTileColumn() == (Integer)(coordinate.getYCoord()))
+            {
                 node = n;
                 break;
             }
@@ -242,11 +249,6 @@ public class GameBoardController implements Observer, Initializable
 
     }
 
-    @FXML
-    public void handleRematchAction()
-    {
-
-    }
 
     @FXML
     public void handleLeaveGameAction() throws IOException
@@ -273,24 +275,6 @@ public class GameBoardController implements Observer, Initializable
         leaveGameButton.setOnMouseExited(mouseEvent -> leaveGameButton.setTextFill(Color.BLACK));
     }
 
-    /**
-     * WHEN THIS METHOD IS CALLED THE 'LEAVE GAME' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
-     */
-    @FXML
-    public void highlightRematch()
-    {
-        rematchButton.setOnMouseEntered(mouseEvent -> rematchButton.setTextFill(Color.valueOf("#FFD700")));
-    }
-
-    /**
-     * WHEN THIS METHOD IS CALLED THE 'LEAVE GAME' BUTTON WILL CHANGE BACK TO THE DEFAULT TEXT COLOR WHEN THE MOUSE IS
-     * NO LONGER HOVERING OVER IT
-     */
-    @FXML
-    public void resetRematch()
-    {
-        rematchButton.setOnMouseExited(mouseEvent -> rematchButton.setTextFill(Color.BLACK));
-    }
 
     public void swapHomeMainMenu(String sceneLocation, Button button) throws IOException
     {
