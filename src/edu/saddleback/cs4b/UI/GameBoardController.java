@@ -84,17 +84,20 @@ public class GameBoardController implements Observer, Initializable
                 e.printStackTrace();
             }
 
-            yourNameLabel.setText(user.getUsername());
+
             if (gameManager.isCreator())
             {
+                yourNameLabel.setText(user.getUsername());
                 outputGameMessagesLabel.setText("YOU START!");
                 isTurn = true;
             }
             else if (gameManager.isPlayer())
             {
+                yourNameLabel.setText(user.getUsername());
                 outputGameMessagesLabel.setText("WAITING FOR PLAYER 1 TO MOVE");
                 isTurn = false;
             } else {
+                yourNameLabel.setText(gameManager.getGame().getCreator().getUsername());
                 outputGameMessagesLabel.setText("YOU ARE VIEWING GAME " + gameManager.getGame().getCreator().getUsername() + " \'s game");
                 isTurn = false;
             }
