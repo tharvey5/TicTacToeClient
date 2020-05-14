@@ -61,5 +61,15 @@
             <Font size="16.0" />
          </font>
       </Label>
+      <Label layoutX="172.0" layoutY="433.0" text="Remember Always..." textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="180.0" layoutY="496.0" text="Defer and Deflect!" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
