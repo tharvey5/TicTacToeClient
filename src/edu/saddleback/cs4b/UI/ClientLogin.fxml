@@ -88,6 +88,9 @@
             <Font size="16.0" />
          </font>
       </PasswordField>
-      <Button fx:id="forgotPasswordButton" layoutX="445.0" layoutY="489.0" mnemonicParsing="false" onMouseClicked="#handleForgotPasswordAction" onMouseEntered="#highlightForgotPassword" onMouseExited="#resetForgotPassword" style="-fx-background-color: #FFFFFF;" text="Forgot Password?" textFill="#00bfff" />
+      <Button fx:id="forgotPasswordButton" layoutX="445.0" layoutY="489.0" mnemonicParsing="false" onMouseClicked="#handleForgotPasswordAction" onMouseEntered="#highlightForgotPassword" onMouseExited="#resetForgotPassword" style="-fx-background-color: #FFFFFF;" text="Forgot Password?" textFill="#00bfff">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    </children>
 </AnchorPane>
