@@ -1,27 +1,30 @@
 package edu.saddleback.cs4b.Backend.Messages;
 
+import edu.saddleback.cs4b.Backend.Objects.Game;
+
 public class SuccessfulViewGameMessage extends BaseMessage
 {
-    String gameID;
+    private Game game;
 
     public SuccessfulViewGameMessage()
     {
         this(null);
     }
 
-    public SuccessfulViewGameMessage(String newGameID)
+    public SuccessfulViewGameMessage(Game game)
     {
         super(MsgTypes.SUCCESS_VIEW_GAME);
-        gameID = newGameID;
+        this.game = game;
     }
 
     public String getGameID()
     {
-        return gameID;
+        return game.getGameID();
     }
 
-    public void setGameID(String newGameID)
-    {
-        this.gameID = newGameID;
+    public void setGame(Game game) {
+        this.game = game;
     }
+
+    public Game getGame() { return game; }
 }

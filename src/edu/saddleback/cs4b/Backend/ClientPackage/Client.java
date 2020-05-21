@@ -1,7 +1,9 @@
 package edu.saddleback.cs4b.Backend.ClientPackage;
 
+import edu.saddleback.cs4b.Backend.PubSub.Subject;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 import edu.saddleback.cs4b.Backend.PubSub.UIObserver;
+import edu.saddleback.cs4b.Backend.PubSub.UISubject;
 
 import java.io.*;
 import java.net.Socket;
@@ -19,10 +21,10 @@ public class Client implements UIObserver {
 
     public Client()
     {
-        this("", -1);
+        this("", -1, null, null);
     }
 
-    public Client(String newHostName, int newPortNumber)
+    public Client(String newHostName, int newPortNumber, UISubject uiPublisher, Subject clientPublisher)
     {
         //Establishing socket and IOStreams
         portNumber = newPortNumber;
@@ -33,7 +35,7 @@ public class Client implements UIObserver {
 
 
         //creating socket, sender, reciever
-        startUp();
+        startUp(uiPublisher, clientPublisher);
     }
 
     private void createSocket()
@@ -54,11 +56,11 @@ public class Client implements UIObserver {
         }
     }
 
-    private void startUp()
+    private void startUp(UISubject uiPublisher, Subject clientPublisher)
     {
         createSocket();
-        this.sender          = new PacketSender(out);
-        this.receiver        = new PacketReceiver(in);
+        this.sender          = new PacketSender(out, uiPublisher);
+        this.receiver        = new PacketReceiver(in, clientPublisher);
         this.listeningThread = new Thread(receiver);
         listeningThread.start();
 //        if(out != null && in != null)

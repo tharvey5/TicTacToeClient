@@ -3,13 +3,8 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -21,106 +16,8 @@
          </font>
       </Label>
       <Line endX="410.0" layoutX="141.0" layoutY="92.0" startX="-100.0" stroke="WHITE" />
-      <VBox layoutX="347.0" layoutY="194.0" prefHeight="108.0" prefWidth="165.0" spacing="10.0">
-         <children>
-            <RadioButton fx:id="selectModeEasy" mnemonicParsing="false" text="Easy" textFill="WHITE">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <toggleGroup>
-                  <ToggleGroup fx:id="difficultyGroup" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="selectModeNormal" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Normal" textFill="WHITE" toggleGroup="$difficultyGroup">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </RadioButton>
-            <RadioButton fx:id="selectModeHard" layoutX="10.0" layoutY="37.0" mnemonicParsing="false" text="Hard" textFill="WHITE" toggleGroup="$difficultyGroup">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </RadioButton>
-         </children>
-      </VBox>
-      <Label layoutX="348.0" layoutY="132.0" text="Select Difficulty:" textFill="WHITE" underline="true">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-      <Label layoutX="39.0" layoutY="132.0" text="Select Player Options:" textFill="WHITE" underline="true">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
       <Line endX="410.0" layoutX="141.0" layoutY="32.0" startX="-100.0" stroke="WHITE" />
-      <VBox layoutX="39.0" layoutY="208.0" prefHeight="99.0" prefWidth="67.0" spacing="10.0">
-         <children>
-            <RadioButton fx:id="token_1_XO" lineSpacing="10.0" mnemonicParsing="false" textFill="WHITE">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Red-X.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <toggleGroup>
-                  <ToggleGroup fx:id="tokenGroup" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="token_2_XO" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" textFill="WHITE" toggleGroup="$tokenGroup">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@X-default.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </RadioButton>
-         </children>
-      </VBox>
-      <Label layoutX="39.0" layoutY="182.0" text="Select Your Tokens:" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="108.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Blue-O.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="108.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@O-default.png" />
-         </image>
-      </ImageView>
-      <VBox layoutX="41.0" layoutY="377.0" prefHeight="67.0" prefWidth="305.0" spacing="6.0">
-         <children>
-            <RadioButton fx:id="selectTurnPlayer" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Player Goes First" textFill="WHITE">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <toggleGroup>
-                  <ToggleGroup fx:id="turnGroup" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="selectTurnComputer" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Computer Goes First" textFill="WHITE" toggleGroup="$turnGroup">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </RadioButton>
-         </children>
-      </VBox>
-      <Label fx:id="noTurnSelection" layoutX="41.0" layoutY="454.0" text="Error Message" textFill="RED" />
-      <Label fx:id="noTokenSelection" layoutX="41.0" layoutY="312.0" text="Error Message" textFill="RED" />
-      <Label fx:id="noDifficultySelection" layoutX="350.0" layoutY="312.0" text="Error Message" textFill="RED" />
-      <Button fx:id="playGameButton" layoutX="213.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#handlePlayGameAction" onMouseEntered="#highlightPlayGame" onMouseExited="#resetPlayGame" prefHeight="27.0" prefWidth="204.0" style="-fx-background-color: #008000; -fx-background-radius: 40;" text="Play Game" textFill="WHITE">
+      <Button fx:id="playGameButton" layoutX="135.0" layoutY="249.0" mnemonicParsing="false" onMouseClicked="#handlePlayGameAction" onMouseEntered="#highlightPlayGame" onMouseExited="#resetPlayGame" prefHeight="51.0" prefWidth="330.0" style="-fx-background-color: #008000; -fx-background-radius: 40;" text="Play Game" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
@@ -131,10 +28,5 @@
             <DropShadow height="8.93" radius="1.7325" width="0.0" />
          </effect>
       </Button>
-      <Label layoutX="41.0" layoutY="342.0" text="Select Turn Order:" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

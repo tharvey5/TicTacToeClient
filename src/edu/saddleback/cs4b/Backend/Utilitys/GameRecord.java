@@ -8,6 +8,7 @@ public interface GameRecord
 {
     public List<Game> getGameRecord();
     public void setGameRecord(List<Game> newGameRecord);
+    void setTotalGames(int total);
 
     public int  getNumGames();
     public void addGame(Game newGame);

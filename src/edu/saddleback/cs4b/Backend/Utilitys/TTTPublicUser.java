@@ -1,5 +1,7 @@
 package edu.saddleback.cs4b.Backend.Utilitys;
 
+import java.io.Serializable;
+
 /**
  * This user will only contain information about a user
  * that is safe for public visibility
@@ -7,7 +9,7 @@ package edu.saddleback.cs4b.Backend.Utilitys;
  * NOTE: Our user structure could of been designed in a better way
  * possibly using an abstract class for the specific use cases
  */
-public class TTTPublicUser implements PublicUser {
+public class TTTPublicUser implements PublicUser, Serializable {
     private String id;
     private String username;
 

@@ -5,20 +5,19 @@ import edu.saddleback.cs4b.Backend.PubSub.Subject;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class ClientEventLog implements Subject {
-    private static ClientEventLog log = new ClientEventLog();
+public class Client2EventLog implements Subject {
+    private static Client2EventLog log = new Client2EventLog();
     private List<Observer> observers;
 
-    private ClientEventLog() {
+    private Client2EventLog() {
         observers = new CopyOnWriteArrayList<>(); // todo costly, find alternative later
     }
 
-    public static ClientEventLog getInstance() { return log; }
+    public static Client2EventLog getInstance() { return log; }
 
     @Override
     public void addObserver(Observer o) {
@@ -37,8 +36,5 @@ public class ClientEventLog implements Subject {
             iterator.next().update(e);
         }
     }
-
-    public void clearObservers() {
-        observers = new CopyOnWriteArrayList<>();
-    }
 }
+

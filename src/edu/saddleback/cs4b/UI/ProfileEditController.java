@@ -56,6 +56,9 @@ public class ProfileEditController implements Observer, Initializable
     @FXML
     Label winLossTieLabel;
 
+    @FXML
+    Button deactivateAccountBtn;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -89,10 +92,10 @@ public class ProfileEditController implements Observer, Initializable
     private void handleMessageEvents(BaseMessage message) throws IOException
     {
         System.out.println("Message Received");
-        if(message instanceof SuccessfulRegistrationMessage)
+        if(message instanceof SuccessfulUpdateProfileMessage)
         {
             System.out.println("Changes Updated");
-            SuccessfulRegistrationMessage msg = (SuccessfulRegistrationMessage) message;
+            SuccessfulUpdateProfileMessage msg = (SuccessfulUpdateProfileMessage) message;
             ClientUser.setInstance(msg.getUser());
             swapHomeProfile("/edu/saddleback/cs4b/UI/ClientHome.fxml", saveChangesButton);
 
@@ -100,6 +103,10 @@ public class ProfileEditController implements Observer, Initializable
         else if(message instanceof RegistrationErrorMessage)
         {
             System.out.println("Denied Change");
+        }
+        else if (message instanceof DeactivationConfirmationMessage)
+        {
+            swapToLogin("/edu/saddleback/cs4b/UI/ClientLogin.fxml" , deactivateAccountBtn);
         }
     }
 
@@ -111,10 +118,10 @@ public class ProfileEditController implements Observer, Initializable
 
         if(!firstName.equals("") && !lastName.equals(""))
         {
-            ProfileMessage profileUpdate = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
+            UpdateProfileMessage updateProfileMessage = (UpdateProfileMessage) factory.createMessage(MsgTypes.UPDATE_PROFILE.getType());
             Profile prof = new TTTProfile(user.getUsername(), firstName, lastName, user.getPassword());
-            profileUpdate.setProfile(prof);
-            uilog.notifyObservers(new MessageEvent(profileUpdate));
+            updateProfileMessage.setProfile(prof);
+            uilog.notifyObservers(new MessageEvent(updateProfileMessage));
         }
     }
 
@@ -122,6 +129,13 @@ public class ProfileEditController implements Observer, Initializable
     public void handleChangeProfilePictureAction()
     {
 
+    }
+
+    @FXML
+    public void handleDeactivateAccountAction()
+    {
+        AcctDeactivationMessage message = (AcctDeactivationMessage) factory.createMessage(MsgTypes.ACCT_DEACTIVATION.getType());
+        uilog.notifyObservers(new MessageEvent(message));
     }
 
     @FXML
@@ -212,6 +226,25 @@ public class ProfileEditController implements Observer, Initializable
         changePasswordButton.setOnMouseExited(mouseEvent -> changePasswordButton.setTextFill(Color.BLACK));
     }
 
+    /**
+     * WHEN THIS METHOD IS CALLED THE 'DEACTIVATE ACCOUNT' BUTTON WILL CHANGE COLOR WHEN THE MOUSE IS HOVERING OVER IT
+     */
+    @FXML
+    public void highlightDeactivateAccount()
+    {
+        changePasswordButton.setOnMouseEntered(mouseEvent -> changePasswordButton.setTextFill(Color.valueOf("#FFD700")));
+    }
+
+    /**
+     * WHEN THIS METHOD IS CALLED THE 'DEACTIVATE ACCOUNT' BUTTON WILL CHANGE BACK TO THE DEFAULT TEXT COLOR WHEN THE MOUSE IS
+     * NO LONGER HOVERING OVER IT
+     */
+    @FXML
+    public void resetDeactivateAccount()
+    {
+        changePasswordButton.setOnMouseExited(mouseEvent -> changePasswordButton.setTextFill(Color.WHITE));
+    }
+
     public void swapHomeProfile(String sceneLocation, Button button) throws IOException
     {
         ClientEventLog.getInstance().removeObserver(this);
@@ -259,6 +292,21 @@ public class ProfileEditController implements Observer, Initializable
 
         ClientHomeController crtl = loader.getController();
         crtl.handleEditProfilePasswordAction();
+
+        Platform.runLater(()->
+        {
+            window.setScene(scene);
+            window.show();
+        });
+    }
+
+    public void swapToLogin(String sceneLocation, Button button) throws IOException
+    {
+        ClientEventLog.getInstance().removeObserver(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneLocation));
+        Parent root = loader.load();
+        Scene scene  = new Scene(root);
+        Stage window = (Stage)(button).getScene().getWindow();
 
         Platform.runLater(()->
         {

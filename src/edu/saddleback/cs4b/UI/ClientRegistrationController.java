@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -36,7 +37,10 @@ public class ClientRegistrationController implements Observer, Initializable
     TextField usernameField;
 
     @FXML
-    TextField passwordField;
+    PasswordField passwordField;
+
+    @FXML
+    PasswordField confirmPasswordField;
 
     @FXML
     TextField firstNameField;
@@ -47,10 +51,14 @@ public class ClientRegistrationController implements Observer, Initializable
     @FXML
     Label usernameError;
 
+    @FXML
+    Label passwordError;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         usernameError.setText("");
+        passwordError.setText("");
     }
 
     public ClientRegistrationController()
@@ -76,10 +84,7 @@ public class ClientRegistrationController implements Observer, Initializable
         }
         else if (message instanceof RegistrationErrorMessage)
         {
-            Platform.runLater(()->
-            {
-                invalidUsername();
-            });
+            Platform.runLater(()-> invalidUsername());
         }
     }
 
@@ -90,17 +95,23 @@ public class ClientRegistrationController implements Observer, Initializable
         String lastName  = lastNameField.getText();
         String username  = usernameField.getText();
         String password  = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
 
-        if (!firstName.equals("") && !lastName.equals("") && !username.equals("") && !password.equals(""))
+        if (!firstName.equals("") && !lastName.equals("") && !username.equals("") && !password.equals("") && !confirmPassword.equals(""))
         {
-            ProfileMessage profileMessage = (ProfileMessage) factory.createMessage(MsgTypes.PROFILE.getType());
-            Profile prof = new TTTProfile(username, firstName, lastName, password);
-            profileMessage.setProfile(prof);
-            uilog.notifyObservers(new MessageEvent(profileMessage));
-        }
-        else
-        {
-            // generate an error message to the screen
+            if(password.equals(confirmPassword))
+            {
+                RegistrationMessage registrationMessage = (RegistrationMessage) factory.createMessage(MsgTypes.REGISTRATION.getType());
+                Profile prof = new TTTProfile(username, firstName, lastName, password);
+                registrationMessage.setProfile(prof);
+                uilog.notifyObservers(new MessageEvent(registrationMessage));
+            }
+            else
+            {
+                invalidPassword();
+                passwordField.clear();
+                confirmPasswordField.clear();
+            }
         }
     }
 
@@ -115,7 +126,13 @@ public class ClientRegistrationController implements Observer, Initializable
     {
         usernameField.setText("");
         usernameError.setText("* Username Already Exists!");
+    }
 
+    @FXML
+    public void invalidPassword()
+    {
+        passwordError.setText("");
+        passwordError.setText("* Password Does Not Match!");
     }
 
     /**

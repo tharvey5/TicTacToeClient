@@ -1,6 +1,8 @@
 package edu.saddleback.cs4b.Backend.Objects;
 
-public class TTTPosition implements Coordinate
+import java.io.Serializable;
+
+public class TTTPosition implements Coordinate, Serializable
 {
     private int xCoord;
     private int yCoord;
@@ -34,6 +36,8 @@ public class TTTPosition implements Coordinate
     {
         this.yCoord = yCoord;
     }
+
+    public String getPositionAsString() { return toString(); }
 
     public String toString()
     {

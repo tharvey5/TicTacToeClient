@@ -1,0 +1,58 @@
+/*
+ * PLEASE READ: Layout of border arguments order: TOP RIGHT BOTTOM LEFT
+ *      (1) 0 width essential gets rid of border
+ *      (2) Each tile has a unique id #border<row column>
+ *      (3) Color changing on individual border follow same scheme as above
+ *          just make sure to add -fx-border-color inside the unique #board<row column>
+ *          if doing custom work on individual tiles otherwise it will apply to all elements
+ *
+ * JAVAFX CSS REFERENCE GUIDE: https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html
+ * original color 004CBB
+ */
+
+/* Stores the the color of all borders bound to this css file */
+* {
+    -fx-border-color: #E84A5F;
+    -fx-border-radius: 10;
+}
+
+/* ID selector for CSS styling of (0, 0) board element */
+#board00 {
+    -fx-border-width: 0 10 10 0;
+}
+
+/* ID selector for CSS styling of (0, 1) board element */
+#board01 {
+   -fx-border-width: 0 10 10 0;
+}
+
+/* ID selector for CSS styling of (0, 2) board element */
+#board02 {
+   -fx-border-width: 0 0 10 0;
+}
+
+/* ID selector for CSS styling of (1, 0) board element */
+#board10 {
+   -fx-border-width: 0 10 10 0;
+}
+
+/* ID selector for CSS styling of (1, 1) board element */
+#board11 {
+   -fx-border-width: 0 10 10 0;
+}
+
+/* ID selector for CSS styling of (1, 2) board element */
+#board12 {
+   -fx-border-width: 0 0 10 0;
+}
+
+/* ID selector for CSS styling of (2, 0) board element */
+#board20 {
+   -fx-border-width: 0 10 0 0;
+}
+
+/* ID selector for CSS styling of (2, 0) board element */
+#board21 {
+   -fx-border-width: 0 10 0 0;
+}
+

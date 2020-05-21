@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2A363B#2A363B #2A363B#2A363B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.AccountCreationSuccessController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2A363B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.AccountCreationSuccessController">
    <children>
       <Label layoutX="50.0" layoutY="119.0" text="Account Was Successfully Created!" textFill="WHITE">
          <font>
@@ -27,7 +27,7 @@
          </font>
       </Label>
       <Line endX="600.0" layoutX="150.0" layoutY="100.0" startX="-100.0" stroke="WHITE" />
-      <Button fx:id="returnToLoginButton" layoutX="50.0" layoutY="197.0" mnemonicParsing="false" onMouseClicked="#handleReturnToLoginAction" onMouseEntered="#highlightReturnToLogin" onMouseExited="#resetReturnToLogin" style="-fx-background-color: #FFFFFF;" text="Return to Login" textFill="#2a363b">
+      <Button fx:id="returnToLoginButton" layoutX="50.0" layoutY="197.0" mnemonicParsing="false" onMouseClicked="#handleReturnToLoginAction" onMouseEntered="#highlightReturnToLogin" onMouseExited="#resetReturnToLogin" style="-fx-background-color: #FFFFFF;" text="Return to Login">
          <font>
             <Font size="24.0" />
          </font>

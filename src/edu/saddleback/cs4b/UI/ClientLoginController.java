@@ -7,7 +7,9 @@ import edu.saddleback.cs4b.Backend.PubSub.EventType;
 import edu.saddleback.cs4b.Backend.PubSub.MessageEvent;
 import edu.saddleback.cs4b.Backend.PubSub.Observer;
 import edu.saddleback.cs4b.Backend.PubSub.SystemEvent;
+import edu.saddleback.cs4b.Backend.Utilitys.TTTProfile;
 import edu.saddleback.cs4b.Backend.Utilitys.TTTUser;
+import edu.saddleback.cs4b.UI.Util.GameManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,22 +30,22 @@ public class ClientLoginController implements Observer, Initializable
     private AbstractMessageFactory factory = MessageFactoryProducer.getFactory(FactoryTypes.ADMIN_FACT.getTypes());
 
     @FXML
-    Button loginButton;
+    private Button loginButton;
 
     @FXML
-    Button createAccountButton;
+    private Button createAccountButton;
 
     @FXML
-    Button forgotPasswordButton;
+    private Button forgotPasswordButton;
 
     @FXML
-    TextField usernameField;
+    private TextField usernameField;
 
     @FXML
-    PasswordField passwordField;
+    private PasswordField passwordField;
 
     @FXML
-    Label passwordError;
+    private Label passwordError;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -79,15 +81,13 @@ public class ClientLoginController implements Observer, Initializable
         {
             AuthenticatedMessage msg = (AuthenticatedMessage) message;
             ClientUser.setInstance(msg.getAuthUser());
-
+            ClientUser.setProfile(msg.getProfile());
+            GameManager.getInstance().setLocalRecord(((TTTProfile)msg.getProfile()).getGameRecord());
             swapHome("/edu/saddleback/cs4b/UI/ClientHome.fxml", loginButton);
         }
         else if(message instanceof DeniedEntryMessage)
         {
-            Platform.runLater(()->
-            {
-                invalidUsernameOrPassword();
-            });
+            Platform.runLater(()-> invalidUsernameOrPassword());
         }
     }
 
@@ -120,7 +120,6 @@ public class ClientLoginController implements Observer, Initializable
     {
         passwordField.setText("");
         passwordError.setText("* Invalid Username or Password");
-
     }
 
     /**
@@ -177,7 +176,7 @@ public class ClientLoginController implements Observer, Initializable
     @FXML
     public void resetForgotPassword()
     {
-        forgotPasswordButton.setOnMouseExited(mouseEvent -> forgotPasswordButton.setTextFill(Color.valueOf("#0099FF")));
+        forgotPasswordButton.setOnMouseExited(mouseEvent -> forgotPasswordButton.setTextFill(Color.valueOf("#00bFFF")));
     }
 
     public void swapHome(String sceneLocation, Button button) throws IOException
@@ -212,7 +211,6 @@ public class ClientLoginController implements Observer, Initializable
             e.printStackTrace();
         }
         Scene scene  = new Scene(parent);
-        // This line gets the Stage information since loginButton and Register have same scene
         Stage window = (Stage)(button).getScene().getWindow();
 
         Platform.runLater(()->
