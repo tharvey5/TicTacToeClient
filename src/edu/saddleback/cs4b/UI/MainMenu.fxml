@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #1B262B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.MainMenuController">
+   <children>
+      <Label layoutX="78.0" layoutY="81.0" prefHeight="50.0" prefWidth="501.0" text="Welcome to Saddleback Injectors Tic-Tac-Toe!" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Line endX="480.0" layoutX="100.0" layoutY="70.0" startX="-80.0" stroke="WHITE" />
+      <Line endX="480.0" layoutX="100.0" layoutY="140.0" startX="-80.0" stroke="WHITE" />
+      <Label layoutX="223.0" layoutY="157.0" text="How to Play:" textFill="WHITE" underline="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="383.0" layoutY="23.0" text="Users Online: " textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="533.0" layoutY="23.0" text="#" textFill="LIME">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="225.0" prefHeight="29.0" prefWidth="542.0" text="Click 'Play Game'" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="264.0" prefHeight="29.0" prefWidth="542.0" text="Then, play a Computer AI created by our team!" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="186.0" text="Single Player:" textFill="WHITE" underline="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="316.0" text="Multiplayer:" textFill="WHITE" underline="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="354.0" prefHeight="29.0" prefWidth="535.0" text="Create, join, or spectate a game" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="383.0" prefHeight="29.0" prefWidth="535.0" text="- Create a game, then wait for an opponent" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="412.0" prefHeight="29.0" prefWidth="535.0" text="- Select a created game and click  'Join Game'" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="441.0" prefHeight="29.0" prefWidth="535.0" text="- Select a created game and click 'Spectate'" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="482.0" text="Then, play other users, or watch other user games!" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="50.0" fitWidth="53.0" layoutX="24.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Injection.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
