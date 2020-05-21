@@ -79,9 +79,16 @@ public class ViewGameHistoryController implements Observer, Initializable
     @FXML
     TableColumn<TTTPublicUser, String> viewersCol;
 
+    @FXML
+    TableView<TTTPublicUser> movePlayerTable;
+
+    @FXML
+    TableColumn<TTTPublicUser, String> playerMovesCol;
+
     private ObservableList<GameInfo> infoList = FXCollections.observableArrayList();
     private ObservableList<TTTPosition> coordList = FXCollections.observableArrayList();
     private ObservableList<TTTPublicUser> viewerList = FXCollections.observableArrayList();
+    private ObservableList<TTTPublicUser> playerGameMoveList = FXCollections.observableArrayList();
     private Map<String, Game> gameMap = new Hashtable<>(); // <gameId, Game>
 
     public ViewGameHistoryController()
@@ -101,6 +108,8 @@ public class ViewGameHistoryController implements Observer, Initializable
 
         movesCol.setCellValueFactory(new PropertyValueFactory<>("positionAsString"));
         viewersCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+        playerMovesCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+
 
         gameInfoTable.getItems().clear();
         GameHistoryRequestMessage requestMessage = (GameHistoryRequestMessage) factory.createMessage(MsgTypes.GAME_HISTORY_REQUEST.getType());
@@ -156,13 +165,24 @@ public class ViewGameHistoryController implements Observer, Initializable
         else if (message instanceof RespondMovesMessage)
         {
             detailsTable.getItems().clear();
+            movePlayerTable.getItems().clear();
             List<Move> moves = ((RespondMovesMessage) message).getMoves();
             System.out.println(moves.size());
             for (Move m : moves)
             {
+                Game game = gameMap.get(m.getGameID());
+                if(game.getStartPlayer().getId().equals(m.getPlayerID()))
+                {
+                    playerGameMoveList.add((TTTPublicUser)game.getStartPlayer());
+                }
+                else
+                {
+                    playerGameMoveList.add((TTTPublicUser)game.getOtherPlayer());
+                }
                 coordList.add((TTTPosition)m.getCoordinate());
             }
             detailsTable.setItems(coordList);
+            movePlayerTable.setItems(playerGameMoveList);
         }
     }
 

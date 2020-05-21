@@ -10,19 +10,19 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2A363B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.ViewGameHistoryController">
    <children>
-      <TableView fx:id="gameInfoTable" layoutX="14.0" layoutY="60.0" onMouseClicked="#onRowClicked" prefHeight="500.0" prefWidth="585.0">
+      <TableView fx:id="gameInfoTable" layoutX="14.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onRowClicked" prefHeight="500.0" prefWidth="460.0">
         <columns>
-          <TableColumn fx:id="idCol" prefWidth="56.0" text="ID" />
-          <TableColumn fx:id="startTimeCol" prefWidth="126.0" text="Start Time" />
-            <TableColumn fx:id="endTimeCol" prefWidth="118.0" text="End Time" />
-            <TableColumn fx:id="hostCol" prefWidth="120.0" text="Host" />
-            <TableColumn fx:id="opponentCol" prefWidth="85.0" text="Opponent" />
-            <TableColumn fx:id="resultCol" prefWidth="79.0" text="Result" />
+          <TableColumn fx:id="idCol" prefWidth="60.0" text="ID" />
+          <TableColumn fx:id="startTimeCol" text="Start Time" />
+            <TableColumn fx:id="endTimeCol" resizable="false" text="End Time" />
+            <TableColumn fx:id="hostCol" text="Host" />
+            <TableColumn fx:id="opponentCol" text="Opponent" />
+            <TableColumn fx:id="resultCol" text="Result" />
         </columns>
       </TableView>
-      <TableView fx:id="detailsTable" layoutX="613.0" layoutY="60.0" prefHeight="500.0" prefWidth="84.0">
+      <TableView fx:id="detailsTable" layoutX="626.0" layoutY="60.0" prefHeight="500.0" prefWidth="80.0">
         <columns>
-          <TableColumn fx:id="movesCol" prefWidth="85.0" text="Moves" />
+          <TableColumn fx:id="movesCol" text="Moves" />
         </columns>
       </TableView>
       <Button fx:id="returnToProfileBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#handleReturnToProfileAction" onMouseEntered="#highlightReturnToProfile" onMouseExited="#resetReturnToProfile" style="-fx-background-color: #FFFFFF;" text="Return To Profile">
@@ -40,10 +40,15 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <TableView fx:id="viewersTable" layoutX="697.0" layoutY="60.0" prefHeight="500.0" prefWidth="93.0">
+      <TableView fx:id="viewersTable" layoutX="706.0" layoutY="60.0" prefHeight="500.0" prefWidth="80.0">
          <columns>
-            <TableColumn fx:id="viewersCol" prefWidth="92.0" text="Viewers" />
+            <TableColumn fx:id="viewersCol" resizable="false" text="Viewers" />
          </columns>
+      </TableView>
+      <TableView fx:id="movePlayerTable" layoutX="526.0" layoutY="60.0" prefHeight="500.0" prefWidth="100.0">
+        <columns>
+          <TableColumn fx:id="playerMovesCol" prefWidth="100.0" text="Move Made By" />
+        </columns>
       </TableView>
    </children>
 </AnchorPane>
