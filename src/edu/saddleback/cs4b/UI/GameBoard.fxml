@@ -82,12 +82,12 @@
             <DropShadow />
          </effect>
       </Button>
-      <Label layoutX="224.0" layoutY="16.0" prefHeight="56.0" prefWidth="403.0" text="SQL Injectors Tic-Tac-Toe" textFill="WHITE">
+      <Label layoutX="165.0" layoutY="26.0" prefHeight="56.0" prefWidth="520.0" text="Saddleback Injectors Tic-Tac-Toe" textFill="WHITE">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="178.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="56.0" fitWidth="49.0" layoutX="109.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Injection.png" />
          </image>
@@ -107,7 +107,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Line endX="351.0" layoutX="274.0" layoutY="71.0" startX="-100.0" stroke="WHITE" />
-      <Line endX="351.0" layoutX="274.0" layoutY="16.0" startX="-100.0" stroke="WHITE" />
+      <Line endX="500.0" layoutX="200.0" layoutY="86.0" startX="-100.0" stroke="WHITE" />
+      <Line endX="500.0" layoutX="200.0" layoutY="26.0" startX="-100.0" stroke="WHITE" />
    </children>
 </AnchorPane>
