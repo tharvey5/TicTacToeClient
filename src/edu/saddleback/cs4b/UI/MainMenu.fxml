@@ -9,9 +9,9 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #1B262B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.MainMenuController">
    <children>
-      <Label layoutX="79.0" layoutY="81.0" prefHeight="50.0" prefWidth="501.0" text="Welcome to SQL Injectors Tic-Tac-Toe!" textFill="WHITE">
+      <Label layoutX="78.0" layoutY="81.0" prefHeight="50.0" prefWidth="501.0" text="Welcome to Saddleback Injectors Tic-Tac-Toe!" textFill="WHITE">
          <font>
-            <Font size="30.0" />
+            <Font size="24.0" />
          </font>
       </Label>
       <Line endX="480.0" layoutX="100.0" layoutY="70.0" startX="-80.0" stroke="WHITE" />
@@ -76,7 +76,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fitHeight="59.0" fitWidth="75.0" layoutX="16.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="50.0" fitWidth="53.0" layoutX="24.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Injection.png" />
          </image>

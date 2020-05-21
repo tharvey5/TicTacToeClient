@@ -17,14 +17,14 @@
       <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #2A363B;">
          <children>
             <Circle fill="WHITE" layoutX="217.0" layoutY="300.0" radius="151.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="80.0" layoutY="256.0" text="SQL INJECTORS" textFill="#2a363b">
+            <Label layoutX="134.0" layoutY="289.0" text="INJECTORS" textFill="#2a363b">
                <font>
-                  <Font name="Tamil MN" size="36.0" />
+                  <Font name="Tamil MN" size="30.0" />
                </font>
             </Label>
-            <Label layoutX="103.0" layoutY="300.0" text="TIC-TAC-TOE" textFill="#2a363b">
+            <Label layoutX="125.0" layoutY="327.0" text="TIC-TAC-TOE" textFill="#2a363b">
                <font>
-                  <Font name="Tamil MN" size="36.0" />
+                  <Font name="Tamil MN" size="30.0" />
                </font>
             </Label>
             <ImageView fitHeight="65.0" fitWidth="76.0" layoutX="184.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
@@ -33,7 +33,12 @@
                </image>
             </ImageView>
             <Line endX="40.0" layoutX="300.0" layoutY="250.0" startX="-200.0" />
-            <Line endX="40.0" layoutX="296.0" layoutY="356.0" startX="-200.0" />
+            <Line endX="40.0" layoutX="296.0" layoutY="365.0" startX="-200.0" />
+            <Label layoutX="116.0" layoutY="251.0" text="SADDLEBACK" textFill="#2a363b">
+               <font>
+                  <Font name="Tamil MN" size="30.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <ImageView fitHeight="103.0" fitWidth="105.0" layoutX="552.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
@@ -88,6 +93,9 @@
             <Font size="16.0" />
          </font>
       </PasswordField>
-      <Button fx:id="forgotPasswordButton" layoutX="445.0" layoutY="489.0" mnemonicParsing="false" onMouseClicked="#handleForgotPasswordAction" onMouseEntered="#highlightForgotPassword" onMouseExited="#resetForgotPassword" style="-fx-background-color: #FFFFFF;" text="Forgot Password?" textFill="#00bfff" />
+      <Button fx:id="forgotPasswordButton" layoutX="445.0" layoutY="489.0" mnemonicParsing="false" onMouseClicked="#handleForgotPasswordAction" onMouseEntered="#highlightForgotPassword" onMouseExited="#resetForgotPassword" style="-fx-background-color: #FFFFFF;" text="Forgot Password?" textFill="#00bfff">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    </children>
 </AnchorPane>

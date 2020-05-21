@@ -1,70 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #1B262B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.cs4b.UI.AboutUsController">
    <children>
-      <Label layoutX="20.0" layoutY="40.0" text="Development Team:" textFill="WHITE" underline="true">
+      <Label layoutX="21.0" layoutY="121.0" text="Development Team:" textFill="WHITE" underline="true">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <VBox layoutX="20.0" layoutY="87.0" prefHeight="259.0" prefWidth="160.0" spacing="40.0">
-         <children>
-            <Label text="Jeffrey Adams" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label text="Tucker Harvey" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label text="Isaac Estrada" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label text="Andrew Dillon" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-      <VBox layoutX="180.0" layoutY="87.0" prefHeight="259.0" prefWidth="392.0" spacing="40.0">
-         <children>
-            <Label text="(UI Developer)" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label text="(Server/Game Developer)" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label text="(Database Developer)" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label text="(Server Message Developer)" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-      <Button fx:id="returnToMainMenuBtn" layoutX="20.0" layoutY="546.0" mnemonicParsing="false" onMouseClicked="#handleReturnToMainMenuAction" onMouseEntered="#highlightReturnToMainMenu" onMouseExited="#resetReturnToMainMenu" style="-fx-background-color: #FFFFFF;" text="Return To Main Menu">
+      <Label layoutX="19.0" layoutY="64.0" text="Start Date: Jan. 2020 - End Date: May 2020 (Alpha Release 5/13/2020)" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="14.0" text="Project Lifetime:" textFill="WHITE" underline="true">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="21.0" layoutY="173.0" text="Jeffrey Adams (GitHub: zerohezitation)" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
-      </Button>
+      </Label>
+      <Label layoutX="22.0" layoutY="235.0" text="Tucker Harvey (GitHub: tharvey5)" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="21.0" layoutY="295.0" text="Isaac Estrada (GitHub: socalisaac)" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="21.0" layoutY="356.0" text="Andrew Dillon (GitHub: adillon3)" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="199.0" text="- Plans to go to ASU to purse a B.S. in Software Engineering and a minor in Gaming." textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="261.0" text="- Plans to go to UC Berkley to purse a B.S. in EECS." textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="321.0" text="- Plans to go to Cal State Fullerton to pursue a B.S. in Computer Science." textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="382.0" text="- Plans to go to Chapman University to purse a B.S. in Software Engineering." textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="172.0" layoutY="433.0" text="Remember Always..." textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="180.0" layoutY="496.0" text="Defer and Deflect!" textFill="WHITE">
+         <font>
+            <Font name="Impact" size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
