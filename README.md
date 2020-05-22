@@ -33,3 +33,6 @@ git checkout master
 git fetch origin
 git merge origin/master
 ```
+
+Project Preview
+<img width="800" alt="Login-Page" src="https://user-images.githubusercontent.com/44624834/82620289-efda2880-9b8c-11ea-8e57-7fb9bf483fef.png">
